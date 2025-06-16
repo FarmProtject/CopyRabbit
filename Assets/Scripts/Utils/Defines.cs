@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class Defines : MonoBehaviour
+public static class Defines 
 {
     public enum UIEvents
     {

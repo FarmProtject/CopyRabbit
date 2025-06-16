@@ -8,24 +8,11 @@ using UnityEngine.EventSystems;
 public class UI_Base:MonoBehaviour
 {
     Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
-    enum Buttons
-    {
+    
 
-    }
-
-    enum Texts
-    {
-
-    }
-
-    enum GameObjects
-    {
-
-    }
     private void Start()
     {
-        Bind<Button>(typeof(Buttons));
-        Bind<TextMeshProUGUI>(typeof(Texts));
+
     }
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
@@ -65,7 +52,7 @@ public class UI_Base:MonoBehaviour
     protected Image GetImage(int idx) { return Get<Image>(idx); }
 
 
-    public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Defines.UIEvents type = Defines.UIEvents.Click)
+    public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Defines.UIEvents type)
     {
         
         UI_EventController evt = Utils.GetOrAddComponent<UI_EventController>(go);
