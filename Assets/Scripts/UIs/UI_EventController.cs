@@ -3,37 +3,42 @@ using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
 
-public class UI_EventController : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandler
+public class UI_EventController : MonoBehaviour, IDragHandler,IBeginDragHandler,IEndDragHandler,IPointerClickHandler
 {
-
-
+    public Action<PointerEventData> OnClickHandler = null;
+    public Action<PointerEventData> OnBegineDragHandler = null;
+    public Action<PointerEventData> OnDragHandler = null;
+    public Action<PointerEventData> OnDragEndHanlder = null;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        DragStartEvent(eventData);
+        if(OnBegineDragHandler != null)
+        {
+            OnBegineDragHandler.Invoke(eventData);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        DragEvent(eventData);
+        if(OnDragHandler != null)
+        {
+            OnDragHandler.Invoke(eventData);
+        }
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        DragEndEvent(eventData);
+        if(OnDragEndHanlder != null)
+        {
+            OnDragEndHanlder.Invoke(eventData);
+        }
+
     }
-    public virtual void DragStartEvent(PointerEventData eventData)
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-
+        if(OnClickHandler != null)
+        {
+            OnClickHandler.Invoke(eventData);
+        }
     }
-
-    public virtual void DragEvent(PointerEventData eventData)
-    {
-
-    }
-
-    public virtual void DragEndEvent(PointerEventData eventData)
-    {
-
-    }
-    
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
+
 public class UI_Base:MonoBehaviour
 {
     Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
@@ -63,9 +65,32 @@ public class UI_Base:MonoBehaviour
     protected Image GetImage(int idx) { return Get<Image>(idx); }
 
 
-    public static void AddUIEvent()
+    public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Defines.UIEvents type = Defines.UIEvents.Click)
     {
+        
+        UI_EventController evt = Utils.GetOrAddComponent<UI_EventController>(go);
 
+        switch (type)
+        {
+            case Defines.UIEvents.Click:
+                evt.OnClickHandler -= action;
+                evt.OnClickHandler += action;
+                break;
+            case Defines.UIEvents.DragStart:
+                evt.OnBegineDragHandler -= action;
+                evt.OnBegineDragHandler += action;
+                break;
+            case Defines.UIEvents.Drag:
+                evt.OnDragHandler -= action;
+                evt.OnDragHandler += action;
+                break;
+            case Defines.UIEvents.DragEnd:
+                evt.OnDragEndHanlder -= action;
+                evt.OnDragEndHanlder += action;
+                break;
+            default:
+                break;
+        }
 
 
     }

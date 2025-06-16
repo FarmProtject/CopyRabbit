@@ -5,6 +5,16 @@ public class Utils
 
 {
 
+    public static T GetOrAddComponent<T>(GameObject go)  where T : UnityEngine.Component
+    {
+        T compoent = go.GetComponent<T>();
+        if(compoent == null)
+        {
+            compoent = go.AddComponent<T>();
+        }
+        return compoent;
+    }
+
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
     {
         Transform transform =  FindChild<Transform>(go, name, recursive);

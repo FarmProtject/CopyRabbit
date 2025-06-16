@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using System.Collections.Generic;
-public class LeverController : UI_EventController, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Lever_Controller : UI_EventController, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     RectTransform parentsTr;
     RectTransform myRect;
@@ -16,7 +16,7 @@ public class LeverController : UI_EventController, IDragHandler, IBeginDragHandl
         OnAwake();
     }
 
-    
+    /*
 
     public override void DragEvent(PointerEventData eventData)
     {
@@ -50,6 +50,6 @@ public class LeverController : UI_EventController, IDragHandler, IBeginDragHandl
     {
         myRect.anchoredPosition = Vector2.zero;
     }
-
+    */
 
 }
