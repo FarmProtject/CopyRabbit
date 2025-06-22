@@ -7,49 +7,53 @@ using UnityEngine.EventSystems;
 
 public class UI_Base:MonoBehaviour
 {
-    Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+    Dictionary<string, List<UnityEngine.Object>> _objects = new Dictionary<string, List<UnityEngine.Object>>();
     
 
     private void Start()
     {
 
     }
-    protected void Bind<T>(Type type) where T : UnityEngine.Object
-    {
-        string[] names = Enum.GetNames(type);
-        UnityEngine.Object[] objects = new UnityEngine.Object[names.Length];
-        _objects.Add(typeof(T), objects);
 
-        for (int i = 0; i < names.Length; i++)
+    protected void Bind<T>() where T : UnityEngine.Object
+    {
+        foreach (Transform child in transform.GetComponentsInChildren<Transform>(true))
         {
+            string key = child.name;
+
+            if (_objects.ContainsKey(key) == false)
+                _objects[key] = new List<UnityEngine.Object>();
+
             if (typeof(T) == typeof(GameObject))
             {
-                objects[i] = Utils.FindChild(gameObject, names[i], true);
+                _objects[key].Add(child.gameObject);
             }
             else
             {
-                objects[i] = Utils.FindChild<T>(gameObject, names[i], true);
-            }
-            if (objects[i] == null)
-            {
-                Debug.Log($"Failed to Bind {names[i]}");
+                T[] components = child.GetComponents<T>();
+                if (components.Length == 0) continue;
+                _objects[key].AddRange(components);
             }
         }
     }
 
-    protected T Get<T>(int idx) where T : UnityEngine.Object
+    protected T Get<T>(string name) where T : UnityEngine.Object
     {
-        UnityEngine.Object[] objects = null;
-        if (_objects.TryGetValue(typeof(T), out objects) == false)
+        List<UnityEngine.Object> objects = null;
+        if (_objects.TryGetValue(name, out objects) == false)
         {
             return null;
         }
-        return objects[idx] as T;
+        foreach(T value in _objects[name])
+        {
+            return value as T;
+        }
+        return null;
     }
 
-    protected TextMeshProUGUI GetTMP(int idx) { return Get<TextMeshProUGUI>(idx); }
-    protected Button GetButton(int idx) { return Get<Button>(idx); }
-    protected Image GetImage(int idx) { return Get<Image>(idx); }
+    protected TextMeshProUGUI GetTMP(string name, int idx) { return Get<TextMeshProUGUI>(name); }
+    protected Button GetButton(string name, int idx) { return Get<Button>(name); }
+    protected Image GetImage(string name,int idx) { return Get<Image>(name); }
 
 
     public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Defines.UIEvents type)

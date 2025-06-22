@@ -72,6 +72,7 @@ public class Lever_Base : UI_Base
             GameManager._instance.inputManager.MoveTo(moveVector);
         }
     }
+
     void MoveableChange()
     {
         if (isMoveable)

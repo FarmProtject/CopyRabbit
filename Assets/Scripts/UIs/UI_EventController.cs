@@ -25,6 +25,7 @@ public class UI_EventController : MonoBehaviour, IDragHandler,IBeginDragHandler,
             OnDragHandler.Invoke(eventData);
         }
     }
+
     public void OnEndDrag(PointerEventData eventData)
     {
         if(OnDragEndHanlder != null)

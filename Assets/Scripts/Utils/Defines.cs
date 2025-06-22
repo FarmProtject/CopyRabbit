@@ -10,4 +10,11 @@ public static class Defines
         Drag,
         DragEnd
     }
+    public enum StatType
+    {
+        Attack,
+        Defence,
+        HealthPoint
+    }
+
 }

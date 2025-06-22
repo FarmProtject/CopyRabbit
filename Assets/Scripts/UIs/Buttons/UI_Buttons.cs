@@ -26,7 +26,7 @@ public class UI_Buttons : UI_Base
     }
     private void Start()
     {
-        Bind<Button>(typeof(Buttons));
+        //Bind<Button>(typeof(Buttons));
     }
 
 
