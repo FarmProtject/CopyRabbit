@@ -3,6 +3,11 @@ using System;
 using System.Collections.Generic;
 public class MonsterEntity : LivingEntity,IDamageable
 {
+    Monster_AI_Controller ai_Ctr;
+
+
+
+
 
     public override void AttackAnamy(LivingEntity targetEntity)
     {

@@ -16,5 +16,16 @@ public static class Defines
         Defence,
         HealthPoint
     }
-
+    public enum StageType
+    {
+        Infinity,
+        Challenge,
+        Boss
+    }
+    public enum MonsterActState
+    {
+        Move,
+        Attack,
+        Stay
+    }
 }

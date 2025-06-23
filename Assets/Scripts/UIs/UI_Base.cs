@@ -51,9 +51,9 @@ public class UI_Base:MonoBehaviour
         return null;
     }
 
-    protected TextMeshProUGUI GetTMP(string name, int idx) { return Get<TextMeshProUGUI>(name); }
-    protected Button GetButton(string name, int idx) { return Get<Button>(name); }
-    protected Image GetImage(string name,int idx) { return Get<Image>(name); }
+    protected TextMeshProUGUI GetTMP(string name) { return Get<TextMeshProUGUI>(name); }
+    protected Button GetButton(string name) { return Get<Button>(name); }
+    protected Image GetImage(string name) { return Get<Image>(name); }
 
 
     public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Defines.UIEvents type)

@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     GameObject playerObj;
     public UI_Manager _ui_Manager;
     public UpgradeManager _UpgradeManager;
+    public StageManager _StageManager;
     private void Awake()
     {
         OnAwake();
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
         {
             _UpgradeManager = new UpgradeManager();
         }
+        if(_StageManager == null)
+        {
+            _StageManager = new StageManager();
+        }
         Debug.Log(_instance);
     }
 
@@ -64,8 +69,15 @@ public class GameManager : MonoBehaviour
     {
         _UpgradeManager.UpGreadEvent(type,count);
     }
+
     public double GetUpCount(Defines.StatType type)
     {
         return _UpgradeManager.GetUpData(type);
     }
+
+    public void SetStage(Defines.StageType type)
+    {
+        _StageManager.SetStage(type);
+    }
+    
 }
