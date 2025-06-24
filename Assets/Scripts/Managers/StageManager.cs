@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class StageManager : MonoBehaviour
+public class StageManager 
 {
     StageBase stage;
     Defines.StageType stageType;

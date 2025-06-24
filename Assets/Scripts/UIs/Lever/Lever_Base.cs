@@ -57,10 +57,7 @@ public class Lever_Base : UI_Base
         Vector2 pos = evt.position;
         float maxRadius = lever_Base_rect.rect.size.x;
         Vector2 clamped = Vector2.ClampMagnitude(pos, maxRadius);
-        lever_Stick_rect.anchoredPosition = clamped;
-        Debug.Log("OnDrag");
-        Debug.Log($"my Pos : {lever_Stick_rect.position}");
-        Debug.Log($"my Local Pos  : {lever_Stick_rect.localPosition}");
+        lever_Stick_rect.localPosition = clamped;
         Vector2 moveVector = lever_Stick_rect.localPosition.normalized * 0.1f;
 
         if (GameManager._instance.inputManager == null)

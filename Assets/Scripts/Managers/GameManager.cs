@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public UI_Manager _ui_Manager;
     public UpgradeManager _UpgradeManager;
     public StageManager _StageManager;
+    PlayerEntity playerEntity;
+
+
     private void Awake()
     {
         OnAwake();
@@ -80,4 +83,13 @@ public class GameManager : MonoBehaviour
         _StageManager.SetStage(type);
     }
     
+    public PlayerEntity GetPlayerEntity()
+    {
+        return playerEntity;
+    }
+
+    public Vector2 GetPlayerPos()
+    {
+        return playerObj.transform.position;
+    }
 }
