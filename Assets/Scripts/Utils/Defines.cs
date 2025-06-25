@@ -10,6 +10,16 @@ public static class Defines
         Drag,
         DragEnd
     }
+    public enum LeverType 
+    {
+        Fixed,
+        Floating
+    }
+    public enum PlayerControllType
+    {
+        Auto,
+        Manual
+    }
     public enum StatType
     {
         Attack,

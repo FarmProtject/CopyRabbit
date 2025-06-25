@@ -5,20 +5,26 @@ public class InputManager
 {
     GameObject playerObj;
     Transform playerTr;
-    Rigidbody2D playerRigid;
+    PlayerEntity playerEntity;
+
+    Lever_Controller lever_Ctr;
+
     public InputManager(GameObject playerObj)
     {
         this.playerObj = playerObj;
         playerTr = playerObj.transform;
-        playerRigid = playerTr.GetComponent<Rigidbody2D>();
+        playerEntity = playerTr.GetComponent<PlayerEntity>();
     }
     
 
-    public void MoveTo(Vector2 moveTo)
+    public void SetMoveDir(Vector2 moveTo)
     {
-        playerRigid.MovePosition(moveTo);
+        playerEntity.SetMoveDir(moveTo);
     }
 
-
+    public Defines.LeverType Get_LeverType()
+    {
+        return lever_Ctr.Get_LeverType();
+    }
 
 }

@@ -23,6 +23,11 @@ public class LivingEntity : MonoBehaviour, IDamageable
             myRigid = transform.GetComponent<Rigidbody2D>();
         }
     }
+
+    private void FixedUpdate()
+    {
+        MoveTo();
+    }
     public virtual void AttackAnamy(LivingEntity targetEntity)
     {
 
@@ -41,7 +46,8 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
     public void MoveTo()
     {
-        myRigid.MovePosition(moveDir);
+        Vector2 pos = new Vector2(transform.position.x,transform.position.y) + moveDir;
+        myRigid.MovePosition(pos);
     }
 
 

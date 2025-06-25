@@ -87,9 +87,17 @@ public class GameManager : MonoBehaviour
     {
         return playerEntity;
     }
-
+    public void SetMoveDir(Vector2 moveDir)
+    {
+        inputManager.SetMoveDir(moveDir);
+    }
     public Vector2 GetPlayerPos()
     {
         return playerObj.transform.position;
+    }
+
+    public Defines.LeverType GetLeverType()
+    {
+        return inputManager.Get_LeverType();
     }
 }

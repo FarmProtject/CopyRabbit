@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class Lever_Base : UI_Base
+public class Lever_Base : UI_EventController,IDragHandler,IEndDragHandler
 {
 
     GameObject lever_Base;
@@ -12,12 +12,13 @@ public class Lever_Base : UI_Base
     RectTransform lever_Stick_rect;
     Vector2 lever_Pos;
 
-    bool isMoveable = false;
 
     void OnAwake()
     {
         lever_Base = GameObject.Find("Lever_Base");
         lever_Stick = GameObject.Find("Lever_Stick");
+        lever_Base_rect = lever_Base.transform.GetComponent<RectTransform>();
+        lever_Stick_rect = lever_Stick.transform.GetComponent<RectTransform>();
     }
     private void Awake()
     {
@@ -25,40 +26,26 @@ public class Lever_Base : UI_Base
     }
     private void Start()
     {
+        lever_Pos = new Vector2(-820, 400);
+        OnDragHandler += OnDragEvt;
+        OnDragEndHanlder += OnDragEndEvt;
+        /*
         lever_Base_rect = Utils.GetOrAddComponent<RectTransform>(lever_Base);
         lever_Stick_rect = Utils.GetOrAddComponent<RectTransform>(lever_Stick);
 
-        lever_Pos = new Vector2(-820, 400);
+        
         AddUIEvent(this.gameObject, OnDragStart, Defines.UIEvents.DragStart);
         AddUIEvent(this.gameObject, OnDragEnd, Defines.UIEvents.DragEnd);
-        AddUIEvent(lever_Base, OnDrag, Defines.UIEvents.Drag);
+        AddUIEvent(lever_Base, OnDrag, Defines.UIEvents.Drag);*/
     }
 
 
-
-    public void OnDragStart(PointerEventData evt)
-    {
-        if (isMoveable)
-        {
-            lever_Base.SetActive(true);
-        }
-    }
-
-    public void OnDragEnd(PointerEventData evt)
-    {
-        if (isMoveable)
-        {
-            lever_Base.SetActive(false);
-        }
-    }
-
-    public void OnDrag(PointerEventData evt)
+    protected virtual void OnDragEvt(PointerEventData evt)
     {
         Vector2 pos = evt.position;
-        float maxRadius = lever_Base_rect.rect.size.x;
-        Vector2 clamped = Vector2.ClampMagnitude(pos, maxRadius);
-        lever_Stick_rect.localPosition = clamped;
-        Vector2 moveVector = lever_Stick_rect.localPosition.normalized * 0.1f;
+
+        SetStickPos(pos);
+        Vector2 moveDir = Calculate_MoveDir(pos);
 
         if (GameManager._instance.inputManager == null)
         {
@@ -66,22 +53,37 @@ public class Lever_Base : UI_Base
         }
         else
         {
-            GameManager._instance.inputManager.MoveTo(moveVector);
+            GameManager._instance.SetMoveDir(moveDir);
         }
     }
 
-    void MoveableChange()
+    Vector2 Calculate_MoveDir(Vector2 pos)
     {
-        if (isMoveable)
+        Vector2 myPos = new Vector2(lever_Base_rect.position.x, lever_Base_rect.position.y);
+        Vector2 moveDir = pos - myPos;
+        return moveDir.normalized*0.1f;
+    }
+
+    void SetStickPos(Vector2 dir)
+    {
+        float maxRadius = lever_Base_rect.rect.size.x*0.5f;
+        Vector2 clamped = Vector2.ClampMagnitude(dir, maxRadius);
+        lever_Stick_rect.localPosition = clamped;
+    }
+
+    void OnDragEndEvt(PointerEventData evt)
+    {
+        Vector2 reset = Vector2.zero;
+        GameManager._instance.SetMoveDir(reset);
+        if(GameManager._instance.GetLeverType() == Defines.LeverType.Floating)
         {
-            isMoveable = false;
-            lever_Base.SetActive(true);
-            lever_Base.transform.position = lever_Pos;
+            Hide();
         }
-        else
-        {
-            isMoveable = true;
-            lever_Base.SetActive(false);
-        }
+    }
+
+
+    void Hide()
+    {
+        this.gameObject.SetActive(false);
     }
 }
