@@ -29,7 +29,7 @@ public static class Defines
     public enum StageType
     {
         Infinity,
-        Challenge,
+        KillCount,
         Boss
     }
     public enum MonsterActState

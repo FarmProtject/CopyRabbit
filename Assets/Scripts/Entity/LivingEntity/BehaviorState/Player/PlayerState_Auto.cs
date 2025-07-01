@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class PlayerState_Auto : MonoBehaviour
+public class PlayerState_Auto 
 {
     Vector2 moveDir;
 

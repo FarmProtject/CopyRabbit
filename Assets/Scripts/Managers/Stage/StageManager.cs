@@ -5,7 +5,7 @@ public class StageManager
 {
     StageBase stage;
     Defines.StageType stageType;
-
+    [SerializeField]int monster_GenCount = 7; //한번에 젠 되는 최대 몬스터 수 
 
 
     public void SetStage(Defines.StageType type)
@@ -19,6 +19,10 @@ public class StageManager
         stageType = type;
     }
 
+    public int GetMonsterGenCount()
+    {
+        return monster_GenCount;
+    }
     public void ChangeStage()
     {
         switch (stageType)
@@ -26,8 +30,8 @@ public class StageManager
             case Defines.StageType.Infinity:
                 stage = new Stage_Infinity();
                 break;
-            case Defines.StageType.Challenge:
-                stage = new Stahge_Challenge();
+            case Defines.StageType.KillCount:
+                stage = new Stage_KillCount();
                 break;
             case Defines.StageType.Boss:
                 stage = new Stage_Boss();

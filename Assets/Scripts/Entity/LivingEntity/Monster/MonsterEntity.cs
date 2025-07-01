@@ -40,7 +40,7 @@ public class MonsterEntity : LivingEntity,IDamageable
         if (collision.transform.tag == "Player")
         {
             float dist = Vector2.Distance(collision.transform.position, this.transform.position);
-            Debug.Log($"Distance with Player Object{dist}");
+            //Debug.Log($"Distance with Player Object{dist}");
             if (dist < attackRange)
             {
                 SetAIState(Defines.MonsterActState.Attack);

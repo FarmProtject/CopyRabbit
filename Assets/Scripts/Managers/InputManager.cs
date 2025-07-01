@@ -6,7 +6,7 @@ public class InputManager
     GameObject playerObj;
     Transform playerTr;
     PlayerEntity playerEntity;
-
+    
     Lever_Controller lever_Ctr;
 
     public InputManager(GameObject playerObj)
@@ -14,12 +14,14 @@ public class InputManager
         this.playerObj = playerObj;
         playerTr = playerObj.transform;
         playerEntity = playerTr.GetComponent<PlayerEntity>();
+        if(lever_Ctr == null)
+        {
+            lever_Ctr = GameObject.Find("Lever_Comtroller").transform.GetComponent<Lever_Controller>();
+        }
     }
-    
-
-    public void SetMoveDir(Vector2 moveTo)
+    public Lever_Controller Get_LeverController()
     {
-        playerEntity.SetMoveDir(moveTo);
+        return lever_Ctr;
     }
 
     public Defines.LeverType Get_LeverType()

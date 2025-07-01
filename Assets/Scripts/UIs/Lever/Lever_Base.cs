@@ -53,7 +53,7 @@ public class Lever_Base : UI_EventController,IDragHandler,IEndDragHandler
         }
         else
         {
-            GameManager._instance.SetMoveDir(moveDir);
+            GameManager._instance.Set_Player_MoveDir(moveDir);
         }
     }
 
@@ -71,10 +71,11 @@ public class Lever_Base : UI_EventController,IDragHandler,IEndDragHandler
         lever_Stick_rect.localPosition = clamped;
     }
 
-    void OnDragEndEvt(PointerEventData evt)
+    public void OnDragEndEvt(PointerEventData evt)
     {
         Vector2 reset = Vector2.zero;
-        GameManager._instance.SetMoveDir(reset);
+        GameManager._instance.Set_Player_MoveDir(reset);
+        lever_Stick_rect.localPosition = new Vector2(0, 0);
         if(GameManager._instance.GetLeverType() == Defines.LeverType.Floating)
         {
             Hide();
