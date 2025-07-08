@@ -58,6 +58,34 @@ public static class Utils
         return null;
     }
 
+    public static bool TrySetValue<T>(Dictionary<string, string> data, string key, ref T target)
+    {
+        if (data.ContainsKey(key) && data[key] != null)
+        {
+            try
+            {
+                target = (T)Convert.ChangeType(data[key], typeof(T));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to convert{key}: {ex.Message}");
+                return false;
+            }
+        }
+        return false;
+    }
+    public static bool TryConvertEnum<T>(Dictionary<string, string> data, string key, ref T target) where T : struct, Enum
+    {
+        if (data.ContainsKey(key) && data[key] != null)
+        {
 
+            if (Enum.TryParse(data[key], true, out target))
+            {
+                return true;
+            }
 
+        }
+        return false;
+    }
 }

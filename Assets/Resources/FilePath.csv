@@ -1,0 +1,6 @@
+folder,filename,fieldName,#주석#
+Data,ClearReward,dropTablePath,클리어보상 테이블
+Data,DropReward,harvestDataPath,몬스터 드랍 테이블
+Data,Monster,shopDataPath,몬스터 데이터 테이블
+Data,Stage,gameConfigDataPath,스테이지 데이터 테이블
+Config,string,stringDataPath,문자열 관리

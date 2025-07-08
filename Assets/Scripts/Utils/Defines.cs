@@ -38,4 +38,9 @@ public static class Defines
         Attack,
         Stay
     }
+    public enum MonsterType
+    {
+        monster,
+        boss
+    }
 }

@@ -16,7 +16,7 @@ public class LivingEntity : MonoBehaviour, IDamageable
 
     }
 
-    void OnAwake()
+    protected virtual void OnAwake()
     {
         if (myRigid == null)
         {

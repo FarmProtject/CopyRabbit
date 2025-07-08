@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
     GameObject playerObj;
     public UI_Manager _ui_Manager;
     public UpgradeManager _UpgradeManager;
-    public StageManager _StageManager;
+    public StageController stage_Controller;
     PlayerEntity playerEntity;
     Player_Comtroller player_Controller;
-    
+    MonsterManager _MonsterManager;
+    PoolManager _PoolManager;
+    DataManager _DataManager;
     private void Awake()
     {
         OnAwake();
@@ -43,13 +45,26 @@ public class GameManager : MonoBehaviour
         {
             _UpgradeManager = new UpgradeManager();
         }
-        if(_StageManager == null)
+        if(stage_Controller == null)
         {
-            _StageManager = new StageManager();
+            stage_Controller = GameObject.Find("StageController").transform.GetComponent<StageController>();
         }
         if(player_Controller == null)
         {
             player_Controller = GameObject.Find("Player").transform.GetComponent<Player_Comtroller>();
+        }
+        if(_MonsterManager == null)
+        {
+            _MonsterManager = new MonsterManager();
+        }
+        if(_PoolManager == null)
+        {
+            _PoolManager = new PoolManager();
+        }
+        if(_DataManager == null)
+        {
+            _DataManager = Utils.GetOrAddComponent<DataManager>(this.gameObject);
+            
         }
         Debug.Log(_instance);
     }
@@ -84,13 +99,38 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region Stages
+
     public void Set_StageType(Defines.StageType type)
     {
-        _StageManager.SetStage(type);
+        stage_Controller.SetStage(type);
     }
-    public int Get_Stage_MaxGenCount()
+    public int Get_Once_Stage_MaxGenCount()
     {
-        return _StageManager.GetMonsterGenCount();
+        return stage_Controller.Get_Once_MonsterGenCount();
+    }
+    public void Add_To_Stage_List(StageField stage)
+    {
+        stage_Controller.Add_Stage_List(stage);
+    }
+    public List<StageField> Get_StageList()
+    {
+        return stage_Controller.Get_StageList();
+    }
+    public GameObject Gen_Monster(string key)
+    {
+        return _PoolManager.Get_Monster(key);
+    }
+    public string Get_Random_Inactive()
+    {
+        return _PoolManager.Get_Random_Inactive();
+    }
+    public void Add_ToPoolList(string key, GameObject go)
+    {
+        _PoolManager.Add_ToList(key, go);
+    }
+    public string Get_Stage_ID()
+    {
+        return stage_Controller.Get_StageID();
     }
     #endregion
     #region Player
@@ -126,5 +166,15 @@ public class GameManager : MonoBehaviour
         return inputManager.Get_LeverType();
     }
     #endregion
-    
+    #region Datas
+
+    public void Read_Data(string path,Dictionary<string,Dictionary<string,string>>target)
+    {
+       _DataManager.ReadData(path, target);
+    }
+    public Dictionary<string, Dictionary<string, string>> Get_StageDatas()
+    {
+        return _DataManager.Get_StageDatas();
+    }
+    #endregion
 }

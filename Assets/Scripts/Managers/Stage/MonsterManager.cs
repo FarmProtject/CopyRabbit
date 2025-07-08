@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class MonsterData 
+public class MonsterManager
 {
-
+    
 }

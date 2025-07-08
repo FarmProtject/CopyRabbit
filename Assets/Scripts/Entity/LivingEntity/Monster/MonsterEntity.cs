@@ -6,6 +6,21 @@ public class MonsterEntity : LivingEntity,IDamageable
     Monster_AI_Controller ai_Ctr;
     int attackRange = 10;
     [SerializeField]Defines.MonsterActState state;
+    MonsterStats myStat;
+
+   
+
+
+    public void Set_MyData(MonsterStats stat)
+    {
+        myStat = stat;
+    }
+
+    protected override void OnAwake()
+    {
+        base.OnAwake();
+        //GameManager._instance.Add_ToPoolList(myStat.id, this.gameObject);
+    }
 
     public override void AttackAnamy(LivingEntity targetEntity)
     {

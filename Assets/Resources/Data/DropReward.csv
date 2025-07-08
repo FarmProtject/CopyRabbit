@@ -1,0 +1,13 @@
+id,drop_reward_groupId,itemId,quantity,dropPercentage
+100001,drop_reward_1C1S,100001,1,30
+100002,drop_reward_1C1S,100002,1,30
+100003,drop_reward_1C2S,100001,2,30
+100004,drop_reward_1C2S,100002,2,30
+100005,drop_reward_1C3S,100001,3,30
+100006,drop_reward_1C3S,100002,3,30
+100007,drop_reward_2C1S,100001,4,30
+100008,drop_reward_2C1S,100002,4,30
+100009,drop_reward_2C2S,100001,5,30
+100010,drop_reward_2C2S,100002,5,30
+100011,drop_reward_2C3S,100001,6,30
+100012,drop_reward_2C3S,100002,6,30

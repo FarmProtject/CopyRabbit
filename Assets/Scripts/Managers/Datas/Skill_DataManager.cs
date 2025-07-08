@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class Monster_PullManager
+public class Skill_DataManager 
 {
 
 }

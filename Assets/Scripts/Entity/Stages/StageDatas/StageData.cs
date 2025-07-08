@@ -3,14 +3,43 @@ using System;
 using System.Collections.Generic;
 public class StageData 
 {
-    string id;
-    string chapter;
-    string stage;
-    Defines.StageType stageType;
-    string spawnGroup;
-    string clearRwardGroup;
-    string dropRewardGroup;
-    int killCount;
-    float timeLimit;
+    public string id;
+    public string chapter;
+    public string stage;
+    public Defines.StageType stageType;
+    public string spawnGroup;
+    public string clearRwardGroup;
+    public string dropRewardGroup;
+    public int killCount;
+    public float timeLimit;
+    public string rewardKey;
+    public string nextStageId;
+    public int recommendedPower;
+    public List<Stage_Reward> rewards = new List<Stage_Reward>();
 
+
+    public StageData()
+    {
+
+    }
+    public StageData(StageData other)
+    {
+        this.id = other.id;
+        this.chapter = other.chapter;
+        this.stage = other.stage;
+        this.stageType = other.stageType;
+        this.spawnGroup = other.spawnGroup;
+        this.clearRwardGroup = other.clearRwardGroup;
+        this.dropRewardGroup = other.dropRewardGroup;
+        this.killCount = other.killCount;
+        this.timeLimit = other.timeLimit;
+        this.rewards = other.rewards;
+    }
+}
+
+public class Stage_Reward
+{
+    string id;
+    string itemId;
+    int quantity;
 }
