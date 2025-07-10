@@ -10,12 +10,49 @@ public class StageController : MonoBehaviour
     List<string> monsterIDs = new List<string>();
     List<StageField> stageFields = new List<StageField>();
     StageData data_Stage;
+
+    private void Start()
+    {
+        Init_Stage(this.id);
+    }
+    void Init_Stage(string id)
+    {
+        Cahnge_StageData(id);
+        Change_MonsterIdList();
+        SetStage(data_Stage.stageType);
+        GameManager._instance.InitMonster(monsterIDs);
+
+    }
+    private void FixedUpdate()
+    {
+        
+    }
+
     public void SetStage(Defines.StageType type)
     {
         SetStageType(type);
         ChangeStage();
     }
 
+    void Cahnge_StageData(string id)
+    {
+        this.id = id;
+        data_Stage = GameManager._instance.Get_StageData_Scriot(id);
+    }
+    void Change_MonsterIdList()
+    {
+        string spawnKey = data_Stage.spawnGroup;
+        Debug.Log(data_Stage.spawnGroup);
+        
+        monsterIDs.Clear();
+        List<StringKeyDatas> data = GameManager._instance.Get_SpawnData()[spawnKey];
+        for(int i = 0; i < data.Count; i++)
+        {
+            monsterIDs.Add(data[i].datas["monsterId"]);
+        }
+        
+
+    }
     void SetStageType(Defines.StageType type)
     {
         stageType = type;
@@ -31,6 +68,10 @@ public class StageController : MonoBehaviour
     public List<StageField> Get_StageList()
     {
         return stageFields;
+    }
+    public List<string> Get_MonsterIds()
+    {
+        return monsterIDs;
     }
     public void Add_Stage_List(StageField stage)
     {

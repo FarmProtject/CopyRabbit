@@ -4,13 +4,35 @@ using System.Collections.Generic;
 public class Stage_DataManager
 {
     Dictionary<string, Dictionary<string,string>> stageDatas = new Dictionary<string, Dictionary<string,string>>();
-    Dictionary<string, StringKeyDatas> rewards = new Dictionary<string, StringKeyDatas>();
+    Dictionary<string, List<StringKeyDatas>> rewards = new Dictionary<string, List<StringKeyDatas>>();
+    
     Dictionary<string, StageData> data_Stage = new Dictionary<string, StageData>();
+
     public void Set_StageData(string path)
     {
         GameManager._instance.Read_Data(path, stageDatas);
     }
 
+    public void Set_Stage_Dict()
+    {
+        foreach(string id in stageDatas.Keys)
+        {
+            if (!data_Stage.ContainsKey(id))
+            {
+                data_Stage.Add(id, Get_StageData(id));
+            }
+        }
+    }
+
+    public StageData Get_Stage_Script(string id)
+    {
+        if (!data_Stage.ContainsKey(id))
+        {
+            data_Stage.Add(id, Get_StageData(id));
+        }
+
+        return data_Stage[id];
+    }
     public StageData Get_StageData(string id)
     {
         StageData newData = new StageData();
@@ -20,8 +42,8 @@ public class Stage_DataManager
         newData.chapter = stageDatas[id]["chapter"];
         newData.stage = stageDatas[id]["stage"];
         Utils.TryConvertEnum<Defines.StageType>(stageDatas[id], "stageType",ref newData.stageType);
-        newData.spawnGroup = stageDatas[id]["spawnGroup"];
-        newData.clearRwardGroup = stageDatas[id]["clearRwardGroup"];
+        newData.spawnGroup = stageDatas[id]["spawnGroupId"];
+        newData.clearRwardGroup = stageDatas[id]["clearRewardGroup"];
         newData.dropRewardGroup = stageDatas[id]["dropRewardGroup"];
         Utils.TrySetValue<int>(stageDatas[id], "killCount", ref newData.killCount);
         Utils.TrySetValue<float>(stageDatas[id], "timeLimit", ref newData.timeLimit);

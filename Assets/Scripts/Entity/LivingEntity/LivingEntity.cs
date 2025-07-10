@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LivingEntity : MonoBehaviour, IDamageable
 {
-    protected EntityStats myStats;
+    //protected EntityStats myStats;
     public Vector2 moveDir;
 
     Rigidbody2D myRigid;

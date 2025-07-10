@@ -21,6 +21,8 @@ public class DataManager:MonoBehaviour
 
     Dictionary<string, Dictionary<string, string>> monsterData = new Dictionary<string, Dictionary<string, string>>();
 
+    Dictionary<string, List<StringKeyDatas>> spawnData = new Dictionary<string, List<StringKeyDatas>>();
+
     private void Awake()
     {
         OnAwake();
@@ -29,8 +31,14 @@ public class DataManager:MonoBehaviour
 
     private void OnAwake()
     {
-        ReadData("Stage", data_Stage.Get_StageDatas());
-        DebugDictionary(data_Stage.Get_StageDatas());
+        ReadData("Data\\Stage", data_Stage.Get_StageDatas());
+        ReadData("Data\\Monster", monsterData);
+        data_Monster.Set_MonsterData(monsterData);
+        
+        //DebugDictionary(data_Stage.Get_StageDatas());
+        LoadMulti("Data\\Spawn", spawnData);
+        //DebugMultiKey(spawnData);
+
     }
     void DebugDictionary(Dictionary<string,Dictionary<string,string>>data )
     {
@@ -41,15 +49,39 @@ public class DataManager:MonoBehaviour
                 Debug.Log($"id : {id} key : {key} value {data[id][key]}");
 
             }
-
-
-
         }
 
+    }
+    void DebugMultiKey(Dictionary<string,List<StringKeyDatas>> data)
+    {
+        foreach(string key in data.Keys)
+        {
+
+            for(int i = 0; i < data[key].Count; i++)
+            {
+                foreach(var index in data[key][i].datas.Keys)
+                {
+                    Debug.Log($"index : {index} value : {data[key][i].datas[index]}");
+                }
+            }
+        }
+    }
+    
+    public Dictionary<string,List<StringKeyDatas>> Get_SpawnDatas()
+    {
+        return spawnData;
     }
     public Dictionary<string, Dictionary<string, string>> Get_StageDatas()
     {
         return data_Stage.Get_StageDatas();
+    }
+    public StageData Get_StageData_Script(string id)
+    {
+        return data_Stage.Get_Stage_Script(id);
+    }
+    public MonsterStats Get_MonsterStat(string id)
+    {
+        return data_Monster.Get_MonsterStat(id);
     }
     public bool TrySetValue<T>(Dictionary<string, object> data, string key, ref T target)
     {

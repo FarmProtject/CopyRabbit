@@ -1,18 +1,34 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class PoolManager 
+public class PoolManager
 {
-    ObjectPool obj_Pool = new ObjectPool();
+    
 
-    [SerializeField]int maxMonsterCount = 63;
+    ObjectPool obj_Pool;
+
+    [SerializeField] int maxMonsterCount = 63;
     [SerializeField] int nowCount;
+
+
+    public PoolManager()
+    {
+        if(obj_Pool == null)
+        {
+            obj_Pool = new ObjectPool();
+        }
+    }
+
 
     public void Add_ToList(string key , GameObject go)
     {
+        if(obj_Pool == null)
+        {
+            Debug.Log("obj_pool is null");
+            obj_Pool = new ObjectPool();
+            return;
+        }
         obj_Pool.Add_To_Inactive(key, go);
-
-
     }
 
 

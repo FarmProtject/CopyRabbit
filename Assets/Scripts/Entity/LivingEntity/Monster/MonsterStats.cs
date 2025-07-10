@@ -6,7 +6,7 @@ public class MonsterStats : EntityStats
     public Defines.MonsterType monsterType;
     public bool canStun;
     public int sturnValue;
-
+    public string assetBundle;
     public MonsterStats()
     {
 
@@ -22,5 +22,6 @@ public class MonsterStats : EntityStats
         this.attackSpeed = other.attackSpeed;
         this.attackRange = other.attackRange;
         this.aggroRange = other.aggroRange;
+        this.assetBundle = other.assetBundle;
     }
 }

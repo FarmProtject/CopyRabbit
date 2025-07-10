@@ -6,22 +6,47 @@ public class MonsterEntity : LivingEntity,IDamageable
     Monster_AI_Controller ai_Ctr;
     int attackRange = 10;
     [SerializeField]Defines.MonsterActState state;
-    MonsterStats myStat;
+    MonsterStats myStat = new MonsterStats();
 
-   
 
+    private void Awake()
+    {
+        OnAwake();
+    }
+    private void Start()
+    {
+        //OnStart();
+    }
 
     public void Set_MyData(MonsterStats stat)
     {
-        myStat = stat;
+        myStat = new MonsterStats(stat);
     }
-
+    public string Get_MyId()
+    {
+        return myStat.id;
+    }
+    public void Set_MyID(string id)
+    {
+        if(myStat == null)
+        {
+            myStat = new MonsterStats();
+        }
+        myStat.id = id;
+    }
     protected override void OnAwake()
     {
         base.OnAwake();
-        //GameManager._instance.Add_ToPoolList(myStat.id, this.gameObject);
+        GameManager._instance.Add_OnMonsterList(this);
+        
     }
-
+    
+    public void Add_ToPoolList()
+    {
+        Debug.Log(myStat.id);
+        GameManager._instance.Add_ToPoolList(myStat.id, this.gameObject);
+        this.gameObject.SetActive(false);
+    }
     public override void AttackAnamy(LivingEntity targetEntity)
     {
         base.AttackAnamy(targetEntity);

@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     MonsterManager _MonsterManager;
     PoolManager _PoolManager;
     DataManager _DataManager;
+
     private void Awake()
     {
         OnAwake();
@@ -31,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
-        Debug.Log(_instance);
         if (_instance == null)
         {
             _instance = this;
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             _DataManager = Utils.GetOrAddComponent<DataManager>(this.gameObject);
             
         }
+
         Debug.Log(_instance);
     }
 
@@ -132,6 +133,18 @@ public class GameManager : MonoBehaviour
     {
         return stage_Controller.Get_StageID();
     }
+    public StageData Get_StageData_Scriot(string id)
+    {
+        return _DataManager.Get_StageData_Script(id);
+    }
+    public void Add_OnMonsterList(MonsterEntity monster)
+    {
+        _MonsterManager.Add_OnMonsterList(monster);
+    }
+    public List<MonsterEntity> Get_MonsterList()
+    {
+        return _MonsterManager.Get_MonsterList();
+    }
     #endregion
     #region Player
     public PlayerEntity GetPlayerEntity()
@@ -150,6 +163,13 @@ public class GameManager : MonoBehaviour
     public void Set_Player_MoveDir(Vector2 dir)
     {
         player_Controller.SetPlayerDir(dir);
+    }
+    #endregion
+    #region Monsters
+
+    public void InitMonster(List<string> monsterIds)
+    {
+        _MonsterManager.Init_Stage(monsterIds);
     }
     #endregion
     #region Lever
@@ -172,9 +192,18 @@ public class GameManager : MonoBehaviour
     {
        _DataManager.ReadData(path, target);
     }
+    public MonsterStats Get_MonsterStat(string id)
+    {
+        return _DataManager.Get_MonsterStat(id);
+    }
     public Dictionary<string, Dictionary<string, string>> Get_StageDatas()
     {
         return _DataManager.Get_StageDatas();
+    }
+
+    public Dictionary<string,List<StringKeyDatas>> Get_SpawnData()
+    {
+        return _DataManager.Get_SpawnDatas();
     }
     #endregion
 }

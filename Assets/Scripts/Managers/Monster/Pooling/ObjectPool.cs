@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class ObjectPool 
+public class ObjectPool
 {
 
     Dictionary<string, Queue<GameObject>> inactivePool = new Dictionary<string, Queue<GameObject>>();
@@ -10,10 +10,26 @@ public class ObjectPool
     List<string> id_List = new List<string>();
     List<string> inactiveIds = new List<string>();
 
+    public ObjectPool()
+    {
+        if (inactiveIds == null)
+        {
+            inactivePool = new Dictionary<string, Queue<GameObject>>();
+        }
+        if (activePool == null)
+        {
+            activePool = new Dictionary<string, List<GameObject>>();
+        }
+    }
+    /*
     public bool IsInList(string key,GameObject go)
     {
         bool isin = false;
-
+        if (!inactivePool.ContainsKey(key))
+        {
+            inactivePool.Add(key, new Queue<GameObject>);
+            return false;
+        }
         if(inactivePool[key].Contains(go) || activePool[key].Contains(go))
         {
             isin = true;
@@ -21,30 +37,38 @@ public class ObjectPool
 
         return isin;
     }
+    */
     public void Add_To_Inactive(string key, GameObject go)
     {
-        if (!IsInList(key, go))
+
+
+        if (inactivePool.ContainsKey(key))
         {
-            if(inactivePool.ContainsKey(key))
-            {
-                inactivePool[key].Enqueue(go);
-                go.SetActive(false);
+            inactivePool[key].Enqueue(go);
+            go.SetActive(false);
 
-            }
-            else
-            {
-                Queue<GameObject> queue = new Queue<GameObject>();
-                queue.Enqueue(go);
-                inactivePool.Add(key, queue);
-                go.SetActive(false);
-            }
         }
-
-
-
+        else
+        {
+            Queue<GameObject> queue = new Queue<GameObject>();
+            queue.Enqueue(go);
+            inactivePool.Add(key, queue);
+            go.SetActive(false);
+        }
     }
 
+    public void Init()
+    {
+        List<MonsterEntity> list = GameManager._instance.Get_MonsterList();
+        for (int i = 0; i < list.Count; i++)
+        {
+            string id = list[i].Get_MyId();
+            if (!inactivePool[id].Contains(list[i].gameObject))
+            {
 
+            }
+        }
+    }
     public GameObject Get(string key)
     {
         GameObject go;
@@ -57,7 +81,7 @@ public class ObjectPool
         {
             go = CreatNewObj(key);
         }
-        
+
         go.SetActive(true);
         activePool[key].Add(go);
         Change_ActiveIDList(key);
@@ -68,7 +92,7 @@ public class ObjectPool
     {
         int count = 0;
 
-        foreach(string key in activePool.Keys)
+        foreach (string key in activePool.Keys)
         {
             count += activePool[key].Count;
         }
@@ -76,12 +100,17 @@ public class ObjectPool
         return count;
     }
 
+    public void Set_IDList(List<string> newId)
+    {
+        id_List = newId;
+    }
+
     void Set_NewID(List<string> newids)
     {
         id_List = newids;
-        
+
         List<GameObject> goList = new List<GameObject>();
-        
+
         Inactive_All();
 
         foreach (var queue in inactivePool.Values)
@@ -115,11 +144,11 @@ public class ObjectPool
 
     public void Inactive_All()
     {
-        foreach(string key in activePool.Keys)
+        foreach (string key in activePool.Keys)
         {
-            foreach(GameObject go in activePool[key])
+            foreach (GameObject go in activePool[key])
             {
-                Return(key,go);
+                Return(key, go);
             }
         }
         inactiveIds.Clear();
@@ -127,11 +156,11 @@ public class ObjectPool
 
     void Change_ActiveIDList(string id)
     {
-        if(inactivePool[id].Count == 0)
+        if (inactivePool[id].Count == 0)
         {
             inactiveIds.Remove(id);
         }
-        else if(!inactiveIds.Contains(id))
+        else if (!inactiveIds.Contains(id))
         {
             inactiveIds.Add(id);
         }
@@ -155,6 +184,6 @@ public class ObjectPool
         {
             return null;
         }
-        
+
     }
 }
