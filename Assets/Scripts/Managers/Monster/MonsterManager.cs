@@ -19,6 +19,7 @@ public class MonsterManager
     public void Init_Stage(List<string> monsterIds)
     {
         Change_MonsterIDs(monsterIds);
+        Add_MonsterPool();
     }
 
     public void Change_MonsterIDs(List<string> monsterIds)
@@ -33,8 +34,8 @@ public class MonsterManager
             MonsterStats stat = GameManager._instance.Get_MonsterStat(id);
 
             monsters[i].Set_MyData(stat);
-
-            monsters[i].Add_ToPoolList();
+            GameManager._instance.Inactive_Monster(monsters[i].Get_MyId(), monsters[i].gameObject);
+            //monsters[i].Add_ToPoolList();
         }
 
     }
@@ -44,7 +45,7 @@ public class MonsterManager
         for(int i = 0; i < monsters.Count; i++)
         {
             string key = monsters[i].Get_MyId();
-            GameManager._instance.Add_ToPoolList(key, monsters[i].gameObject);
+            GameManager._instance.Inactive_Monster(key, monsters[i].gameObject);
         }
     }
 

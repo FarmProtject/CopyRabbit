@@ -21,31 +21,19 @@ public class ObjectPool
             activePool = new Dictionary<string, List<GameObject>>();
         }
     }
-    /*
-    public bool IsInList(string key,GameObject go)
-    {
-        bool isin = false;
-        if (!inactivePool.ContainsKey(key))
-        {
-            inactivePool.Add(key, new Queue<GameObject>);
-            return false;
-        }
-        if(inactivePool[key].Contains(go) || activePool[key].Contains(go))
-        {
-            isin = true;
-        }
-
-        return isin;
-    }
-    */
+    
     public void Add_To_Inactive(string key, GameObject go)
     {
-
+        
 
         if (inactivePool.ContainsKey(key))
         {
-            inactivePool[key].Enqueue(go);
-            go.SetActive(false);
+            if (!inactivePool[key].Contains(go))
+            {
+                inactivePool[key].Enqueue(go);
+                go.SetActive(false);
+            }
+            
 
         }
         else
@@ -55,6 +43,18 @@ public class ObjectPool
             inactivePool.Add(key, queue);
             go.SetActive(false);
         }
+        if (!inactiveIds.Contains(key))
+        {
+            inactiveIds.Add(key);
+        }
+        if (activePool.ContainsKey(key))
+        {
+            if (activePool[key].Contains(go))
+            {
+                activePool[key].Remove(go);
+            }
+        }
+        //Debug.Log($" Monster Key : {key } MonsterName {go.name} Pool Count {inactivePool[key].Count}");
     }
 
     public void Init()
@@ -72,7 +72,11 @@ public class ObjectPool
     public GameObject Get(string key)
     {
         GameObject go;
-
+        if(key == null)
+        {
+            Debug.Log(null);
+        }
+        
         if (inactivePool.Count > 0)
         {
             go = inactivePool[key].Dequeue();
@@ -81,9 +85,22 @@ public class ObjectPool
         {
             go = CreatNewObj(key);
         }
-
+        if (activePool.ContainsKey(key))
+        {
+            if (!activePool[key].Contains(go))
+            {
+                activePool[key].Add(go);
+            }
+            
+        }
+        else
+        {
+            List<GameObject> newList = new();
+            newList.Add(go);
+            activePool.Add(key, newList);
+        }
         go.SetActive(true);
-        activePool[key].Add(go);
+        //activePool[key].Add(go);
         Change_ActiveIDList(key);
         return go;
     }
@@ -95,8 +112,9 @@ public class ObjectPool
         foreach (string key in activePool.Keys)
         {
             count += activePool[key].Count;
+            
         }
-
+        Debug.Log($"ActiveCount : {count}");
         return count;
     }
 
@@ -125,7 +143,7 @@ public class ObjectPool
             inactivePool[key] = new Queue<GameObject>();
             activePool[key] = new List<GameObject>();
         }
-
+        
         for (int i = 0; i < goList.Count; i++)
         {
             string key = id_List[i % id_List.Count];
@@ -171,19 +189,39 @@ public class ObjectPool
         GameObject go = new GameObject();
         return go;
     }
-
-    public string Get_Random_Inactive()
+    public string Get_Random_Gen()
     {
+        string id = Get_Random_InactiveId();
+        if(id == null)
+        {
+            Debug.Log("No Inactive Objs Can't Get inactiveId in 'ObjectPool' Script 'Get_Random_Gen' Messod");
+            return null;
+        }
+        if (inactivePool.ContainsKey(id))
+        {
+            return id;
+        }
+        else
+        {
+            Debug.Log("Inactive Pool Didn't Got Inactive Id, ID Error! In 'ObjectPool' Script 'Get_Random_Gen' Messod");
+            return null;
+        }
+    }
+    
+    public string Get_Random_InactiveId()
+    {
+
         if (inactiveIds.Count > 1)
         {
-            int index = UnityEngine.Random.Range(0, inactivePool.Count);
+            int index = UnityEngine.Random.Range(0, inactiveIds.Count);
+            Debug.Log($"index : {index}");
             string id = inactiveIds[index];
             return id;
         }
         else
         {
+            Debug.Log("Inactive null!!");
             return null;
         }
-
     }
 }

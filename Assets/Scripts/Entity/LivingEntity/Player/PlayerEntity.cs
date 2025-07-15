@@ -22,4 +22,10 @@ public class PlayerEntity : LivingEntity,IDamageable
             }
         }
     }
+
+    protected override double Damaged(double damage)
+    {
+        return base.Damaged(damage);
+
+    }
 }

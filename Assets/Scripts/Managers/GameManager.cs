@@ -88,6 +88,12 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+    #region GetManagers
+    public PoolManager Get_PoolMamagaer()
+    {
+        return _PoolManager;
+    }
+    #endregion
     #region Upgrage
     public void Upgrade(Defines.StatType type, double count)
     {
@@ -117,18 +123,9 @@ public class GameManager : MonoBehaviour
     {
         return stage_Controller.Get_StageList();
     }
-    public GameObject Gen_Monster(string key)
-    {
-        return _PoolManager.Get_Monster(key);
-    }
-    public string Get_Random_Inactive()
-    {
-        return _PoolManager.Get_Random_Inactive();
-    }
-    public void Add_ToPoolList(string key, GameObject go)
-    {
-        _PoolManager.Add_ToList(key, go);
-    }
+    
+    
+    
     public string Get_Stage_ID()
     {
         return stage_Controller.Get_StageID();
@@ -171,6 +168,20 @@ public class GameManager : MonoBehaviour
     {
         _MonsterManager.Init_Stage(monsterIds);
     }
+    #region MonsterPooling
+    public string Get_Random_Inactive()
+    {
+        return _PoolManager.Get_Random_Inactive();
+    }
+    public void Inactive_Monster(string key, GameObject go)
+    {
+        _PoolManager.Inactive_Obj(key, go);
+    }
+    public GameObject Gen_Monster(string key)
+    {
+        return _PoolManager.Get_Monster(key);
+    }
+    #endregion
     #endregion
     #region Lever
     public Lever_Controller Get_LeverCtr()

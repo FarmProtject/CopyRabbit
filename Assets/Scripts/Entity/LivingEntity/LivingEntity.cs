@@ -28,9 +28,10 @@ public class LivingEntity : MonoBehaviour, IDamageable
     {
         MoveTo();
     }
+    
     public virtual void AttackAnamy(LivingEntity targetEntity)
     {
-
+        
     }
 
     protected virtual double Damaged(double damage)

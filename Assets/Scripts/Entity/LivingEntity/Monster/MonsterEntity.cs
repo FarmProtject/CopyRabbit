@@ -8,7 +8,8 @@ public class MonsterEntity : LivingEntity,IDamageable
     [SerializeField]Defines.MonsterActState state;
     MonsterStats myStat = new MonsterStats();
 
-
+    double healthPoint;
+    bool isDead;
     private void Awake()
     {
         OnAwake();
@@ -21,6 +22,7 @@ public class MonsterEntity : LivingEntity,IDamageable
     public void Set_MyData(MonsterStats stat)
     {
         myStat = new MonsterStats(stat);
+        healthPoint = stat.healthPoint;
     }
     public string Get_MyId()
     {
@@ -44,7 +46,7 @@ public class MonsterEntity : LivingEntity,IDamageable
     public void Add_ToPoolList()
     {
         Debug.Log(myStat.id);
-        GameManager._instance.Add_ToPoolList(myStat.id, this.gameObject);
+        GameManager._instance.Inactive_Monster(myStat.id, this.gameObject);
         this.gameObject.SetActive(false);
     }
     public override void AttackAnamy(LivingEntity targetEntity)
@@ -53,10 +55,24 @@ public class MonsterEntity : LivingEntity,IDamageable
     }
     protected override double Damaged(double damage)
     {
-        return base.Damaged(damage);
+
+        healthPoint -= damage;
+        if (IsDead())
+        {
+            GameManager._instance.Inactive_Monster(myStat.id, this.gameObject);
+            
+        }
+        return healthPoint;
     }
 
-
+    bool IsDead()
+    {
+        if(healthPoint <= 0)
+        {
+            isDead = true;
+        }
+        return isDead;
+    }
     void SetAIState(Defines.MonsterActState monsterState)
     {
         if(ai_Ctr == null)
@@ -65,6 +81,7 @@ public class MonsterEntity : LivingEntity,IDamageable
         }
         ai_Ctr.SetMyState(monsterState);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

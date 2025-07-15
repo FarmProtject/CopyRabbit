@@ -19,8 +19,12 @@ public class PoolManager
         }
     }
 
+    public void InitPool()
+    {
+        
+    }
 
-    public void Add_ToList(string key , GameObject go)
+    public void Inactive_Obj(string key , GameObject go)
     {
         if(obj_Pool == null)
         {
@@ -37,12 +41,14 @@ public class PoolManager
         int genCount = 0;
         nowCount = obj_Pool.GetActiveCount();
         genCount = maxMonsterCount - nowCount;
+        //Debug.Log($"genCount : {genCount}");
         List<StageField> fieldList = GameManager._instance.Get_StageList();
 
         while (genCount > 0)
         {
             int index = UnityEngine.Random.Range(0, fieldList.Count);
-            genCount -= fieldList[index].Gen_Monster(genCount);
+            genCount    = fieldList[index].Gen_Monster(genCount);
+            Debug.Log($"genCount : {genCount}");
             fieldList.RemoveAt(index);
         }
     }
@@ -54,6 +60,11 @@ public class PoolManager
 
     public string Get_Random_Inactive()
     {
-        return obj_Pool.Get_Random_Inactive();
+        return obj_Pool.Get_Random_InactiveId();
+    }
+
+    public ObjectPool Get_ObjectPool()
+    {
+        return obj_Pool;
     }
 }
