@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         OnAwake();
-        Test();
+        //Test();
 
 
     }
@@ -107,9 +107,10 @@ public class GameManager : MonoBehaviour
     #endregion
     #region Stages
 
-    public void Set_StageType(Defines.StageType type)
+
+    public void Change_Stage(string id)
     {
-        stage_Controller.SetStage(type);
+        stage_Controller.Change_Stage(id);
     }
     public int Get_Once_Stage_MaxGenCount()
     {

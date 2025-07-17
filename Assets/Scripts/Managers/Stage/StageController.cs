@@ -5,7 +5,6 @@ public class StageController : MonoBehaviour
 {
     [SerializeField]string id = "1C1S";
     StageBase stage;
-    Defines.StageType stageType;
     [SerializeField]int monster_GenCount = 7; //한번에 젠 되는 최대 몬스터 수 
     List<string> monsterIDs = new List<string>();
     List<StageField> stageFields = new List<StageField>();
@@ -17,9 +16,9 @@ public class StageController : MonoBehaviour
     }
     void Init_Stage(string id)
     {
-        Cahnge_StageData(id);
+        Change_StageData(id);
         Change_MonsterIdList();
-        SetStage(data_Stage.stageType);
+        SetStage();
         GameManager._instance.InitMonster(monsterIDs);
 
     }
@@ -28,13 +27,19 @@ public class StageController : MonoBehaviour
         
     }
 
-    public void SetStage(Defines.StageType type)
+    
+    public void Change_Stage(string id)
     {
-        SetStageType(type);
+        Change_StageData(id);
+        SetStage();
+    }
+
+    public void SetStage()
+    {
         ChangeStage();
     }
 
-    void Cahnge_StageData(string id)
+    public void Change_StageData(string id)
     {
         this.id = id;
         data_Stage = GameManager._instance.Get_StageData_Scriot(id);
@@ -53,10 +58,7 @@ public class StageController : MonoBehaviour
         
 
     }
-    void SetStageType(Defines.StageType type)
-    {
-        stageType = type;
-    }
+
     public string Get_StageID()
     {
         return id;
@@ -90,7 +92,7 @@ public class StageController : MonoBehaviour
     }
     public void ChangeStage()
     {
-        switch (stageType)
+        switch (data_Stage.stageType)
         {
             case Defines.StageType.Infinity:
                 stage = new Stage_Infinity();

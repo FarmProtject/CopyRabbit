@@ -43,4 +43,9 @@ public static class Defines
         monster,
         boss
     }
+    public enum Language
+    {
+        kr,
+        en
+    }
 }
