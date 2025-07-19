@@ -43,6 +43,7 @@ public class StageController : MonoBehaviour
     {
         this.id = id;
         data_Stage = GameManager._instance.Get_StageData_Scriot(id);
+        GameManager._instance.Get_StagePanelScript().Set_StageKey(id);
     }
     void Change_MonsterIdList()
     {

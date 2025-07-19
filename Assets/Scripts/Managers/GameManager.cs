@@ -66,7 +66,11 @@ public class GameManager : MonoBehaviour
             _DataManager = Utils.GetOrAddComponent<DataManager>(this.gameObject);
             
         }
-
+        if(_ui_Manager.Get_StagePanel_Script() == null)
+        {
+            UI_StagePanel stagePanel = Utils.GetOrAddComponent<UI_StagePanel>(GameObject.Find("StagePanel"));
+            _ui_Manager.Set_StagePanel_Script(stagePanel);
+        }
         Debug.Log(_instance);
     }
 
@@ -75,6 +79,8 @@ public class GameManager : MonoBehaviour
         Init();
         playerObj = GameObject.Find("Player");
         inputManager = new InputManager(playerObj);
+        
+
     }
     #region UIs
     public void Bind_UI_PopUp(UI_PopUpObj bindTarget)
@@ -142,6 +148,16 @@ public class GameManager : MonoBehaviour
     public List<MonsterEntity> Get_MonsterList()
     {
         return _MonsterManager.Get_MonsterList();
+    }
+
+    public UI_StagePanel Get_StagePanelScript()
+    {
+        return _ui_Manager.Get_StagePanel_Script();
+    }
+
+    public void Add_StageButtons(UI_PortalRightCell button)
+    {
+        _ui_Manager.Add_StageButtons(button);
     }
     #endregion
     #region Player
@@ -212,7 +228,10 @@ public class GameManager : MonoBehaviour
     {
         return _DataManager.Get_StageDatas();
     }
-
+    public Dictionary<string,List<StringKeyDatas>> Get_ChapterDatas()
+    {
+        return _DataManager.Get_ChapterDatas();
+    }
     public Dictionary<string,List<StringKeyDatas>> Get_SpawnData()
     {
         return _DataManager.Get_SpawnDatas();

@@ -19,6 +19,8 @@ public class DataManager:MonoBehaviour
 
     Item_DataManager data_Item = new Item_DataManager();
 
+    Dictionary<string, List<StringKeyDatas>> data_Chapter = new Dictionary<string, List<StringKeyDatas>>();
+
     Dictionary<string, Dictionary<string, string>> monsterData = new Dictionary<string, Dictionary<string, string>>();
 
     Dictionary<string, List<StringKeyDatas>> spawnData = new Dictionary<string, List<StringKeyDatas>>();
@@ -34,10 +36,10 @@ public class DataManager:MonoBehaviour
         ReadData("Data\\Stage", data_Stage.Get_StageDatas());
         ReadData("Data\\Monster", monsterData);
         data_Monster.Set_MonsterData(monsterData);
-        
+        LoadMulti("Data\\Chapter", data_Chapter);
         //DebugDictionary(data_Stage.Get_StageDatas());
         LoadMulti("Data\\Spawn", spawnData);
-        //DebugMultiKey(spawnData);
+        DebugMultiKey(data_Chapter);
 
     }
     void DebugDictionary(Dictionary<string,Dictionary<string,string>>data )
@@ -66,7 +68,10 @@ public class DataManager:MonoBehaviour
             }
         }
     }
-    
+    public Dictionary<string,List<StringKeyDatas>> Get_ChapterDatas()
+    {
+        return data_Chapter;
+    }
     public Dictionary<string,List<StringKeyDatas>> Get_SpawnDatas()
     {
         return spawnData;

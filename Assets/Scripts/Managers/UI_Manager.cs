@@ -7,6 +7,8 @@ public class UI_Manager
     Dictionary<string, string> buttonBind = new Dictionary<string, string>();//버튼이름 키 , 열릴 오브젝트 밸류 , 이부분 CSV로 매핑처리 필요
 
     List<GameObject> opened_UIs = new List<GameObject>();
+
+    UI_StagePanel stagePanel;
     public void BindPopUp(UI_PopUpObj uiObj)
     {
         string name = uiObj.gameObject.name;
@@ -15,7 +17,14 @@ public class UI_Manager
             popUpObjs.Add(name, uiObj.gameObject);
         }
     }
-
+    public void Set_StagePanel_Script(UI_StagePanel script)
+    {
+        stagePanel = script;
+    }
+    public UI_StagePanel Get_StagePanel_Script()
+    {
+        return stagePanel;
+    }
     public void AddButtonBind(string key, string value)
     {
         if (!buttonBind.ContainsKey(key))
@@ -71,6 +80,11 @@ public class UI_Manager
         {
             opened_UIs.Add(go);
         }
+    }
+
+    public void Add_StageButtons(UI_PortalRightCell button)
+    {
+        stagePanel.Add_Buttons(button);
     }
 
 }

@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 503975830710532580}
   - component: {fileID: 7684116954973899252}
   - component: {fileID: 8977661041855374409}
+  - component: {fileID: 7185342214643249713}
   m_Layer: 5
   m_Name: LeftCellPanel
   m_TagString: Untagged
@@ -366,3 +367,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7185342214643249713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333794147721907693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd74521ee2edb44eb40cd2719b9391f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -283,6 +283,7 @@ GameObject:
   - component: {fileID: 7223836805646382565}
   - component: {fileID: 4891287372479028325}
   - component: {fileID: 6852367741455829244}
+  - component: {fileID: 8653104404931294073}
   m_Layer: 5
   m_Name: ChapterRightCell
   m_TagString: Untagged
@@ -349,3 +350,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8653104404931294073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6611390912109956118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580f7dfb8fc524e4aa3e7c23a444a312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageId: 
+  titleText: {fileID: 7093630410357192191}
+  combatText: {fileID: 1472536330733706358}
