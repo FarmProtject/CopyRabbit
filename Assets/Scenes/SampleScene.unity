@@ -2593,7 +2593,7 @@ GameObject:
   - component: {fileID: 442088394}
   - component: {fileID: 442088395}
   m_Layer: 5
-  m_Name: Content
+  m_Name: RightCellContents
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5857,6 +5857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15b12db4446bc540a1f8b4e723e2b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightPanel: {fileID: 0}
   prefab_RightCell: {fileID: 6611390912109956118, guid: 206d570f548e11242a5e451a5e78c797, type: 3}
 --- !u!1 &961553649
 GameObject:
@@ -11907,7 +11908,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd01aa3b5ef261428aafe5796b65283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1C1S
+  stageId: 1C1S
+  chapter: 
   monster_GenCount: 7
 --- !u!1001 &2107366998
 PrefabInstance:

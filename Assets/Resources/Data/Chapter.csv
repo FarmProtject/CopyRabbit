@@ -1,7 +1,7 @@
 id,groupId,nextChapter,beforeChapter,combat
-C1S1,1,2,null,10000
-C1S2,1,2,null,15000
-C1S3,1,2,null,20000
-C2S1,2,3,1,25000
-C2S2,2,3,1,30000
-C2S3,2,3,1,35000
+1C1S,1,2,null,10000
+1C2S,1,2,null,15000
+1C3S,1,2,null,20000
+2C1S,2,3,1,25000
+2C2S,2,3,1,30000
+2C3S,2,3,1,35000

@@ -9,7 +9,7 @@ public class UI_StagePanel : MonoBehaviour
     string before;
     List<UI_PortalRightCell> uI_StageButtons = new List<UI_PortalRightCell>();
     List<string> stageKeys = new List<string>();
-
+    [SerializeField]GameObject rightPanel;
     [SerializeField]GameObject prefab_RightCell;
     public string Get_StageKey()
     {
@@ -21,11 +21,13 @@ public class UI_StagePanel : MonoBehaviour
         stageKeys.Clear();
         Dictionary<string, List<StringKeyDatas>> chapterDatas = GameManager._instance.Get_ChapterDatas();
 
-
+        Debug.Log($" Cahpter Data Count{chapterDatas[cahpterKey].Count}");
+        
         for(int i = 0; i<chapterDatas[cahpterKey].Count; i++)
         {
             stageKeys.Add(chapterDatas[cahpterKey][i].datas["id"]);
         }
+        Set_RightCells();
         for(int i = 0; i<chapterDatas[cahpterKey].Count; i++)
         {
             string id = chapterDatas[cahpterKey][i].datas["id"];
@@ -54,7 +56,10 @@ public class UI_StagePanel : MonoBehaviour
     void Set_RightCells()
     {
         int count = stageKeys.Count - uI_StageButtons.Count;
-
+        if(rightPanel == null)
+        {
+            rightPanel = GameObject.Find("RightCellContents");
+        }
         for(int i = 0; i<uI_StageButtons.Count; i++)
         {
             uI_StageButtons[i].gameObject.SetActive(true);
@@ -64,7 +69,7 @@ public class UI_StagePanel : MonoBehaviour
             for (int i = 0; i<count; i++)
             {
                 GameObject go = Instantiate(prefab_RightCell);
-                go.transform.SetParent(this.gameObject.transform);
+                go.transform.SetParent(rightPanel.transform);
             }
         }
         
@@ -77,6 +82,8 @@ public class UI_StagePanel : MonoBehaviour
                 uI_StageButtons[i].gameObject.SetActive(false);
             }
         }
+
+        rightPanel.transform.localPosition = new Vector2(0, 0);
 
     }
 }

@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 public class StageController : MonoBehaviour
 {
-    [SerializeField]string id = "1C1S";
+    [SerializeField]string stageId = "1C1S";
+    [SerializeField] string chapter;
     StageBase stage;
     [SerializeField]int monster_GenCount = 7; //한번에 젠 되는 최대 몬스터 수 
     List<string> monsterIDs = new List<string>();
@@ -12,7 +13,7 @@ public class StageController : MonoBehaviour
 
     private void Start()
     {
-        Init_Stage(this.id);
+        Init_Stage(this.stageId);
     }
     void Init_Stage(string id)
     {
@@ -41,9 +42,10 @@ public class StageController : MonoBehaviour
 
     public void Change_StageData(string id)
     {
-        this.id = id;
+        this.stageId = id;
         data_Stage = GameManager._instance.Get_StageData_Scriot(id);
-        GameManager._instance.Get_StagePanelScript().Set_StageKey(id);
+        chapter = data_Stage.chapter;
+        GameManager._instance.Get_StagePanelScript().Set_StageKey(chapter);
     }
     void Change_MonsterIdList()
     {
@@ -62,7 +64,7 @@ public class StageController : MonoBehaviour
 
     public string Get_StageID()
     {
-        return id;
+        return stageId;
     }
     public int Get_Once_MonsterGenCount()
     {
