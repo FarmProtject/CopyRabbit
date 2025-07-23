@@ -10,6 +10,7 @@ public class MonsterEntity : LivingEntity,IDamageable
 
     double healthPoint;
     bool isDead;
+    [SerializeField]string myId;
     private void Awake()
     {
         OnAwake();
@@ -23,6 +24,7 @@ public class MonsterEntity : LivingEntity,IDamageable
     {
         myStat = new MonsterStats(stat);
         healthPoint = stat.healthPoint;
+        myId = myStat.id;
     }
     public string Get_MyId()
     {

@@ -11,6 +11,8 @@ public class UI_StagePanel : MonoBehaviour
     List<string> stageKeys = new List<string>();
     [SerializeField]GameObject rightPanel;
     [SerializeField]GameObject prefab_RightCell;
+    [SerializeField] GameObject leftPanel;
+    [SerializeField] GameObject prefab_LeftCell;
     public string Get_StageKey()
     {
         return cahpterKey;

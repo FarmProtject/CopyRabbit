@@ -5859,6 +5859,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightPanel: {fileID: 0}
   prefab_RightCell: {fileID: 6611390912109956118, guid: 206d570f548e11242a5e451a5e78c797, type: 3}
+  leftPanel: {fileID: 0}
+  prefab_LeftCell: {fileID: 0}
 --- !u!1 &961553649
 GameObject:
   m_ObjectHideFlags: 0
