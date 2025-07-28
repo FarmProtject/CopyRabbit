@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class UI_PortalRightCell : UI_StageButton
+public class Cell_PortalRightCell : UI_StageButton,IPoolUI
 {
     [SerializeField] string stageId;
     TextMeshProUGUI stageText;
@@ -36,5 +36,30 @@ public class UI_PortalRightCell : UI_StageButton
             return;
         }
         GameManager._instance.Change_Stage(stageId);
+    }
+
+    public void Init()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnDisable()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public GameObject Get()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void EnableFunction()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DisableFunction()
+    {
+        throw new System.NotImplementedException();
     }
 }

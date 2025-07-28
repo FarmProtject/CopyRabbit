@@ -13,6 +13,15 @@ public class Stage_DataManager
         GameManager._instance.Read_Data(path, stageDatas);
     }
 
+    public Dictionary<string, List<StringKeyDatas>> Get_Rewards()
+    {
+        return rewards;
+    }
+    public void Set_Rewards(Dictionary<string,List<StringKeyDatas>> data)
+    {
+        rewards = data;
+    }
+
     public void Set_Stage_Dict()
     {
         foreach(string id in stageDatas.Keys)
@@ -33,6 +42,8 @@ public class Stage_DataManager
 
         return data_Stage[id];
     }
+
+
     public StageData Get_StageData(string id)
     {
         StageData newData = new StageData();
@@ -49,7 +60,15 @@ public class Stage_DataManager
         Utils.TrySetValue<float>(stageDatas[id], "timeLimit", ref newData.timeLimit);
         Utils.TrySetValue<string>(stageDatas[id], "nextStageId", ref newData.nextStageId);
         Utils.TrySetValue<int>(stageDatas[id], "recommendedPower", ref newData.recommendedPower);
-
+        List<Stage_Reward> rewads = new List<Stage_Reward>();
+        for(int i = 0; i < rewards[id].Count; i++)
+        {
+            Stage_Reward reward = new Stage_Reward();
+            reward.id = rewards[id][i].datas["id"];
+            reward.itemId = rewards[id][i].datas["itemId"];
+            Utils.TrySetValue<int>(rewards[id][i].datas,"qauntity",ref reward.quantity);
+        }
+        newData.rewards = rewads;
         return newData;
     }
 

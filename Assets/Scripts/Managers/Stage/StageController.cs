@@ -10,7 +10,6 @@ public class StageController : MonoBehaviour
     List<string> monsterIDs = new List<string>();
     List<StageField> stageFields = new List<StageField>();
     StageData data_Stage;
-
     private void Start()
     {
         Init_Stage(this.stageId);
@@ -39,7 +38,7 @@ public class StageController : MonoBehaviour
     {
         ChangeStage();
     }
-
+    
     public void Change_StageData(string id)
     {
         this.stageId = id;

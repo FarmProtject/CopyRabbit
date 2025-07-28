@@ -39,7 +39,7 @@ public class StageData
 
 public class Stage_Reward
 {
-    string id;
-    string itemId;
-    int quantity;
+    public string id;
+    public string itemId;
+    public int quantity;
 }

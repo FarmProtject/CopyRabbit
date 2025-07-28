@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     MonsterManager _MonsterManager;
     PoolManager _PoolManager;
     DataManager _DataManager;
+    UI_Pooler _uiPooler;
 
     private void Awake()
     {
@@ -28,6 +29,15 @@ public class GameManager : MonoBehaviour
         GameObject go = GameObject.Find("TestPopUp");
         _ui_Manager.AddButtonBind("TestButton", go.name);
         _ui_Manager.AddPopUpObj(go.name, go);
+    }
+
+    void OnAwake()
+    {
+        Init();
+        playerObj = GameObject.Find("Player");
+        inputManager = new InputManager(playerObj);
+
+
     }
 
     void Init()
@@ -71,17 +81,15 @@ public class GameManager : MonoBehaviour
             UI_StagePanel stagePanel = Utils.GetOrAddComponent<UI_StagePanel>(GameObject.Find("StagePanel"));
             _ui_Manager.Set_StagePanel_Script(stagePanel);
         }
+        if(_uiPooler == null)
+        {
+            _uiPooler = Utils.GetOrAddComponent<UI_Pooler>(this.gameObject);
+
+        }
         Debug.Log(_instance);
     }
 
-    void OnAwake()
-    {
-        Init();
-        playerObj = GameObject.Find("Player");
-        inputManager = new InputManager(playerObj);
-        
-
-    }
+    
     #region UIs
     public void Bind_UI_PopUp(UI_PopUpObj bindTarget)
     {
@@ -92,7 +100,18 @@ public class GameManager : MonoBehaviour
     {
         _ui_Manager.Pop_Up_UI(name);
     }
-
+    public Dictionary<Defines.UI_PrefabType, Queue<IPoolUI>> Get_UI_Pool()
+    {
+        return _uiPooler.Get_Pool();
+    }
+    public GameObject Get_PoolUI(Defines.UI_PrefabType type)
+    {
+        return _uiPooler.Get(type);
+    }
+    public void Return_PoolUI(Defines.UI_PrefabType type, IPoolUI ui)
+    {
+        _uiPooler.Return(type,ui);
+    }
     #endregion
     #region GetManagers
     public PoolManager Get_PoolMamagaer()
@@ -155,9 +174,9 @@ public class GameManager : MonoBehaviour
         return _ui_Manager.Get_StagePanel_Script();
     }
 
-    public void Add_StageButtons(UI_PortalRightCell button)
+    public void Add_StageButtons(Cell_PortalRightCell button)
     {
-        _ui_Manager.Add_StageButtons(button);
+        _ui_Manager.Add_RightCells(button);
     }
     #endregion
     #region Player

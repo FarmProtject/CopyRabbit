@@ -2845,6 +2845,7 @@ GameObject:
   - component: {fileID: 495113135}
   - component: {fileID: 495113136}
   - component: {fileID: 495113137}
+  - component: {fileID: 495113138}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2893,6 +2894,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   language: 0
+--- !u!114 &495113138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495113134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c5baec90336c864ab0fe83789dc671a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cell_IconPrefab: {fileID: 0}
+  rewardPanels: {fileID: 0}
+  cell_StageButton: {fileID: 0}
 --- !u!1 &496835227
 GameObject:
   m_ObjectHideFlags: 0
@@ -5857,10 +5873,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15b12db4446bc540a1f8b4e723e2b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelType: 0
+  selectStage: 
   rightPanel: {fileID: 0}
   prefab_RightCell: {fileID: 6611390912109956118, guid: 206d570f548e11242a5e451a5e78c797, type: 3}
   leftPanel: {fileID: 0}
-  prefab_LeftCell: {fileID: 0}
+  prefab_LeftContents: {fileID: 0}
+  prefab_LeftPanelCell: {fileID: 0}
 --- !u!1 &961553649
 GameObject:
   m_ObjectHideFlags: 0

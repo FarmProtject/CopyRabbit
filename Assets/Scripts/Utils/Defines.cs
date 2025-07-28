@@ -3,6 +3,19 @@ using System;
 using System.Collections.Generic;
 public static class Defines 
 {
+    public enum RightPanelType
+    {
+        Stage,
+        Challenge
+    }
+
+
+    public enum UI_PrefabType
+    {
+        CellIcon,
+        RewardPanel,
+        CellStageButton
+    }
     public enum UIEvents
     {
         Click,

@@ -9,6 +9,8 @@ public class UI_Manager
     List<GameObject> opened_UIs = new List<GameObject>();
 
     UI_StagePanel stagePanel;
+
+
     public void BindPopUp(UI_PopUpObj uiObj)
     {
         string name = uiObj.gameObject.name;
@@ -82,9 +84,14 @@ public class UI_Manager
         }
     }
 
-    public void Add_StageButtons(UI_PortalRightCell button)
+    public void Add_RightCells(Cell_PortalRightCell button)
     {
         stagePanel.Add_Buttons(button);
     }
+    public void Add_LeftCells(Cell_StageLeft cell)
+    {
+        stagePanel.Add_LeftCells(cell);
+    }
+
 
 }
