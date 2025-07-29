@@ -14,6 +14,8 @@ public class StageController : MonoBehaviour
     {
         Init_Stage(this.stageId);
     }
+
+
     void Init_Stage(string id)
     {
         Change_StageData(id);

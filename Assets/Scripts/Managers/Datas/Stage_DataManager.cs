@@ -52,7 +52,7 @@ public class Stage_DataManager
         newData.id = stageDatas[id]["id"];
         newData.chapter = stageDatas[id]["chapter"];
         newData.stage = stageDatas[id]["stage"];
-        Utils.TryConvertEnum<Defines.StageType>(stageDatas[id], "stageType",ref newData.stageType);
+        Utils.TryConvertEnum<Defines.StageClearType>(stageDatas[id], "stageType",ref newData.stageClearType);
         newData.spawnGroup = stageDatas[id]["spawnGroupId"];
         newData.clearRwardGroup = stageDatas[id]["clearRewardGroup"];
         newData.dropRewardGroup = stageDatas[id]["dropRewardGroup"];

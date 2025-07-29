@@ -6,18 +6,19 @@ public class StageData
     public string id;
     public string chapter;
     public string stage;
-    public Defines.StageType stageType;
+    
     public string spawnGroup;
     public string clearRwardGroup;
-    public string dropRewardGroup;
-    public int killCount;
+    //public string dropRewardGroup;
+    public int requiredCount;
     public float timeLimit;
     public string rewardKey;
-    public string nextStageId;
+    //public string nextStageId;
     public int recommendedPower;
     public List<Stage_Reward> rewards = new List<Stage_Reward>();
 
-
+    public Defines.StageType stageType;
+    public Defines.StageClearType stageClearType;
     public StageData()
     {
 

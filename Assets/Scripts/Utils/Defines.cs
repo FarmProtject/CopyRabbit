@@ -3,13 +3,6 @@ using System;
 using System.Collections.Generic;
 public static class Defines 
 {
-    public enum RightPanelType
-    {
-        Stage,
-        Challenge
-    }
-
-
     public enum UI_PrefabType
     {
         CellIcon,
@@ -39,12 +32,20 @@ public static class Defines
         Defence,
         HealthPoint
     }
+
+    public enum StageClearType
+    {
+        Normal,
+        Boss,
+        Object
+    }
+    
     public enum StageType
     {
-        Infinity,
-        KillCount,
-        Boss
+        Stage,
+        Challenge
     }
+
     public enum MonsterActState
     {
         Move,
@@ -53,12 +54,12 @@ public static class Defines
     }
     public enum MonsterType
     {
-        monster,
-        boss
+        Monster,
+        Boss
     }
     public enum Language
     {
-        kr,
-        en
+        Kr,
+        En
     }
 }
