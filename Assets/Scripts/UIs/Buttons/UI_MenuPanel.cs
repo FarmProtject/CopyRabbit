@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class UI_StageButton : MonoBehaviour
+public class UI_MenuPanel : MonoBehaviour
 {
 
 }

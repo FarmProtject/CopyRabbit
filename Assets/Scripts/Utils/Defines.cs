@@ -9,6 +9,12 @@ public static class Defines
         RewardPanel,
         CellStageButton
     }
+    public enum MenuType
+    {
+        Manu,
+        Combat,
+        Shop
+    }
     public enum UIEvents
     {
         Click,

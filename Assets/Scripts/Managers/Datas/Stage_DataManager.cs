@@ -3,14 +3,19 @@ using System;
 using System.Collections.Generic;
 public class Stage_DataManager
 {
-    Dictionary<string, Dictionary<string,string>> stageDatas = new Dictionary<string, Dictionary<string,string>>();
+    Dictionary<string, Dictionary<string,string>> data_NormalStage = new Dictionary<string, Dictionary<string,string>>();
+    Dictionary<string, Dictionary<string, string>> data_ChallengeStage = new Dictionary<string, Dictionary<string, string>>();
     Dictionary<string, List<StringKeyDatas>> rewards = new Dictionary<string, List<StringKeyDatas>>();
     
     Dictionary<string, StageData> data_Stage = new Dictionary<string, StageData>();
 
+    Dictionary<string, StageData> script_Stages = new Dictionary<string, StageData>();
+    
+
+
     public void Set_StageData(string path)
     {
-        GameManager._instance.Read_Data(path, stageDatas);
+        GameManager._instance.Read_Data(path, data_NormalStage);
     }
 
     public Dictionary<string, List<StringKeyDatas>> Get_Rewards()
@@ -22,60 +27,57 @@ public class Stage_DataManager
         rewards = data;
     }
 
-    public void Set_Stage_Dict()
+    public Dictionary<string, Dictionary<string, string>> Get_Normal_StageData()
     {
-        foreach(string id in stageDatas.Keys)
-        {
-            if (!data_Stage.ContainsKey(id))
-            {
-                data_Stage.Add(id, Get_StageData(id));
-            }
-        }
+        return data_NormalStage;
+    }
+
+    public Dictionary<string, Dictionary<string, string>> Get_Challenge_StageData()
+    {
+        return data_ChallengeStage;
     }
 
     public StageData Get_Stage_Script(string id)
     {
-        if (!data_Stage.ContainsKey(id))
-        {
-            data_Stage.Add(id, Get_StageData(id));
-        }
+        return script_Stages[id];
 
-        return data_Stage[id];
+
     }
 
-
-    public StageData Get_StageData(string id)
+    public void Init_NormalStageData()
     {
-        StageData newData = new StageData();
-        string stageId = GameManager._instance.Get_Stage_ID();
 
-        newData.id = stageDatas[id]["id"];
-        newData.chapter = stageDatas[id]["chapter"];
-        newData.stage = stageDatas[id]["stage"];
-        Utils.TryConvertEnum<Defines.StageClearType>(stageDatas[id], "stageType",ref newData.stageClearType);
-        newData.spawnGroup = stageDatas[id]["spawnGroupId"];
-        newData.clearRwardGroup = stageDatas[id]["clearRewardGroup"];
-        newData.dropRewardGroup = stageDatas[id]["dropRewardGroup"];
-        Utils.TrySetValue<int>(stageDatas[id], "killCount", ref newData.killCount);
-        Utils.TrySetValue<float>(stageDatas[id], "timeLimit", ref newData.timeLimit);
-        Utils.TrySetValue<string>(stageDatas[id], "nextStageId", ref newData.nextStageId);
-        Utils.TrySetValue<int>(stageDatas[id], "recommendedPower", ref newData.recommendedPower);
-        List<Stage_Reward> rewads = new List<Stage_Reward>();
-        for(int i = 0; i < rewards[id].Count; i++)
+        foreach(string key in data_NormalStage.Keys)
         {
-            Stage_Reward reward = new Stage_Reward();
-            reward.id = rewards[id][i].datas["id"];
-            reward.itemId = rewards[id][i].datas["itemId"];
-            Utils.TrySetValue<int>(rewards[id][i].datas,"qauntity",ref reward.quantity);
+            NormalStageData newData = new NormalStageData();
+
+            Utils.TrySetValue(data_NormalStage[key], "id", ref newData.id);
+            Utils.TrySetValue(data_NormalStage[key], "chapter", ref newData.chapter);
+            Utils.TrySetValue(data_NormalStage[key], "stage", ref newData.stage);
+            Utils.TrySetValue(data_NormalStage[key], "spawnGroupId", ref newData.spawnGroup);
+            Utils.TrySetValue(data_NormalStage[key], "killCount", ref newData.killCount);
+            Utils.TrySetValue(data_NormalStage[key], "timeLimit", ref newData.timeLimit);
+            Utils.TrySetValue(data_NormalStage[key], "clearRewardGroup", ref newData.clearRewardGroup);
+            Utils.TrySetValue(data_NormalStage[key], "dropRewardGroup", ref newData.dropRewardGroup);
+            Utils.TrySetValue(data_NormalStage[key], "nextStageId", ref newData.nextStageId);
+            Utils.TrySetValue(data_NormalStage[key], "recommendedPower", ref newData.recommendedPower);
+            Utils.TryConvertEnum<Defines.StageClearType>(data_NormalStage[key], "type", ref newData.stageClearType);
         }
-        newData.rewards = rewads;
-        return newData;
     }
-
-
-    public Dictionary<string, Dictionary<string, string>> Get_StageDatas()
+    public void Init_ChallengeStageData()
     {
-        return stageDatas;
-    }
+        foreach (string key in data_NormalStage.Keys)
+        {
+            ChallengeStageData newData = new ChallengeStageData();
 
+            Utils.TrySetValue(data_NormalStage[key], "id", ref newData.id);
+            Utils.TrySetValue(data_NormalStage[key], "chapter", ref newData.chapter);
+            Utils.TrySetValue(data_NormalStage[key], "stage", ref newData.stage);
+            Utils.TrySetValue(data_NormalStage[key], "spawnGroupId", ref newData.spawnGroup);
+            Utils.TrySetValue(data_NormalStage[key], "timeLimit", ref newData.timeLimit);
+            Utils.TrySetValue(data_NormalStage[key], "clearRewardGroup", ref newData.clearRewardGroup);
+            Utils.TrySetValue(data_NormalStage[key], "recommendedPower", ref newData.recommendedPower);
+            Utils.TryConvertEnum<Defines.StageClearType>(data_NormalStage[key], "type", ref newData.stageClearType);
+        }
+    }
 }

@@ -8,7 +8,7 @@ public class StageData
     public string stage;
     
     public string spawnGroup;
-    public string clearRwardGroup;
+    public string clearRewardGroup;
     //public string dropRewardGroup;
     public int requiredCount;
     public float timeLimit;
@@ -30,9 +30,7 @@ public class StageData
         this.stage = other.stage;
         this.stageType = other.stageType;
         this.spawnGroup = other.spawnGroup;
-        this.clearRwardGroup = other.clearRwardGroup;
-        this.dropRewardGroup = other.dropRewardGroup;
-        this.killCount = other.killCount;
+        this.clearRewardGroup = other.clearRewardGroup;
         this.timeLimit = other.timeLimit;
         this.rewards = other.rewards;
     }

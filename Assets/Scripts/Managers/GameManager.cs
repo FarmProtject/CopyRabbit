@@ -132,7 +132,14 @@ public class GameManager : MonoBehaviour
     #endregion
     #region Stages
 
-
+    public StageData Get_SelectStage()
+    {
+        return stage_Controller.Get_SelectStage();
+    }
+    public Defines.StageType Get_SetlectStage_Type()
+    {
+        return stage_Controller.Get_Select_StageType();
+    }
     public void Change_Stage(string id)
     {
         stage_Controller.Change_Stage(id);
@@ -150,15 +157,13 @@ public class GameManager : MonoBehaviour
         return stage_Controller.Get_StageList();
     }
     
-    
-    
-    public string Get_Stage_ID()
-    {
-        return stage_Controller.Get_StageID();
-    }
     public StageData Get_StageData_Scriot(string id)
     {
         return _DataManager.Get_StageData_Script(id);
+    }
+    public void Set_StageData_Script(StageData stage)
+    {
+        stage_Controller.Set_SelectStage(stage);
     }
     public void Add_OnMonsterList(MonsterEntity monster)
     {
@@ -174,7 +179,7 @@ public class GameManager : MonoBehaviour
         return _ui_Manager.Get_StagePanel_Script();
     }
 
-    public void Add_StageButtons(Cell_PortalRightCell button)
+    public void Add_StageButtons(Cell_StageRightCell button)
     {
         _ui_Manager.Add_RightCells(button);
     }
@@ -245,7 +250,7 @@ public class GameManager : MonoBehaviour
     }
     public Dictionary<string, Dictionary<string, string>> Get_StageDatas()
     {
-        return _DataManager.Get_StageDatas();
+        return _DataManager.Get_Normal_StageDatas();
     }
     public Dictionary<string,List<StringKeyDatas>> Get_ChapterDatas()
     {

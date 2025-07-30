@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Cell_PortalRightCell : UI_StageButton,IPoolUI
+public class Cell_StageRightCell : UI_Base , IPoolUI
 {
     [SerializeField] string stageId;
     TextMeshProUGUI stageText;
@@ -35,7 +35,9 @@ public class Cell_PortalRightCell : UI_StageButton,IPoolUI
             Debug.Log("Stage Id is Null In StageButton");
             return;
         }
-        GameManager._instance.Change_Stage(stageId);
+        StageData stage = GameManager._instance.Get_StageData_Scriot(stageId);
+        GameManager._instance.Set_StageData_Script(stage);
+        //GameManager._instance.Change_Stage(stageId);
     }
 
     public void Init()

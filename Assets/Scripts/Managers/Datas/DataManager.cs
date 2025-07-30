@@ -33,7 +33,8 @@ public class DataManager:MonoBehaviour
 
     private void OnAwake()
     {
-        ReadData("Data\\Stage", data_Stage.Get_StageDatas());
+        ReadData("Data\\Stage", data_Stage.Get_Normal_StageData());
+        data_Stage.Init_NormalStageData();
         ReadData("Data\\Monster", monsterData);
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
@@ -77,14 +78,16 @@ public class DataManager:MonoBehaviour
     {
         return spawnData;
     }
-    public Dictionary<string, Dictionary<string, string>> Get_StageDatas()
+    public Dictionary<string, Dictionary<string, string>> Get_Normal_StageDatas()
     {
-        return data_Stage.Get_StageDatas();
+        return data_Stage.Get_Normal_StageData();
     }
     public Dictionary<string,List<StringKeyDatas>> Get_Rewards()
     {
         return data_Stage.Get_Rewards();
     }
+
+    
     public StageData Get_StageData_Script(string id)
     {
         return data_Stage.Get_Stage_Script(id);
@@ -93,6 +96,8 @@ public class DataManager:MonoBehaviour
     {
         return data_Monster.Get_MonsterStat(id);
     }
+
+    
     public bool TrySetValue<T>(Dictionary<string, object> data, string key, ref T target)
     {
         if (data.ContainsKey(key) && data[key] != null)

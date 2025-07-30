@@ -4,14 +4,12 @@ using System;
 using System.Collections.Generic;
 public class UI_StagePanel : MonoBehaviour
 {
-    public Defines.RightPanelType panelType = Defines.RightPanelType.Stage;
-
     string cahpterKey;
     string next;
     string before;
 
     List<string> stageKeys = new List<string>();
-    List<Cell_PortalRightCell> uI_StageButtons = new List<Cell_PortalRightCell>();
+    List<Cell_StageRightCell> uI_StageRightCells = new List<Cell_StageRightCell>();
     List<Cell_StageLeft> ui_StageLeftCells = new List<Cell_StageLeft>();
 
     List<GameObject> leftPanelCells = new List<GameObject>();
@@ -19,9 +17,9 @@ public class UI_StagePanel : MonoBehaviour
     [SerializeField] string selectStage;
     [SerializeField]GameObject rightPanel;
     [SerializeField]GameObject prefab_RightCell;
-    [SerializeField] GameObject leftPanel;
-    [SerializeField] GameObject prefab_LeftContents;
-    [SerializeField] GameObject prefab_LeftPanelCell;
+    [SerializeField]GameObject leftPanel;
+    [SerializeField]GameObject prefab_LeftContents;
+    [SerializeField]GameObject prefab_LeftPanelCell;
     private void OnEnable()
     {
         OnRightPanelEnable();
@@ -29,16 +27,33 @@ public class UI_StagePanel : MonoBehaviour
 
     public void OnRightPanelEnable()
     {
-        switch (panelType)
+        Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();
+
+        switch (stageType)
         {
-            case Defines.RightPanelType.Stage:
+            case Defines.StageType.Stage:
                 break;
-            case Defines.RightPanelType.Challenge:
+            case Defines.StageType.Challenge:
                 break;
             default:
                 break;
         }
     }
+    public void OnLeftPanelEnable()
+    {
+        Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();
+
+        switch (stageType)
+        {
+            case Defines.StageType.Stage:
+                break;
+            case Defines.StageType.Challenge:
+                break;
+            default:
+                break;
+        }
+    }
+
 
     public string Get_StageKey()
     {
@@ -48,6 +63,8 @@ public class UI_StagePanel : MonoBehaviour
     {
         cahpterKey = key;
         stageKeys.Clear();
+
+
         Dictionary<string, List<StringKeyDatas>> chapterDatas = GameManager._instance.Get_ChapterDatas();
 
         Debug.Log($" Cahpter Data Count{chapterDatas[cahpterKey].Count}");
@@ -57,19 +74,19 @@ public class UI_StagePanel : MonoBehaviour
             stageKeys.Add(chapterDatas[cahpterKey][i].datas["id"]);
         }
         Set_RightCells();
-        Set_Stage_LeftCells();
+        //Set_Stage_LeftCells();
         for(int i = 0; i<chapterDatas[cahpterKey].Count; i++)
         {
             string id = chapterDatas[cahpterKey][i].datas["id"];
-            uI_StageButtons[i].Init(id);
+            uI_StageRightCells[i].Init(id);
         }
     }
 
-    public void Add_Buttons(Cell_PortalRightCell button)
+    public void Add_Buttons(Cell_StageRightCell button)
     {
-        if (!uI_StageButtons.Contains(button))
+        if (!uI_StageRightCells.Contains(button))
         {
-            uI_StageButtons.Add(button);
+            uI_StageRightCells.Add(button);
         }
     }
     public void Add_LeftCells(Cell_StageLeft cell)
@@ -85,20 +102,20 @@ public class UI_StagePanel : MonoBehaviour
         for(int i = 0; i< stageKeys.Count; i++)
         {
             string id = stageKeys[i];
-            uI_StageButtons[i].Init(id);
+            uI_StageRightCells[i].Init(id);
         }
     }
 
     void Set_RightCells()
     {
-        int count = stageKeys.Count - uI_StageButtons.Count;
+        int count = stageKeys.Count - uI_StageRightCells.Count;
         if(rightPanel == null)
         {
             rightPanel = GameObject.Find("RightCellContents");
         }
-        for(int i = 0; i<uI_StageButtons.Count; i++)
+        for(int i = 0; i< uI_StageRightCells.Count; i++)
         {
-            uI_StageButtons[i].gameObject.SetActive(true);
+            uI_StageRightCells[i].gameObject.SetActive(true);
         }
         if (count>=1)
         {
@@ -115,23 +132,12 @@ public class UI_StagePanel : MonoBehaviour
 
             for(int i = 0; i<count; i++)
             {
-                uI_StageButtons[i].gameObject.SetActive(false);
+                uI_StageRightCells[i].gameObject.SetActive(false);
             }
         }
 
         rightPanel.transform.localPosition = new Vector2(0, 0);
 
     }
-    void Set_Stage_LeftCells()
-    {
-        switch (panelType)
-        {
-            case Defines.RightPanelType.Stage:
-                break;
-            case Defines.RightPanelType.Challenge:
-                break;
-            default:
-                break;
-        }
-    }
+    
 }

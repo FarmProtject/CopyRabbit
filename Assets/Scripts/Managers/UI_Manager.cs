@@ -84,7 +84,7 @@ public class UI_Manager
         }
     }
 
-    public void Add_RightCells(Cell_PortalRightCell button)
+    public void Add_RightCells(Cell_StageRightCell button)
     {
         stagePanel.Add_Buttons(button);
     }
