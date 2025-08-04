@@ -13,7 +13,7 @@ public class StageController : MonoBehaviour
     //StageData data_Stage;
     private void Start()
     {
-        Init_Stage(this.stageId);
+        //Init_Stage(this.stageId);
     }
 
 

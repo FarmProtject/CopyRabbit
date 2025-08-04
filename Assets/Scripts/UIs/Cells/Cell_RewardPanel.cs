@@ -37,4 +37,9 @@ public class Cell_RewardPanel : MonoBehaviour,IPoolUI
     {
         EnableFunction();
     }
+
+    public void Return()
+    {
+        throw new NotImplementedException();
+    }
 }

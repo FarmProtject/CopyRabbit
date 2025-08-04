@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 18236863}
   - component: {fileID: 18236865}
   - component: {fileID: 18236864}
+  - component: {fileID: 18236866}
   m_Layer: 5
   m_Name: ShopButton
   m_TagString: Untagged
@@ -205,6 +206,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18236862}
   m_CullTransparentMesh: 1
+--- !u!114 &18236866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18236862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a26180e0dd15cc488f02b63769041a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuType: 2
 --- !u!1 &26601234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2906,9 +2920,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5baec90336c864ab0fe83789dc671a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cell_IconPrefab: {fileID: 0}
-  rewardPanels: {fileID: 0}
-  cell_StageButton: {fileID: 0}
+  cell_IconPrefab: {fileID: 5651284363880714747, guid: c106411f2c1ad124798428075cab90d6, type: 3}
+  rewardPanels: {fileID: 6333794147721907693, guid: bb5788976b3204541a03b6e8d9545252, type: 3}
+  cell_StageRight: {fileID: 6611390912109956118, guid: 206d570f548e11242a5e451a5e78c797, type: 3}
+  menuButton: {fileID: 3843222782748856150, guid: e555da87b880e69418e01d7ba18249fd, type: 3}
+  rewardIcons: {fileID: 5651284363880714747, guid: c106411f2c1ad124798428075cab90d6, type: 3}
 --- !u!1 &496835227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4272,6 +4288,7 @@ GameObject:
   - component: {fileID: 620908198}
   - component: {fileID: 620908200}
   - component: {fileID: 620908199}
+  - component: {fileID: 620908201}
   m_Layer: 5
   m_Name: CombatButton
   m_TagString: Untagged
@@ -4337,6 +4354,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620908197}
   m_CullTransparentMesh: 1
+--- !u!114 &620908201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620908197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a26180e0dd15cc488f02b63769041a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuType: 1
 --- !u!1 &624943504
 GameObject:
   m_ObjectHideFlags: 0
@@ -10402,6 +10432,7 @@ GameObject:
   - component: {fileID: 1817311163}
   - component: {fileID: 1817311165}
   - component: {fileID: 1817311164}
+  - component: {fileID: 1817311166}
   m_Layer: 5
   m_Name: MenuButton
   m_TagString: Untagged
@@ -10467,6 +10498,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817311162}
   m_CullTransparentMesh: 1
+--- !u!114 &1817311166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817311162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a26180e0dd15cc488f02b63769041a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuType: 0
 --- !u!4 &1827767804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2765888824603402653, guid: 5869cd70849add848bf71cde5d088a0c, type: 3}

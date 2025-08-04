@@ -64,4 +64,9 @@ public class Cell_StageRightCell : UI_Base , IPoolUI
     {
         throw new System.NotImplementedException();
     }
+
+    public void Return()
+    {
+        throw new System.NotImplementedException();
+    }
 }

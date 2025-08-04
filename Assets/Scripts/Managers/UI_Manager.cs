@@ -10,7 +10,16 @@ public class UI_Manager
 
     UI_StagePanel stagePanel;
 
+    UI_MenuPanel menuPanel;
 
+    public void Init()
+    {
+        if(menuPanel == null)
+        {
+            menuPanel = GameObject.Find("MenuPanel").GetComponent<UI_MenuPanel>();
+        }
+    }
+    #region PopUp
     public void BindPopUp(UI_PopUpObj uiObj)
     {
         string name = uiObj.gameObject.name;
@@ -93,5 +102,12 @@ public class UI_Manager
         stagePanel.Add_LeftCells(cell);
     }
 
+    #endregion
 
+    #region Menus
+    public void Set_MenuType(Defines.MenuType type)
+    {
+        menuPanel.Set_myType(type);
+    }
+    #endregion
 }

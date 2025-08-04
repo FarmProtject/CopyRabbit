@@ -38,7 +38,7 @@ public class DataManager:MonoBehaviour
         ReadData("Data\\Monster", monsterData);
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
-        LoadMulti("Data\\Reward", data_Stage.Get_Rewards());
+        LoadMulti("Data\\ClearReward", data_Stage.Get_Rewards());
         //DebugDictionary(data_Stage.Get_StageDatas());
         LoadMulti("Data\\Spawn", spawnData);
         DebugMultiKey(data_Chapter);

@@ -5,16 +5,36 @@ public static class Defines
 {
     public enum UI_PrefabType
     {
-        CellIcon,
+        Cell_Icon,
         RewardPanel,
-        CellStageButton
+        Cell_StageRight,
+        MenuButton
     }
     public enum MenuType
     {
-        Manu,
+        Menu,
         Combat,
         Shop
     }
+    public enum MenuSubPanels
+    {
+        Options
+    }
+    public enum CombatSubPanels
+    {
+        Portal,
+        Treasure,
+        Skill,
+        Gold,
+        Guardian,
+        Boss
+    }
+    public enum ShopSubPanels
+    {
+        Skill,
+        Weapon
+    }
+
     public enum UIEvents
     {
         Click,

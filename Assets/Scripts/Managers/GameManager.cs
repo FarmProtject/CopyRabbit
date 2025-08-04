@@ -76,10 +76,12 @@ public class GameManager : MonoBehaviour
             _DataManager = Utils.GetOrAddComponent<DataManager>(this.gameObject);
             
         }
+        
         if(_ui_Manager.Get_StagePanel_Script() == null)
         {
             UI_StagePanel stagePanel = Utils.GetOrAddComponent<UI_StagePanel>(GameObject.Find("StagePanel"));
             _ui_Manager.Set_StagePanel_Script(stagePanel);
+            stagePanel.gameObject.SetActive(false);
         }
         if(_uiPooler == null)
         {
@@ -104,13 +106,17 @@ public class GameManager : MonoBehaviour
     {
         return _uiPooler.Get_Pool();
     }
-    public GameObject Get_PoolUI(Defines.UI_PrefabType type)
+    public GameObject Get_PoolUI(Defines.UI_PrefabType type,GameObject parents)
     {
-        return _uiPooler.Get(type);
+        return _uiPooler.Get(type,parents);
     }
     public void Return_PoolUI(Defines.UI_PrefabType type, IPoolUI ui)
     {
         _uiPooler.Return(type,ui);
+    }
+    public void Set_MenuType(Defines.MenuType type)
+    {
+        _ui_Manager.Set_MenuType(type);
     }
     #endregion
     #region GetManagers

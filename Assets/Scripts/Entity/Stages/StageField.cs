@@ -47,6 +47,11 @@ public class StageField : MonoBehaviour
         {
             string key = GameManager._instance.Get_Random_Inactive();
             Debug.Log($"Random Inactive Key : {key}");
+            if(key == null)
+            {
+                Debug.Log("Monster Key Null ! In StageField Gen_Monster");
+                return 0;
+            }
             GameObject go = GameManager._instance.Gen_Monster(key);
             Vector2 pos = new Vector2(this.transform.localScale.x,this.transform.localScale.y);
             go.transform.localPosition = new Vector2(UnityEngine.Random.Range(0, pos.x), UnityEngine.Random.Range(0, pos.y));

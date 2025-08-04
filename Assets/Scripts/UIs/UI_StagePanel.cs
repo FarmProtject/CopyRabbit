@@ -20,6 +20,10 @@ public class UI_StagePanel : MonoBehaviour
     [SerializeField]GameObject leftPanel;
     [SerializeField]GameObject prefab_LeftContents;
     [SerializeField]GameObject prefab_LeftPanelCell;
+
+    Defines.CombatSubPanels select_Type;
+
+
     private void OnEnable()
     {
         OnRightPanelEnable();
@@ -29,11 +33,19 @@ public class UI_StagePanel : MonoBehaviour
     {
         Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();
 
-        switch (stageType)
+        switch (select_Type)
         {
-            case Defines.StageType.Stage:
+            case Defines.CombatSubPanels.Portal:
                 break;
-            case Defines.StageType.Challenge:
+            case Defines.CombatSubPanels.Treasure:
+                break;
+            case Defines.CombatSubPanels.Skill:
+                break;
+            case Defines.CombatSubPanels.Gold:
+                break;
+            case Defines.CombatSubPanels.Guardian:
+                break;
+            case Defines.CombatSubPanels.Boss:
                 break;
             default:
                 break;
