@@ -42,3 +42,51 @@ public class Stage_Reward
     public string itemId;
     public int quantity;
 }
+public class NormalStageData : StageData
+{
+    public string nextStageId;
+    public string dropRewardGroup;
+    public int killCount;
+
+    public NormalStageData(NormalStageData other)
+    {
+        this.stageType = Defines.StageType.Stage;
+        this.id = other.id;
+        this.chapter = other.chapter;
+        this.stage = other.stage;
+        this.stageType = other.stageType;
+        this.spawnGroup = other.spawnGroup;
+        this.clearRewardGroup = other.clearRewardGroup;
+        this.dropRewardGroup = other.dropRewardGroup;
+        this.killCount = other.killCount;
+        this.timeLimit = other.timeLimit;
+        this.rewards = other.rewards;
+
+    }
+
+    public NormalStageData()
+    {
+
+    }
+}
+public class TrasureStageData:StageData
+{
+
+}
+public class SkillStageData : StageData
+{
+
+}
+
+public class GoldStageData : StageData
+{
+
+}
+public class GuardianStageData : StageData
+{
+
+}
+public class BossStageData : StageData
+{
+
+}

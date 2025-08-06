@@ -41,7 +41,6 @@ public class DataManager:MonoBehaviour
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
         LoadMulti("Data\\ClearReward", data_Stage.Get_Rewards());
-        //DebugDictionary(data_Stage.Get_StageDatas());
         LoadMulti("Data\\Spawn", spawnData);
         
         GameManager._instance.Set_PopUpBind(popUpBind);

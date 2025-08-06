@@ -9,6 +9,13 @@ public class UI_MenuPanel : UI_PopUpObj
 
     RectTransform myRectTransform;
 
+    private static readonly Dictionary<Type, Type> _enumToComponentMap = new()
+{
+    { typeof(Defines.CombatSubPanels), typeof(Cell_CombatSubCell) },
+    { typeof(Defines.MenuSubPanels), typeof(Cell_MenuSubCell) },
+    { typeof(Defines.ShopSubPanels), typeof(Cell_ShopSubCell) },
+};
+
     protected override void Awake()
     {
         base.Awake();
@@ -82,6 +89,11 @@ public class UI_MenuPanel : UI_PopUpObj
             go.name = value.ToString();
             myButtons.Add(go);
             Debug.Log($"Button Name : {go.name}");
+            var builder = Set_Cell_Script(value, go);
+            if(builder is Cell_MenuCell cell)
+            {
+                cell.Set_MyType(value);
+            }
         }
     }
     void Resize()
@@ -103,9 +115,22 @@ public class UI_MenuPanel : UI_PopUpObj
         Debug.Log($" Pos : {mySize}");
         Debug.Log("RePositioning");
     }
-    public void Set_myType(Defines.MenuType menuType)
+    public void Set_MyType(Defines.MenuType menuType)
     {
         myType = menuType;
     }
-    
+    ISubPanelBuilder Set_Cell_Script<T>(T type, GameObject go) where T : Enum
+    {
+        var enumType = typeof(T);
+        if (_enumToComponentMap.TryGetValue(enumType, out var componentType))
+        {
+            go.AddComponent(componentType);
+            return go.GetComponent<ISubPanelBuilder>();
+        }
+        else
+        {
+            Debug.LogWarning($"정의되지 않은 Enum 타입: {enumType}");
+            return null;
+        }
+    }
 }

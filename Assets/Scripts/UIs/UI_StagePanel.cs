@@ -9,6 +9,7 @@ public class UI_StagePanel : MonoBehaviour
     string before;
 
     List<string> stageKeys = new List<string>();
+
     List<Cell_StageRightCell> uI_StageRightCells = new List<Cell_StageRightCell>();
     List<Cell_StageLeft> ui_StageLeftCells = new List<Cell_StageLeft>();
 
@@ -27,6 +28,7 @@ public class UI_StagePanel : MonoBehaviour
     private void OnEnable()
     {
         OnRightPanelEnable();
+        OnLeftPanelEnable();
     }
 
     public void OnRightPanelEnable()
@@ -55,11 +57,19 @@ public class UI_StagePanel : MonoBehaviour
     {
         Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();
 
-        switch (stageType)
+        switch (select_Type)
         {
-            case Defines.StageType.Stage:
+            case Defines.CombatSubPanels.Portal:
                 break;
-            case Defines.StageType.Challenge:
+            case Defines.CombatSubPanels.Treasure:
+                break;
+            case Defines.CombatSubPanels.Skill:
+                break;
+            case Defines.CombatSubPanels.Gold:
+                break;
+            case Defines.CombatSubPanels.Guardian:
+                break;
+            case Defines.CombatSubPanels.Boss:
                 break;
             default:
                 break;
@@ -151,5 +161,8 @@ public class UI_StagePanel : MonoBehaviour
         rightPanel.transform.localPosition = new Vector2(0, 0);
 
     }
-    
+    public void Set_CombatSubType(Defines.CombatSubPanels type)
+    {
+        select_Type = type;
+    }
 }

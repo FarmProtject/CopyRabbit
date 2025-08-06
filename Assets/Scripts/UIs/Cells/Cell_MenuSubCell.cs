@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class Cell_MenuSubCell : Cell_MenuCell
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    Defines.MenuSubPanels myType;
+    public override void Set_MyType<T>(T type)
     {
-        
+        base.Set_MyType(type);
+        if (type is Defines.MenuSubPanels subType)
+        {
+            myType = subType;
+            Debug.Log(myType);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void Set_PanelType()
     {
         
+        base.Set_PanelType();
     }
 }

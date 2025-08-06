@@ -9,6 +9,7 @@ public class StageController : MonoBehaviour
     [SerializeField]int monster_GenCount = 7; //한번에 젠 되는 최대 몬스터 수 
     List<string> monsterIDs = new List<string>();
     List<StageField> stageFields = new List<StageField>();
+
     StageData select_Stage;
     //StageData data_Stage;
     private void Start()

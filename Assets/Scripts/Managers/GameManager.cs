@@ -141,7 +141,10 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region Stages
-
+    public void Set_SelectStage_Type(Defines.CombatSubPanels type)
+    {
+        _ui_Manager.Set_StagePanelType(type);
+    }
     public StageData Get_SelectStage()
     {
         return stage_Controller.Get_SelectStage();

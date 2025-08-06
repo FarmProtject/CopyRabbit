@@ -12,6 +12,8 @@ public class UI_Manager
 
     UI_MenuPanel menuPanel;
 
+    Dictionary<Defines.CombatSubPanels, Action> combatSubActions = new Dictionary<Defines.CombatSubPanels, Action>();
+
     public void Init()
     {
         /*
@@ -24,6 +26,8 @@ public class UI_Manager
             menuPanel = GameObject.Find("Menues").transform.GetChild(3).gameObject.transform.GetComponent<UI_MenuPanel>();
         }
         Debug_Buttons();
+
+        
     }
     #region PopUp
     void Debug_Buttons()
@@ -142,7 +146,33 @@ public class UI_Manager
         {
             Init();
         }
-        menuPanel.Set_myType(type);
+        menuPanel.Set_MyType(type);
+    }
+    #endregion
+
+    #region subPanel
+     
+
+    void Cell_CombatSubPanel()
+    {
+        
+    }
+
+    void Cell_ShopSubPanel()
+    {
+
+    }
+
+    void Cell_MenuSubPanel()
+    {
+
+    }
+
+    #endregion
+    #region StagePanel
+    public void Set_StagePanelType(Defines.CombatSubPanels type)
+    {
+        combatSubActions[type]();
     }
     #endregion
 }
