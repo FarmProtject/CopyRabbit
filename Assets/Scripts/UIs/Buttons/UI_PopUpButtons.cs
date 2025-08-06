@@ -20,6 +20,5 @@ public class UI_PopUpButtons : UI_Base
     protected virtual void OnClickEvent(PointerEventData evt)
     {
         GameManager._instance.PopUpUI(buttonName);
-        Debug.Log("11");
     }
 }

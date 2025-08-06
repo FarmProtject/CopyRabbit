@@ -31,7 +31,7 @@ public class MonsterSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        StartCoroutine("Gen_Monster");
+        //StartCoroutine("Gen_Monster");
     }
 
     public void Set_CanGen(bool other)

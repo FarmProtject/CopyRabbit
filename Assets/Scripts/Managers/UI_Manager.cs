@@ -14,12 +14,31 @@ public class UI_Manager
 
     public void Init()
     {
+        /*
         if(menuPanel == null)
         {
             menuPanel = GameObject.Find("MenuPanel").GetComponent<UI_MenuPanel>();
+        }*/
+        if(menuPanel == null)
+        {
+            menuPanel = GameObject.Find("Menues").transform.GetChild(3).gameObject.transform.GetComponent<UI_MenuPanel>();
         }
+        Debug_Buttons();
     }
     #region PopUp
+    void Debug_Buttons()
+    {
+        Debug.Log("buttonBind");
+        foreach(var key in buttonBind.Keys)
+        {
+            Debug.Log($"key : {key} value : {buttonBind[key]}");
+        }
+        Debug.Log("popUpObjs");
+        foreach(var key in popUpObjs.Keys)
+        {
+            Debug.Log($"Key : {key} value name : {popUpObjs[key].name}");
+        }
+    }
     public void BindPopUp(UI_PopUpObj uiObj)
     {
         string name = uiObj.gameObject.name;
@@ -36,6 +55,17 @@ public class UI_Manager
     {
         return stagePanel;
     }
+    public void Set_PopUpBind(Dictionary<string, Dictionary<string,string>> data)
+    {
+        
+        foreach (string key in data.Keys)
+        {
+            string ky = data[key]["key"];
+            string value = data[key]["target"];
+            buttonBind.Add(ky, value);
+        }
+        
+    }
     public void AddButtonBind(string key, string value)
     {
         if (!buttonBind.ContainsKey(key))
@@ -49,15 +79,16 @@ public class UI_Manager
         if (!popUpObjs.ContainsKey(name))
         {
             popUpObjs.Add(name, go);
+            Debug.Log($" Pop Up Added{name}");
         }
     }
 
     public void Pop_Up_UI(string button_Name)
     {
-        Debug.Log($"{button_Name}");
+        Debug.Log($"Button Name {button_Name}, OpenUI Name {buttonBind[button_Name]}");
+        
         if (buttonBind.ContainsKey(button_Name))
         {
-            Debug.Log("Key COntained ");
             string targetName = buttonBind[button_Name];
             if (!popUpObjs.ContainsKey(targetName))
             {
@@ -107,6 +138,10 @@ public class UI_Manager
     #region Menus
     public void Set_MenuType(Defines.MenuType type)
     {
+        if(menuPanel == null)
+        {
+            Init();
+        }
         menuPanel.Set_myType(type);
     }
     #endregion

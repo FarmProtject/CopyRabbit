@@ -118,6 +118,10 @@ public class GameManager : MonoBehaviour
     {
         _ui_Manager.Set_MenuType(type);
     }
+    public void Set_PopUpBind(Dictionary<string,Dictionary<string,string>>data)
+    {
+        _ui_Manager.Set_PopUpBind(data);
+    }
     #endregion
     #region GetManagers
     public PoolManager Get_PoolMamagaer()

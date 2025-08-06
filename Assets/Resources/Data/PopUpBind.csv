@@ -1,0 +1,10 @@
+id,key,target
+1,MenuButton,MenuPanel
+2,CombatButton,MenuPanel
+3,ShopButton,MenuPanel
+4,Portal,StagePanel
+5,Treasure,StagePanel
+6,Skill,StagePanel
+7,Gold,StagePanel
+8,Guaridan,StagePanel
+9,Boss,StagePanel

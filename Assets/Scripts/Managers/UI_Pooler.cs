@@ -35,6 +35,14 @@ public class UI_Pooler : MonoBehaviour
         ui_Prefabs.Add(Defines.UI_PrefabType.RewardPanel, rewardPanels);
         ui_Prefabs.Add(Defines.UI_PrefabType.Cell_StageRight, cell_StageRight);
         ui_Prefabs.Add(Defines.UI_PrefabType.MenuButton, menuButton);
+        foreach (var key in ui_Prefabs.Keys) 
+        {
+            ui_pool.Add(key, new Queue<IPoolUI>());
+        }
+        foreach(var key in ui_Prefabs.Keys)
+        {
+            ui_active.Add(key, new List<IPoolUI>());
+        }
     }
     public Dictionary<Defines.UI_PrefabType,Queue<IPoolUI>> Get_Pool()
     {
@@ -122,7 +130,7 @@ public class UI_Pooler : MonoBehaviour
         }
         IPoolUI poolUI = go.transform.GetComponent<IPoolUI>();
         
-        ui_pool[type].Enqueue(poolUI);
+        //ui_pool[type].Enqueue(poolUI);
         return go;
     }
 

@@ -25,6 +25,7 @@ public class DataManager:MonoBehaviour
 
     Dictionary<string, List<StringKeyDatas>> spawnData = new Dictionary<string, List<StringKeyDatas>>();
 
+    Dictionary<string, Dictionary<string, string>> popUpBind = new Dictionary<string, Dictionary<string, string>>();
     private void Awake()
     {
         OnAwake();
@@ -36,14 +37,20 @@ public class DataManager:MonoBehaviour
         ReadData("Data\\Stage", data_Stage.Get_Normal_StageData());
         data_Stage.Init_NormalStageData();
         ReadData("Data\\Monster", monsterData);
+        ReadData("Data\\PopUpBind", popUpBind);
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
         LoadMulti("Data\\ClearReward", data_Stage.Get_Rewards());
         //DebugDictionary(data_Stage.Get_StageDatas());
         LoadMulti("Data\\Spawn", spawnData);
-        DebugMultiKey(data_Chapter);
+        
+        GameManager._instance.Set_PopUpBind(popUpBind);
+    }
+    void DebugPopUpBind()
+    {
 
     }
+
     void DebugDictionary(Dictionary<string,Dictionary<string,string>>data )
     {
         foreach(string id in data.Keys)
