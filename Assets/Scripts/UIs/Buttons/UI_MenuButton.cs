@@ -12,7 +12,7 @@ public class UI_MenuButton : UI_PopUpButtons
 
         Init_Menues();
         base.OnClickEvent(evt);
-
+        Debug.Log("MenuButton UI Event");
 
     }
 

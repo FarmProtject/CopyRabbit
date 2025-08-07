@@ -12,8 +12,6 @@ public class UI_Manager
 
     UI_MenuPanel menuPanel;
 
-    Dictionary<Defines.CombatSubPanels, Action> combatSubActions = new Dictionary<Defines.CombatSubPanels, Action>();
-
     public void Init()
     {
         /*
@@ -170,9 +168,9 @@ public class UI_Manager
 
     #endregion
     #region StagePanel
-    public void Set_StagePanelType(Defines.CombatSubPanels type)
+   public void Set_SelcectStageType(Defines.CombatSubPanels type)
     {
-        combatSubActions[type]();
+        stagePanel.Set_CombatSubType(type);
     }
     #endregion
 }
