@@ -1,7 +1,9 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-public class UI_MenuPanel : UI_PopUpObj
+using UnityEngine.UI;
+
+public class UI_MenuPanel : UI_PopUpObj,IPoolUI
 {
     List<GameObject> myButtons = new List<GameObject>();
 
@@ -9,6 +11,7 @@ public class UI_MenuPanel : UI_PopUpObj
 
     RectTransform myRectTransform;
 
+    int buttonSize;
     private static readonly Dictionary<Type, Type> _enumToComponentMap = new()
 {
     { typeof(Defines.CombatSubPanels), typeof(Cell_CombatSubCell) },
@@ -23,13 +26,19 @@ public class UI_MenuPanel : UI_PopUpObj
 
     private void OnEnable()
     {
+        myButtons.Clear();
         Adjust_LayOut();
+    }
+    private void OnDisable()
+    {
+        ReturnAll();
+        myButtons.Clear();
     }
     void Init_Menu()
     {
         
     }
-
+    #region OnEnable
     void Adjust_LayOut()
     {
         if(myRectTransform == null)
@@ -56,7 +65,6 @@ public class UI_MenuPanel : UI_PopUpObj
         {
             case Defines.MenuType.Menu:
                 Defines.MenuSubPanels[] menus = (Defines.MenuSubPanels[])Enum.GetValues(typeof(Defines.MenuSubPanels));
-
                 ButtonMake(menus);
                 break;
             case Defines.MenuType.Combat:
@@ -71,6 +79,7 @@ public class UI_MenuPanel : UI_PopUpObj
                     Debug.Log( combatMenus[i]);
                 }
                 ButtonMake(combatMenus);
+                Debug.Log($" my Buttons : {myButtons.Count}");
                 break;
             case Defines.MenuType.Shop:
                 Defines.ShopSubPanels[] shopMenus = (Defines.ShopSubPanels[])Enum.GetValues(typeof(Defines.ShopSubPanels));
@@ -100,7 +109,8 @@ public class UI_MenuPanel : UI_PopUpObj
     {
         int buttonCount = myButtons.Count;
         float myHeight = myRectTransform.rect.height;
-        float culculated = buttonCount*myHeight;
+        buttonSize = (int)this.transform.GetComponent<GridLayoutGroup>().cellSize.y;
+        float culculated = buttonCount*buttonSize;
         myRectTransform.sizeDelta = new Vector2(myRectTransform.rect.width, culculated);
     }
     void RePositioning()
@@ -122,8 +132,20 @@ public class UI_MenuPanel : UI_PopUpObj
     ISubPanelBuilder Set_Cell_Script<T>(T type, GameObject go) where T : Enum
     {
         var enumType = typeof(T);
-        if (_enumToComponentMap.TryGetValue(enumType, out var componentType))
+        var scriptType = _enumToComponentMap[enumType];
+        var script = go.transform.GetComponent(scriptType);
+        if(script is ISubPanelBuilder subBuilder)
         {
+
+        }
+        if (script != null && script is Behaviour behavior)
+        {
+            behavior.enabled = true;
+            return script as ISubPanelBuilder;
+        }
+        else if (_enumToComponentMap.TryGetValue(enumType, out var componentType))
+        {
+            //Utils.GetOrAddComponent<typeof(componentType)>(go)
             go.AddComponent(componentType);
             return go.GetComponent<ISubPanelBuilder>();
         }
@@ -133,4 +155,39 @@ public class UI_MenuPanel : UI_PopUpObj
             return null;
         }
     }
+    #endregion
+    #region OnDisable
+
+    void ReturnAll()
+    {
+        for(int i = 0; i<myButtons.Count; i++)
+        {
+            IPoolUI ui = myButtons[i].transform.GetComponent<IPoolUI>();
+            GameManager._instance.Return_PoolUI(Defines.UI_PrefabType.MenuButton, ui);
+        }
+    }
+
+
+    #endregion
+    #region interface
+    public void EnableFunction()
+    {
+
+    }
+
+    public void DisableFunction()
+    {
+
+    }
+
+    public GameObject Get()
+    {
+        return this.gameObject;
+    }
+
+    public void Return()
+    {
+        this.gameObject.SetActive(false);
+    }
+    #endregion
 }

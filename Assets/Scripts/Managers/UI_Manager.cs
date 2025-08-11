@@ -43,10 +43,11 @@ public class UI_Manager
     }
     public void BindPopUp(UI_PopUpObj uiObj)
     {
-        string name = uiObj.gameObject.name;
-        if (!popUpObjs.ContainsKey(name))
+        string objName = uiObj.gameObject.name;
+        if (!popUpObjs.ContainsKey(objName))
         {
-            popUpObjs.Add(name, uiObj.gameObject);
+            popUpObjs.Add(objName, uiObj.gameObject);
+            Debug.Log($"PopUp obj Binded Objname : {objName} ");
         }
     }
     public void Set_StagePanel_Script(UI_StagePanel script)

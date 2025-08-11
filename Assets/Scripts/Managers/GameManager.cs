@@ -81,7 +81,8 @@ public class GameManager : MonoBehaviour
         {
             UI_StagePanel stagePanel = Utils.GetOrAddComponent<UI_StagePanel>(GameObject.Find("StagePanel"));
             _ui_Manager.Set_StagePanel_Script(stagePanel);
-            stagePanel.gameObject.SetActive(false);
+            stagePanel.Init();
+            //stagePanel.gameObject.SetActive(false);
         }
         if(_uiPooler == null)
         {

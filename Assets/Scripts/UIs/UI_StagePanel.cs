@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
-public class UI_StagePanel : MonoBehaviour
+public class UI_StagePanel : UI_PopUpObj
 {
     string cahpterKey;
     string next;
@@ -24,13 +24,21 @@ public class UI_StagePanel : MonoBehaviour
 
     Defines.CombatSubPanels select_Type;
 
-
+    protected override void Awake()
+    {
+       
+    }
     private void OnEnable()
     {
         OnRightPanelEnable();
         OnLeftPanelEnable();
+        OnLeftPanelEnable();
     }
-
+    public override void Init()
+    {
+        base.Init();
+        this.gameObject.SetActive(false);
+    }
     public void OnRightPanelEnable()
     {
         Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();

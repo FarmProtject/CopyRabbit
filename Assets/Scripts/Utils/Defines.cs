@@ -3,6 +3,54 @@ using System;
 using System.Collections.Generic;
 public static class Defines 
 {
+    #region skill
+    public enum Skill_Grade
+    {
+        None,
+        Common,
+        Rare,
+        Unique,
+        Epic,
+        Legendary
+    }
+    public enum TargetType
+    {
+        Enemy,
+        Friendly,
+        Self
+    }
+    public enum EffectType
+    {
+        Damage,
+        Heal,
+        Projectile,
+        Hitbox,
+        Buff
+    }
+    public enum ColliderShapeType
+    {
+
+    }
+    public enum HitboxActiveType
+    {
+        Start,
+        Tick,
+        End
+    }
+    public enum BuffType
+    {
+
+    }
+    public enum OverlapType
+    {
+
+    }
+    public enum BuffActiveType
+    {
+
+    }
+    #endregion
+    #region Ui
     public enum UI_PrefabType
     {
         Cell_Icon,
@@ -42,6 +90,7 @@ public static class Defines
         Drag,
         DragEnd
     }
+    #endregion
     public enum LeverType 
     {
         Fixed,
