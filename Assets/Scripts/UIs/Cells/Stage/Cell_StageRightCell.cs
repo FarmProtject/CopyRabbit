@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Cell_StageRightCell : UI_Base , IPoolUI
+public class Cell_StageRightCell : UI_Buttons , IPoolUI
 {
     [SerializeField] string stageId;
     TextMeshProUGUI stageText;
@@ -35,38 +35,39 @@ public class Cell_StageRightCell : UI_Base , IPoolUI
             Debug.Log("Stage Id is Null In StageButton");
             return;
         }
-        StageData stage = GameManager._instance.Get_StageData_Scriot(stageId);
-        GameManager._instance.Set_StageData_Script(stage);
+        GameManager._instance.Set_StageID(stageId);
+        Debug.Log("RightCell Clicked");
         //GameManager._instance.Change_Stage(stageId);
     }
 
     public void Init()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void OnDisable()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public GameObject Get()
     {
-        throw new System.NotImplementedException();
+        return this.gameObject;
+        //throw new System.NotImplementedException();
     }
 
     public void EnableFunction()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void DisableFunction()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public void Return()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

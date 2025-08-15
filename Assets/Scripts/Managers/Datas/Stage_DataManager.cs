@@ -33,7 +33,7 @@ public class Stage_DataManager
         {
             
             int chapter = Int32.Parse(data_NormalStage[id]["chapter"]);
-            string stageKey = data_NormalStage[id]["stage"];
+            string stageKey = data_NormalStage[id]["id"];
             if (chapters[Defines.CombatSubPanels.Portal].ContainsKey(chapter))
             {
                 chapters[Defines.CombatSubPanels.Portal][chapter].Add(stageKey);

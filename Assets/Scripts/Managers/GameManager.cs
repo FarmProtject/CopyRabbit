@@ -185,6 +185,10 @@ public class GameManager : MonoBehaviour
     {
         return _DataManager.Get_StageData_Script(id);
     }
+    public void Set_StageID(string id)
+    {
+        stage_Controller.Set_StageId(id);
+    }
     public void Set_StageData_Script(StageData stage)
     {
         stage_Controller.Set_SelectStage(stage);

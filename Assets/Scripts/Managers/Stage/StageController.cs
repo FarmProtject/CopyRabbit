@@ -67,6 +67,10 @@ public class StageController : MonoBehaviour
         chapter = select_Stage.chapter;
         GameManager._instance.Get_StagePanelScript().Set_StageKey(chapter);
     }
+    public void Set_StageId(string id)
+    {
+        stageId = id;
+    }
     void Change_MonsterIdList()
     {
         string spawnKey = select_Stage.spawnGroup;

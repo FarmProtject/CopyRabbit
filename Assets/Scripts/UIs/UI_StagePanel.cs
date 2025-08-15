@@ -18,31 +18,59 @@ public class UI_StagePanel : UI_PopUpObj
     [SerializeField] int selectChapter;
     [SerializeField] string selectStage;
 
+    [SerializeField]GameObject rightPanelContents;
     [SerializeField]GameObject rightPanel;
     [SerializeField]GameObject prefab_RightCell;
+    [SerializeField]ScrollRect rightScroll;
     [SerializeField]GameObject leftPanel;
+    [SerializeField]ScrollRect leftScroll;
     [SerializeField]GameObject prefab_LeftContents;
     [SerializeField]GameObject prefab_LeftPanelCell;
+    [SerializeField]GameObject tailPanel;
 
     [SerializeField]Defines.CombatSubPanels select_Type;
 
     protected override void Awake()
     {
-       
+        Init();
+        base.Awake();
     }
     private void OnEnable()
     {
-
+        //Init();
         Set_SelectChapter();
         InitStageList();
         OnRightPanelEnable();
         OnLeftPanelEnable();
         OnLeftPanelEnable();
+        OnTailPanelEnable();
+        Set_ScrollPos();
     }
     public override void Init()
     {
         base.Init();
-        this.gameObject.SetActive(false);
+        
+        if(rightPanelContents == null)
+        {
+            rightPanelContents = GameObject.Find("RightCellContents");
+        }
+        if(leftPanel == null)
+        {
+            leftPanel = GameObject.Find("LeftPanel");
+        }
+        if(tailPanel == null)
+        {
+            tailPanel = GameObject.Find("TailPanel");
+        }
+        if(rightScroll = null)
+        {
+            rightScroll = rightPanel.transform.GetComponent<ScrollRect>();
+        }
+        if(leftScroll == null)
+        {
+            //leftScroll = leftPanel.transform.GetComponent<ScrollRect>();
+        }
+        //this.gameObject.SetActive(false);
     }
     public void Set_SelectChapter()
     {
@@ -54,7 +82,7 @@ public class UI_StagePanel : UI_PopUpObj
         switch (select_Type)
         {
             case Defines.CombatSubPanels.Portal:
-                Set_RightCells();
+                Init_Buttons();
                 break;
             case Defines.CombatSubPanels.Treasure:
                 break;
@@ -91,7 +119,26 @@ public class UI_StagePanel : UI_PopUpObj
                 break;
         }
     }
-
+    public void OnTailPanelEnable()
+    {
+        switch (select_Type)
+        {
+            case Defines.CombatSubPanels.Portal:
+                break;
+            case Defines.CombatSubPanels.Treasure:
+                break;
+            case Defines.CombatSubPanels.Skill:
+                break;
+            case Defines.CombatSubPanels.Gold:
+                break;
+            case Defines.CombatSubPanels.Guardian:
+                break;
+            case Defines.CombatSubPanels.Boss:
+                break;
+            default:
+                break;
+        }
+    }
 
     public string Get_StageKey()
     {
@@ -147,9 +194,9 @@ public class UI_StagePanel : UI_PopUpObj
     void Set_RightCells()
     {
         int count = stageKeys.Count - uI_StageRightCells.Count;
-        if(rightPanel == null)
+        if(rightPanelContents == null)
         {
-            rightPanel = GameObject.Find("RightCellContents");
+            rightPanelContents = GameObject.Find("RightCellContents");
         }
         for(int i = 0; i< uI_StageRightCells.Count; i++)
         {
@@ -160,7 +207,7 @@ public class UI_StagePanel : UI_PopUpObj
             for (int i = 0; i<count; i++)
             {
                 GameObject go = Instantiate(prefab_RightCell);
-                go.transform.SetParent(rightPanel.transform);
+                go.transform.SetParent(rightPanelContents.transform);
             }
         }
         
@@ -174,7 +221,7 @@ public class UI_StagePanel : UI_PopUpObj
             }
         }
 
-        rightPanel.transform.localPosition = new Vector2(0, 0);
+        rightPanelContents.transform.localPosition = new Vector2(0, 0);
 
     }
     public void Set_CombatSubType(Defines.CombatSubPanels type)
@@ -192,14 +239,24 @@ public class UI_StagePanel : UI_PopUpObj
         PlayerEntity entity = GameManager._instance.GetPlayerEntity();
         int lastChapter = entity.Get_LastChapter(select_Type);
         stageKeys = GameManager._instance.Get_Chapters()[select_Type][lastChapter];
+        for(int i = 0; i < stageKeys.Count; i++)
+        {
+            Debug.Log($"Stage Key :  {stageKeys[i]}");
+        }
     }
     void Set_RightCells(int count)
     {
         
         for(int i = 0; i<stageKeys.Count; i++)
         {
-            GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageRight, rightPanel);
+            GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageRight, rightPanelContents);
         }
     }
     #endregion
+
+    void Set_ScrollPos()
+    {
+        rightScroll.verticalNormalizedPosition = 0;
+        leftScroll.verticalNormalizedPosition = 0;
+    }
 }
