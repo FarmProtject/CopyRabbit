@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     void OnAwake()
     {
         Init();
-        playerObj = GameObject.Find("Player");
-        inputManager = new InputManager(playerObj);
+        
+        
 
 
     }
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
             _DataManager = Utils.GetOrAddComponent<DataManager>(this.gameObject);
             
+            
         }
         
         if(_ui_Manager.Get_StagePanel_Script() == null)
@@ -88,6 +89,18 @@ public class GameManager : MonoBehaviour
         {
             _uiPooler = Utils.GetOrAddComponent<UI_Pooler>(this.gameObject);
 
+        }
+        if(playerObj == null)
+        {
+            playerObj = GameObject.Find("Player");
+        }
+        if(playerEntity == null)
+        {
+            playerEntity = playerObj.GetComponent<PlayerEntity>();
+        }
+        if(inputManager == null)
+        {
+            inputManager = new InputManager(playerObj);
         }
         Debug.Log(_instance);
     }
@@ -141,7 +154,7 @@ public class GameManager : MonoBehaviour
         return _UpgradeManager.GetUpData(type);
     }
     #endregion
-    #region Stages
+    #region StagesController
     public void Set_SelectStage_Type(Defines.CombatSubPanels type)
     {
         _ui_Manager.Set_SelcectStageType(type);
@@ -150,10 +163,7 @@ public class GameManager : MonoBehaviour
     {
         return stage_Controller.Get_SelectStage();
     }
-    public Defines.StageType Get_SetlectStage_Type()
-    {
-        return stage_Controller.Get_Select_StageType();
-    }
+    
     public void Change_Stage(string id)
     {
         stage_Controller.Change_Stage(id);
@@ -192,10 +202,19 @@ public class GameManager : MonoBehaviour
     {
         return _ui_Manager.Get_StagePanel_Script();
     }
-
+    #endregion
+    #region StagePanel
+    public Defines.CombatSubPanels Get_SetlectStage_Type()
+    {
+        return _ui_Manager.Get_StagePanel_Script().Get_CombatSubType();
+    }
     public void Add_StageButtons(Cell_StageRightCell button)
     {
         _ui_Manager.Add_RightCells(button);
+    }
+    public Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>> Get_Chapters()
+    {
+        return _DataManager.Get_Chapters();
     }
     #endregion
     #region Player

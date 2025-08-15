@@ -35,14 +35,14 @@ public class DataManager:MonoBehaviour
     private void OnAwake()
     {
         ReadData("Data\\Stage", data_Stage.Get_Normal_StageData());
-        data_Stage.Init_NormalStageData();
+        //data_Stage.Init_NormalStageData();
         ReadData("Data\\Monster", monsterData);
         ReadData("Data\\PopUpBind", popUpBind);
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
         LoadMulti("Data\\ClearReward", data_Stage.Get_Rewards());
         LoadMulti("Data\\Spawn", spawnData);
-        
+        data_Stage.Init_StageScript();
         GameManager._instance.Set_PopUpBind(popUpBind);
     }
     void DebugPopUpBind()
@@ -103,7 +103,11 @@ public class DataManager:MonoBehaviour
         return data_Monster.Get_MonsterStat(id);
     }
 
-    
+    public Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>> Get_Chapters()
+    {
+        return data_Stage.Get_Chapters();
+    }
+
     public bool TrySetValue<T>(Dictionary<string, object> data, string key, ref T target)
     {
         if (data.ContainsKey(key) && data[key] != null)

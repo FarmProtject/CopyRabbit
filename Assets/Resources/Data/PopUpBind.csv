@@ -6,5 +6,5 @@ id,key,target
 5,Treasure,StagePanel
 6,Skill,StagePanel
 7,Gold,StagePanel
-8,Guaridan,StagePanel
+8,Guardian,StagePanel
 9,Boss,StagePanel

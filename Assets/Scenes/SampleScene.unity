@@ -5903,12 +5903,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15b12db4446bc540a1f8b4e723e2b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectChapter: 0
   selectStage: 
   rightPanel: {fileID: 0}
   prefab_RightCell: {fileID: 6611390912109956118, guid: 206d570f548e11242a5e451a5e78c797, type: 3}
   leftPanel: {fileID: 0}
   prefab_LeftContents: {fileID: 0}
   prefab_LeftPanelCell: {fileID: 0}
+  select_Type: 0
 --- !u!1 &961553649
 GameObject:
   m_ObjectHideFlags: 0
@@ -12084,6 +12086,7 @@ MonoBehaviour:
   stageId: 1C1S
   chapter: 
   monster_GenCount: 7
+  selectPanelType: 0
 --- !u!1001 &2107366998
 PrefabInstance:
   m_ObjectHideFlags: 0

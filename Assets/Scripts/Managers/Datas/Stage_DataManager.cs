@@ -12,8 +12,40 @@ public class Stage_DataManager
     Dictionary<string, List<StringKeyDatas>> rewards = new Dictionary<string, List<StringKeyDatas>>();
     
     Dictionary<string, StageData> script_Stages = new Dictionary<string, StageData>();
-    
 
+    Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>> chapters = new Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>>();
+
+
+    public void BindingChapters()
+    {
+        Debug.Log("Chapter Binding!!");
+        Defines.CombatSubPanels[] combatSub = (Defines.CombatSubPanels[])(Enum.GetValues(typeof(Defines.CombatSubPanels)));
+        foreach(var key in combatSub)
+        {
+            if (!chapters.ContainsKey(key))
+            {
+                Dictionary<int, List<string>> newData = new Dictionary<int, List<string>>();
+                chapters.Add(key, newData);
+            }
+        }
+
+        foreach (var id in data_NormalStage.Keys)
+        {
+            
+            int chapter = Int32.Parse(data_NormalStage[id]["chapter"]);
+            string stageKey = data_NormalStage[id]["stage"];
+            if (chapters[Defines.CombatSubPanels.Portal].ContainsKey(chapter))
+            {
+                chapters[Defines.CombatSubPanels.Portal][chapter].Add(stageKey);
+            }
+            else
+            {
+                List<string> newList = new();
+                newList.Add(stageKey);
+                chapters[Defines.CombatSubPanels.Portal].Add(chapter, newList);
+            }
+        }
+    }
 
     public void Set_StageData(string path)
     {
@@ -71,6 +103,7 @@ public class Stage_DataManager
         Init_NormalStageData();
         Init_SkillStageData();
         Init_TrasureStageData();
+        BindingChapters();
     }
 
     public void Init_NormalStageData()
@@ -184,5 +217,10 @@ public class Stage_DataManager
 
             script_Stages.Add(newData.id, newData);
         }
+    }
+
+    public Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>> Get_Chapters()
+    {
+        return chapters;
     }
 }

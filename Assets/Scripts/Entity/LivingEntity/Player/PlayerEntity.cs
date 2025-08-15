@@ -14,7 +14,7 @@ public class PlayerEntity : LivingEntity,IDamageable
     protected override void OnAwake()
     {
         base.OnAwake();
-        if(playerDatas.Get_LastChapter().Count ==0)
+        if(playerDatas.Get_LastChapterDict().Count ==0)
         {
             Debug.Log("need to Whrite PlayerEntity OnAWake");
         }
@@ -43,8 +43,16 @@ public class PlayerEntity : LivingEntity,IDamageable
 
     }
 
-    public string Get_LastChapter(Defines.CombatSubPanels type)
+
+    public List<string> Get_ClearStage(Defines.CombatSubPanels type)
     {
-        return playerDatas.Get_LastChapter()[type];
+        return playerDatas.Get_ClearStage()[type];
     }
+    #region Stage
+    public int Get_LastChapter(Defines.CombatSubPanels type)
+    {
+        return playerDatas.Get_LastChapter(type);
+
+    }
+    #endregion
 }

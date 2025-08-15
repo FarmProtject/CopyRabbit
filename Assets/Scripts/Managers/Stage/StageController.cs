@@ -11,6 +11,7 @@ public class StageController : MonoBehaviour
     List<StageField> stageFields = new List<StageField>();
 
     StageData select_Stage;
+    [SerializeField] Defines.CombatSubPanels selectPanelType;
     //StageData data_Stage;
     private void Start()
     {
@@ -98,7 +99,10 @@ public class StageController : MonoBehaviour
         }
     }
 
+    #region SelectType
+
     
-    
+    #endregion
+
 
 }

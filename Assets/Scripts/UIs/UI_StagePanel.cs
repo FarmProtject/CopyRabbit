@@ -15,14 +15,16 @@ public class UI_StagePanel : UI_PopUpObj
 
     List<GameObject> leftPanelCells = new List<GameObject>();
 
+    [SerializeField] int selectChapter;
     [SerializeField] string selectStage;
+
     [SerializeField]GameObject rightPanel;
     [SerializeField]GameObject prefab_RightCell;
     [SerializeField]GameObject leftPanel;
     [SerializeField]GameObject prefab_LeftContents;
     [SerializeField]GameObject prefab_LeftPanelCell;
 
-    Defines.CombatSubPanels select_Type;
+    [SerializeField]Defines.CombatSubPanels select_Type;
 
     protected override void Awake()
     {
@@ -30,6 +32,9 @@ public class UI_StagePanel : UI_PopUpObj
     }
     private void OnEnable()
     {
+
+        Set_SelectChapter();
+        InitStageList();
         OnRightPanelEnable();
         OnLeftPanelEnable();
         OnLeftPanelEnable();
@@ -39,13 +44,17 @@ public class UI_StagePanel : UI_PopUpObj
         base.Init();
         this.gameObject.SetActive(false);
     }
+    public void Set_SelectChapter()
+    {
+        selectChapter = GameManager._instance.GetPlayerEntity().Get_LastChapter(select_Type);
+    }
     public void OnRightPanelEnable()
     {
-        Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();
-
+        
         switch (select_Type)
         {
             case Defines.CombatSubPanels.Portal:
+                Set_RightCells();
                 break;
             case Defines.CombatSubPanels.Treasure:
                 break;
@@ -63,7 +72,6 @@ public class UI_StagePanel : UI_PopUpObj
     }
     public void OnLeftPanelEnable()
     {
-        Defines.StageType stageType = GameManager._instance.Get_SetlectStage_Type();
 
         switch (select_Type)
         {
@@ -173,4 +181,25 @@ public class UI_StagePanel : UI_PopUpObj
     {
         select_Type = type;
     }
+
+    public Defines.CombatSubPanels Get_CombatSubType()
+    {
+        return select_Type;
+    }
+    #region SetCells
+    void InitStageList()
+    {
+        PlayerEntity entity = GameManager._instance.GetPlayerEntity();
+        int lastChapter = entity.Get_LastChapter(select_Type);
+        stageKeys = GameManager._instance.Get_Chapters()[select_Type][lastChapter];
+    }
+    void Set_RightCells(int count)
+    {
+        
+        for(int i = 0; i<stageKeys.Count; i++)
+        {
+            GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageRight, rightPanel);
+        }
+    }
+    #endregion
 }
