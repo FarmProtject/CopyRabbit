@@ -18,7 +18,7 @@ public class Stage_DataManager
 
     public void BindingChapters()
     {
-        Debug.Log("Chapter Binding!!");
+        
         Defines.CombatSubPanels[] combatSub = (Defines.CombatSubPanels[])(Enum.GetValues(typeof(Defines.CombatSubPanels)));
         foreach(var key in combatSub)
         {

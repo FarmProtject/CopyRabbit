@@ -16,19 +16,29 @@ public class StageController : MonoBehaviour
     private void Start()
     {
         //Init_Stage(this.stageId);
+        //Init_Stage();
+        select_Stage = GameManager._instance.Get_StageData_Scriot(stageId);
+
     }
 
 
-    void Init_Stage(string id)
+    public void Init_Stage()
     {
+        if(select_Stage.id == stageId)
+        {
+            return;
+        }
         if(select_Stage == null)
         {
             select_Stage = GameManager._instance.Get_StageData_Scriot(stageId);
         }
-        Change_StageData(id);
+        Change_StageData(stageId);
         Change_MonsterIdList();
-        GameManager._instance.InitMonster(monsterIDs);
-
+        GameManager._instance.Inactive_All();
+        GameManager._instance.Change_Monsters(monsterIDs);
+        GameManager._instance.RenewInactiveIds();
+        GameManager._instance.Gen_Reset();
+        Debug.Log("Stage Initiating!");
     }
     private void FixedUpdate()
     {

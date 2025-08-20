@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     PlayerEntity playerEntity;
     Player_Comtroller player_Controller;
     MonsterManager _MonsterManager;
+    MonsterSpawner _MonsterSpawner;
     PoolManager _PoolManager;
     DataManager _DataManager;
     UI_Pooler _uiPooler;
@@ -69,7 +70,7 @@ public class GameManager : MonoBehaviour
         }
         if(_PoolManager == null)
         {
-            _PoolManager = new PoolManager();
+            _PoolManager = _MonsterManager.Get_PoolManager();
         }
         if(_DataManager == null)
         {
@@ -101,6 +102,10 @@ public class GameManager : MonoBehaviour
         if(inputManager == null)
         {
             inputManager = new InputManager(playerObj);
+        }
+        if(_MonsterSpawner == null)
+        {
+            _MonsterSpawner = GameObject.Find("MonsterPooler").transform.GetComponent<MonsterSpawner>();
         }
         Debug.Log(_instance);
     }
@@ -193,11 +198,11 @@ public class GameManager : MonoBehaviour
     {
         stage_Controller.Set_SelectStage(stage);
     }
-    public void Add_OnMonsterList(MonsterEntity monster)
+    public void Add_OnMonsterList(GameObject monster)
     {
         _MonsterManager.Add_OnMonsterList(monster);
     }
-    public List<MonsterEntity> Get_MonsterList()
+    public List<GameObject> Get_MonsterList()
     {
         return _MonsterManager.Get_MonsterList();
     }
@@ -205,6 +210,11 @@ public class GameManager : MonoBehaviour
     public UI_StagePanel Get_StagePanelScript()
     {
         return _ui_Manager.Get_StagePanel_Script();
+    }
+
+    public void Init_Stage()
+    {
+        stage_Controller.Init_Stage();
     }
     #endregion
     #region StagePanel
@@ -241,7 +251,10 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region Monsters
-
+    public void Inactive_All()
+    {
+        _MonsterManager.Inactive_All();
+    }
     public void InitMonster(List<string> monsterIds)
     {
         _MonsterManager.Init_Stage(monsterIds);
@@ -249,7 +262,7 @@ public class GameManager : MonoBehaviour
     #region MonsterPooling
     public string Get_Random_Inactive()
     {
-        return _PoolManager.Get_Random_Inactive();
+        return _PoolManager.Get_Random_InactiveId();
     }
     public void Inactive_Monster(string key, GameObject go)
     {
@@ -258,6 +271,23 @@ public class GameManager : MonoBehaviour
     public GameObject Gen_Monster(string key)
     {
         return _PoolManager.Get_Monster(key);
+    }
+   
+    public void Change_Monsters(List<string> monsterIds)
+    {
+        _MonsterManager.Change_MonsterIDs(monsterIds);
+    }
+    public void Add_Inactive(string key, GameObject go)
+    {
+        _PoolManager.Add_Inactive(key, go);
+    }
+    public void Gen_Reset()
+    {
+        _MonsterSpawner.Gen_Reset();
+    }
+    public void RenewInactiveIds()
+    {
+        _MonsterManager.RenewInactiveIds();
     }
     #endregion
     #endregion

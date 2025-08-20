@@ -6,11 +6,12 @@ using System.Collections;
 public class MonsterSpawner : MonoBehaviour
 {
     PoolManager poolManager;
-    ObjectPool objPool;
 
     [SerializeField]int maxMonsterCount = 54;
     [SerializeField]int maxGenCount = 7;
-    bool canGen = false;
+    [SerializeField]bool canGen = false;
+    [SerializeField] float genDelayTiem = 5f;
+    [SerializeField] float genTime = 0;
     private void Start()
     {
         canGen = true;
@@ -23,21 +24,41 @@ public class MonsterSpawner : MonoBehaviour
         {
             poolManager = GameManager._instance.Get_PoolMamagaer();
         }
-        if(objPool == null)
-        {
-            objPool = poolManager.Get_ObjectPool();
-        }
+
     }
 
     private void FixedUpdate()
     {
-        //StartCoroutine("Gen_Monster");
+        Gen_Monster();
     }
 
     public void Set_CanGen(bool other)
     {
         canGen = other;
     }
+    void Gen_Monster()
+    {
+        genTime+=Time.deltaTime;
+        if (genTime>= genDelayTiem)
+        {
+            canGen = true;
+        }
+        while (canGen)
+        {
+            canGen = false;
+            Debug.Log("Gen Monsters!");
+            poolManager.Gen_Monster(poolManager.Get_Random_InactiveId());
+            genTime = 0f;
+        }
+
+    }
+
+    public void Gen_Reset()
+    {
+        genTime = 0f;
+        canGen = true;
+    }
+    /*
     IEnumerator Gen_Monster()
     {
         Debug.Log("111");
@@ -45,13 +66,13 @@ public class MonsterSpawner : MonoBehaviour
         {
             poolManager.Gen_Monster(poolManager.Get_Random_Inactive());
             Debug.Log("Monster Gen!");
-            yield return new WaitForSeconds(30f);
+            yield return new WaitForSeconds(genTime);
         }
         
-    }
+    }*/
     int Calc_GenCount()
     {
-        int nowCount = objPool.GetActiveCount();
+        int nowCount = poolManager.GetActiveCount();
         int leftCount = maxMonsterCount - nowCount;
         int genCount = leftCount / maxGenCount;
         int rest = leftCount % maxGenCount;

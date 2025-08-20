@@ -17,7 +17,9 @@ public class UI_StagePanel : UI_PopUpObj
 
     [SerializeField] int selectChapter;
     [SerializeField] string selectStage;
+    [SerializeField] float rightCellSizeY=100f;
 
+    [SerializeField] GameObject bodyPanel;
     [SerializeField]GameObject rightPanelContents;
     [SerializeField]GameObject rightPanel;
     [SerializeField]GameObject prefab_RightCell;
@@ -27,6 +29,9 @@ public class UI_StagePanel : UI_PopUpObj
     [SerializeField]GameObject prefab_LeftContents;
     [SerializeField]GameObject prefab_LeftPanelCell;
     [SerializeField]GameObject tailPanel;
+
+    [SerializeField] GameObject normalButtons;
+    [SerializeField] GameObject challengeButtons;
 
     [SerializeField]Defines.CombatSubPanels select_Type;
 
@@ -46,23 +51,34 @@ public class UI_StagePanel : UI_PopUpObj
         OnTailPanelEnable();
         Set_ScrollPos();
     }
+    private void OnDisable()
+    {
+        
+    }
     public override void Init()
     {
         base.Init();
-        
+        if(bodyPanel == null)
+        {
+            bodyPanel = transform.GetChild(1).gameObject;
+        }
         if(rightPanelContents == null)
         {
             rightPanelContents = GameObject.Find("RightCellContents");
         }
+        if(rightPanel == null)
+        {
+            rightPanel = bodyPanel.transform.GetChild(1).gameObject;
+        }
         if(leftPanel == null)
         {
-            leftPanel = GameObject.Find("LeftPanel");
+            leftPanel = bodyPanel.transform.GetChild(0).gameObject;
         }
         if(tailPanel == null)
         {
             tailPanel = GameObject.Find("TailPanel");
         }
-        if(rightScroll = null)
+        if(rightScroll == null)
         {
             rightScroll = rightPanel.transform.GetComponent<ScrollRect>();
         }
@@ -71,6 +87,18 @@ public class UI_StagePanel : UI_PopUpObj
             //leftScroll = leftPanel.transform.GetComponent<ScrollRect>();
         }
         //this.gameObject.SetActive(false);
+        if(rightPanelContents ==null)
+        {
+            rightPanelContents = rightPanel.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        }
+        if(normalButtons == null)
+        {
+            normalButtons = tailPanel.transform.GetChild(0).gameObject;
+        }
+        if(challengeButtons == null)
+        {
+            challengeButtons = tailPanel.transform.GetChild(1).gameObject;
+        }
     }
     public void Set_SelectChapter()
     {
@@ -82,7 +110,7 @@ public class UI_StagePanel : UI_PopUpObj
         switch (select_Type)
         {
             case Defines.CombatSubPanels.Portal:
-                Init_Buttons();
+                Init_RightButtons();
                 break;
             case Defines.CombatSubPanels.Treasure:
                 break;
@@ -124,16 +152,22 @@ public class UI_StagePanel : UI_PopUpObj
         switch (select_Type)
         {
             case Defines.CombatSubPanels.Portal:
+                normalButtons.SetActive(true);
                 break;
             case Defines.CombatSubPanels.Treasure:
+                challengeButtons.SetActive(true);
                 break;
             case Defines.CombatSubPanels.Skill:
+                challengeButtons.SetActive(true);
                 break;
             case Defines.CombatSubPanels.Gold:
+                challengeButtons.SetActive(true);
                 break;
             case Defines.CombatSubPanels.Guardian:
+                challengeButtons.SetActive(true);
                 break;
             case Defines.CombatSubPanels.Boss:
+                challengeButtons.SetActive(true);
                 break;
             default:
                 break;
@@ -181,7 +215,7 @@ public class UI_StagePanel : UI_PopUpObj
             ui_StageLeftCells.Add(cell);
         }
     }
-    public void Init_Buttons()
+    public void Init_RightButtons()
     {
         Set_RightCells();
         for(int i = 0; i< stageKeys.Count; i++)
@@ -227,6 +261,7 @@ public class UI_StagePanel : UI_PopUpObj
     public void Set_CombatSubType(Defines.CombatSubPanels type)
     {
         select_Type = type;
+        Debug.Log($"select Type : {type}");
     }
 
     public Defines.CombatSubPanels Get_CombatSubType()
@@ -256,7 +291,21 @@ public class UI_StagePanel : UI_PopUpObj
 
     void Set_ScrollPos()
     {
-        rightScroll.verticalNormalizedPosition = 0;
-        leftScroll.verticalNormalizedPosition = 0;
+        if(rightScroll == null)
+        {
+            rightPanel.transform.GetComponent<ScrollRect>();
+        }   
+        if(rightScroll == null)
+        {
+            rightScroll = rightPanel.transform.GetComponent<ScrollRect>();
+        }
+        if(leftScroll == null)
+        {
+            leftScroll = leftPanel.transform.GetComponent<ScrollRect>();
+        }
+        int count = stageKeys.Count;
+        count = count/2;
+        Vector2 pos = new Vector2(0, -count*rightCellSizeY);
+        rightPanelContents.transform.localPosition = pos;;
     }
 }

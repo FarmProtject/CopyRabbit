@@ -20,6 +20,16 @@ public class MonsterEntity : LivingEntity,IDamageable
         //OnStart();
     }
 
+    public void OnEnable()
+    {
+
+    }
+
+    public void OnDisable()
+    {
+        GameManager._instance.Add_Inactive(myId, this.gameObject);
+    }
+
     public void Set_MyData(MonsterStats stat)
     {
         myStat = new MonsterStats(stat);
@@ -41,7 +51,7 @@ public class MonsterEntity : LivingEntity,IDamageable
     protected override void OnAwake()
     {
         base.OnAwake();
-        GameManager._instance.Add_OnMonsterList(this);
+        GameManager._instance.Add_OnMonsterList(this.gameObject);
         
     }
     
@@ -61,7 +71,7 @@ public class MonsterEntity : LivingEntity,IDamageable
         healthPoint -= damage;
         if (IsDead())
         {
-            GameManager._instance.Inactive_Monster(myStat.id, this.gameObject);
+            this.gameObject.SetActive(false);
             
         }
         return healthPoint;

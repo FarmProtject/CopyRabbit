@@ -1,8 +1,16 @@
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class Cell_CombatSubCell : Cell_MenuCell
 {
-    Defines.CombatSubPanels myType;
+    [SerializeField]Defines.CombatSubPanels myType;
+
+
+    protected override void OnClickEvent(PointerEventData evt)
+    {
+        base.OnClickEvent(evt);
+        Set_PanelType();
+    }
+
     public override void Set_MyType<T>(T type)
     {
         base.Set_MyType(type);
