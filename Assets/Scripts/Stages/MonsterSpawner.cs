@@ -50,7 +50,7 @@ public class MonsterSpawner : MonoBehaviour
             poolManager.Gen_Monster(poolManager.Get_Random_InactiveId());
             genTime = 0f;
         }
-
+        Debug.Log($"몬스터 리스트 내부 몬스터 수 : {GameManager._instance.Get_MonsterList().Count}");
     }
 
     public void Gen_Reset()

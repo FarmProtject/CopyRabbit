@@ -181,7 +181,7 @@ public class PoolManager
             Debug.Log(null);
         }
 
-        if (inactivePool.Count > 0)
+        if (inactivePool[key].Count > 0)
         {
             go = inactivePool[key].Dequeue();
         }
