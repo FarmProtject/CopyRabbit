@@ -6,6 +6,8 @@ public class PoolManager
     [SerializeField] int maxMonsterCount = 63;
     [SerializeField] int nowCount;
 
+    GameObject monsterPrefab;
+
     Dictionary<string, Queue<GameObject>> inactivePool = new Dictionary<string, Queue<GameObject>>(); // key : id
     Dictionary<string, List<GameObject>> activePool = new Dictionary<string, List<GameObject>>();
 
@@ -22,6 +24,11 @@ public class PoolManager
         {
             activePool = new Dictionary<string, List<GameObject>>();
         }
+        /*
+        if(monsterPrefab == null)
+        {
+            monsterPrefab = GameManager._instance.Get_MonsterPrefab();
+        }*/
     }
 
     public void InitPool()
@@ -65,6 +72,7 @@ public class PoolManager
         if (inactivePool.ContainsKey(key))
         {
             if (inactivePool[key].Contains(go))
+            {
                 if (activePool.ContainsKey(key))
                 {
                     activePool[key].Add(go);
@@ -74,6 +82,7 @@ public class PoolManager
                     activePool.Add(key, new List<GameObject>());
                     activePool[key].Add(go);
                 }
+            }
         }
         else
         {
@@ -303,11 +312,24 @@ public class PoolManager
     }
     GameObject CreatNewObj(string key)
     {
+        //GameObject go = new GameObject();
+        if(monsterPrefab == null)
+        {
+            monsterPrefab = GameManager._instance.Get_MonsterPrefab();
+        }
         Debug.Log("Need to Write CreateNewObj Massod in ObjectPool Script ");
-        GameObject go = new GameObject();
+        GameObject go = UnityEngine.Object.Instantiate(monsterPrefab);
+        go.transform.SetParent(GameManager._instance.Get_MonsterSpawner().transform);
+        MonsterEntity entity = go.transform.GetComponent<MonsterEntity>();
+        MonsterStats stat = GameManager._instance.Get_MonsterStat(key);
+        entity.Set_MyID(key);
+        entity.Set_MyData(stat);
         return go;
     }
+    void Set_MonsterRigid()
+    {
 
+    }
 
     public string Get_Random_InactiveId()
     {
@@ -316,6 +338,7 @@ public class PoolManager
             int index = UnityEngine.Random.Range(0, inactiveIds.Count);
             Debug.Log($"index : {index}");
             string id = inactiveIds[index];
+            Debug.Log($"id : {inactiveIds[index]}");
             return id;
         }
         else

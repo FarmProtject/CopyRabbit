@@ -3224,6 +3224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage_Controller: {fileID: 0}
+  _MonsterSpawner: {fileID: 0}
 --- !u!114 &495113137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9361,6 +9362,7 @@ MonoBehaviour:
   canGen: 0
   genDelayTiem: 10
   genTime: 0
+  monsterPrefab: {fileID: 5582807415127072658, guid: 5869cd70849add848bf71cde5d088a0c, type: 3}
 --- !u!1 &1379651356
 GameObject:
   m_ObjectHideFlags: 0

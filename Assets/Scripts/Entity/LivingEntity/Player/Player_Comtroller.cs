@@ -36,11 +36,11 @@ public class Player_Comtroller : MonoBehaviour
         {
             case Defines.PlayerControllType.Auto:
                 moveDir = auto_State.GetMoveDirection();
-                Debug.Log("Player Controll Type : Auto");
+                //Debug.Log("Player Controll Type : Auto");
                 break;
             case Defines.PlayerControllType.Manual:
                 moveDir = lever_Controller.GetMoveDir();
-                Debug.Log("Player Controll Type : Manual");
+                //Debug.Log("Player Controll Type : Manual");
                 break;
             default:
                 Debug.Log("Player Control State Error!");

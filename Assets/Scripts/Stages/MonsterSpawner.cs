@@ -12,6 +12,7 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField]bool canGen = false;
     [SerializeField] float genDelayTiem = 5f;
     [SerializeField] float genTime = 0;
+    [SerializeField] GameObject monsterPrefab;
     private void Start()
     {
         canGen = true;
@@ -26,7 +27,7 @@ public class MonsterSpawner : MonoBehaviour
         }
 
     }
-
+    
     private void FixedUpdate()
     {
         Gen_Monster();
@@ -50,13 +51,19 @@ public class MonsterSpawner : MonoBehaviour
             poolManager.Gen_Monster(poolManager.Get_Random_InactiveId());
             genTime = 0f;
         }
-        Debug.Log($"몬스터 리스트 내부 몬스터 수 : {GameManager._instance.Get_MonsterList().Count}");
     }
-
+    public GameObject Get_MonsterPrefab()
+    {
+        return monsterPrefab;
+    }
     public void Gen_Reset()
     {
         genTime = 0f;
         canGen = true;
+    }
+    public GameObject Get_MonsterSpawner()
+    {
+        return this.gameObject;
     }
     /*
     IEnumerator Gen_Monster()

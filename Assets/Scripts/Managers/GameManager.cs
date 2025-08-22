@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     PlayerEntity playerEntity;
     Player_Comtroller player_Controller;
     MonsterManager _MonsterManager;
-    MonsterSpawner _MonsterSpawner;
+    [SerializeField]MonsterSpawner _MonsterSpawner;
     PoolManager _PoolManager;
     DataManager _DataManager;
     UI_Pooler _uiPooler;
@@ -68,11 +68,11 @@ public class GameManager : MonoBehaviour
         {
             _MonsterManager = new MonsterManager();
         }
-        if(_PoolManager == null)
+        if (_MonsterSpawner == null)
         {
-            _PoolManager = _MonsterManager.Get_PoolManager();
+            _MonsterSpawner = GameObject.Find("MonsterPooler").transform.GetComponent<MonsterSpawner>();
         }
-        if(_DataManager == null)
+        if (_DataManager == null)
         {
             _DataManager = Utils.GetOrAddComponent<DataManager>(this.gameObject);
             
@@ -103,9 +103,10 @@ public class GameManager : MonoBehaviour
         {
             inputManager = new InputManager(playerObj);
         }
-        if(_MonsterSpawner == null)
+        
+        if (_PoolManager == null)
         {
-            _MonsterSpawner = GameObject.Find("MonsterPooler").transform.GetComponent<MonsterSpawner>();
+            _PoolManager = _MonsterManager.Get_PoolManager();
         }
         Debug.Log(_instance);
     }
@@ -251,6 +252,10 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region Monsters
+    public GameObject Get_MonsterSpawner()
+    {
+        return _MonsterSpawner.Get_MonsterSpawner();
+    }
     public void Inactive_All()
     {
         _MonsterManager.Inactive_All();
@@ -258,6 +263,11 @@ public class GameManager : MonoBehaviour
     public void InitMonster(List<string> monsterIds)
     {
         _MonsterManager.Init_Stage(monsterIds);
+    }
+    public GameObject Get_MonsterPrefab()
+    {
+        
+        return _MonsterSpawner.Get_MonsterPrefab();
     }
     #region MonsterPooling
     public string Get_Random_Inactive()
