@@ -56,7 +56,8 @@ public static class Defines
         Cell_Icon,
         RewardPanel,
         Cell_StageRight,
-        MenuButton
+        MenuButton,
+        Cell_StageLeft
     }
     public enum MenuType
     {
@@ -68,13 +69,13 @@ public static class Defines
     {
         Options
     }
-    public enum CombatSubPanels
+    public enum DungeonType
     {
         Portal,
-        Treasure,
+        Gem,
         Skill,
         Gold,
-        Guardian,
+        Tower,
         Boss
     }
     public enum ShopSubPanels
@@ -120,7 +121,7 @@ public static class Defines
         Stage,
         Challenge
     }
-
+    
     public enum MonsterActState
     {
         Move,

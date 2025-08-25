@@ -4,12 +4,23 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 public class Cell_StageLeft : MonoBehaviour
 {
-    string iconId;
-    [SerializeField]Image myIcon;
-    private void Awake()
+    [SerializeField]string typeId;
+    [SerializeField]string dataId;
+    
+    List<Cell_Icon> myIcons = new List<Cell_Icon>();
+
+    
+
+    public void Set_MyID(string id)
     {
-        GameManager._instance._ui_Manager.Add_LeftCells(this);
-        myIcon = Utils.FindChild<Image>(this.gameObject);
+        dataId = id;
+        UpdateDatas();
+    }
+
+
+    void UpdateDatas()
+    {
+
     }
 
 }

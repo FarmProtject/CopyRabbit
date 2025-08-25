@@ -44,12 +44,12 @@ public class PlayerEntity : LivingEntity,IDamageable
     }
 
 
-    public List<string> Get_ClearStage(Defines.CombatSubPanels type)
+    public List<string> Get_ClearStage(Defines.DungeonType type)
     {
         return playerDatas.Get_ClearStage()[type];
     }
     #region Stage
-    public int Get_LastChapter(Defines.CombatSubPanels type)
+    public int Get_LastChapter(Defines.DungeonType type)
     {
         return playerDatas.Get_LastChapter(type);
 

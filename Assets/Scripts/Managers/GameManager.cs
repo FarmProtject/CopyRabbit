@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region StagesController
-    public void Set_SelectStage_Type(Defines.CombatSubPanels type)
+    public void Set_SelectStage_Type(Defines.DungeonType type)
     {
         _ui_Manager.Set_SelcectStageType(type);
     }
@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region StagePanel
-    public Defines.CombatSubPanels Get_SetlectStage_Type()
+    public Defines.DungeonType Get_SetlectStage_Type()
     {
         return _ui_Manager.Get_StagePanel_Script().Get_CombatSubType();
     }
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
     {
         _ui_Manager.Add_RightCells(button);
     }
-    public Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>> Get_Chapters()
+    public Dictionary<Defines.DungeonType, Dictionary<int, List<string>>> Get_Chapters()
     {
         return _DataManager.Get_Chapters();
     }

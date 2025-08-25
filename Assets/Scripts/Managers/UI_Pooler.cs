@@ -7,6 +7,7 @@ public class UI_Pooler : MonoBehaviour
     [SerializeField] GameObject cell_IconPrefab;
     [SerializeField] GameObject rewardPanels;
     [SerializeField] GameObject cell_StageRight;
+    [SerializeField] GameObject cell_StageLeft;
     [SerializeField] GameObject menuButton;
     [SerializeField] GameObject rewardIcons;
     Dictionary<Defines.UI_PrefabType, GameObject> ui_Prefabs = new Dictionary<Defines.UI_PrefabType, GameObject>();
@@ -35,6 +36,7 @@ public class UI_Pooler : MonoBehaviour
         ui_Prefabs.Add(Defines.UI_PrefabType.RewardPanel, rewardPanels);
         ui_Prefabs.Add(Defines.UI_PrefabType.Cell_StageRight, cell_StageRight);
         ui_Prefabs.Add(Defines.UI_PrefabType.MenuButton, menuButton);
+        ui_Prefabs.Add(Defines.UI_PrefabType.Cell_StageLeft, cell_StageLeft);
         foreach (var key in ui_Prefabs.Keys) 
         {
             ui_pool.Add(key, new Queue<IPoolUI>());

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class Cell_CombatSubCell : Cell_MenuCell
 {
-    [SerializeField]Defines.CombatSubPanels myType;
+    [SerializeField]Defines.DungeonType myType;
 
 
     protected override void OnClickEvent(PointerEventData evt)
@@ -14,7 +14,7 @@ public class Cell_CombatSubCell : Cell_MenuCell
     public override void Set_MyType<T>(T type)
     {
         base.Set_MyType(type);
-        if (type is Defines.CombatSubPanels subType)
+        if (type is Defines.DungeonType subType)
         {
             myType = subType;
             Debug.Log(myType);

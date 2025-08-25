@@ -3,44 +3,44 @@ using System;
 using System.Collections.Generic;
 public class PlayerDatas 
 {
-    public Dictionary<Defines.CombatSubPanels, int> lastChapter = new Dictionary<Defines.CombatSubPanels, int>() 
+    public Dictionary<Defines.DungeonType, int> clearChapter = new Dictionary<Defines.DungeonType, int>() 
     { 
-        { Defines.CombatSubPanels.Gold, 1 },
-        {Defines.CombatSubPanels.Skill,1 },
-        {Defines.CombatSubPanels.Guardian,1 },
-        {Defines.CombatSubPanels.Portal,1 },
-        {Defines.CombatSubPanels.Boss,1 },
-        {Defines.CombatSubPanels.Treasure,1 },
+        { Defines.DungeonType.Gold, 0 },
+        {Defines.DungeonType.Skill,0 },
+        {Defines.DungeonType.Tower,0 },
+        {Defines.DungeonType.Portal,0 },
+        {Defines.DungeonType.Boss,0 },
+        {Defines.DungeonType.Gem,0 },
     };
-    public Dictionary<Defines.CombatSubPanels,List<string>> clearStage = new Dictionary<Defines.CombatSubPanels, List<string>>();
+    public Dictionary<Defines.DungeonType, List<string>> clearStage = new Dictionary<Defines.DungeonType, List<string>>();
 
-    public Dictionary<Defines.CombatSubPanels,int> Get_LastChapterDict()
+    public Dictionary<Defines.DungeonType, int> Get_LastChapterDict()
     {
-        return lastChapter;
+        return clearChapter;
     }
 
-    public int Get_LastChapter(Defines.CombatSubPanels type)
+    public int Get_LastChapter(Defines.DungeonType type)
     {
-        return lastChapter[type];
+        return clearChapter[type];
     }
-    public Dictionary<Defines.CombatSubPanels, List<string>> Get_ClearStage()
+    public Dictionary<Defines.DungeonType, List<string>> Get_ClearStage()
     {
         return clearStage;
     }
 
-    public void Add_LastChapter(Defines.CombatSubPanels type, int value)
+    public void Add_LastChapter(Defines.DungeonType type, int value)
     {
-        if (!lastChapter.ContainsKey(type))
+        if (!clearChapter.ContainsKey(type))
         {
-            lastChapter.Add(type, value);
+            clearChapter.Add(type, value);
         }
-        else if (lastChapter.ContainsKey(type))
+        else if (clearChapter.ContainsKey(type))
         {
-            lastChapter[type] = value;
+            clearChapter[type] = value;
         }
     }
 
-    public void Add_ClearStage(Defines.CombatSubPanels type, string value)
+    public void Add_ClearStage(Defines.DungeonType type, string value)
     {
         if (!clearStage.ContainsKey(type))
         {

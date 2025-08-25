@@ -3253,6 +3253,7 @@ MonoBehaviour:
   cell_IconPrefab: {fileID: 5651284363880714747, guid: c106411f2c1ad124798428075cab90d6, type: 3}
   rewardPanels: {fileID: 6333794147721907693, guid: bb5788976b3204541a03b6e8d9545252, type: 3}
   cell_StageRight: {fileID: 6611390912109956118, guid: 206d570f548e11242a5e451a5e78c797, type: 3}
+  cell_StageLeft: {fileID: 0}
   menuButton: {fileID: 3843222782748856150, guid: e555da87b880e69418e01d7ba18249fd, type: 3}
   rewardIcons: {fileID: 5651284363880714747, guid: c106411f2c1ad124798428075cab90d6, type: 3}
 --- !u!1 &496835227

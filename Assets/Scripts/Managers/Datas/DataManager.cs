@@ -38,10 +38,12 @@ public class DataManager:MonoBehaviour
         //data_Stage.Init_NormalStageData();
         ReadData("Data\\Monster", monsterData);
         ReadData("Data\\PopUpBind", popUpBind);
+        ReadData("Data\\ChallengeStage", data_Stage.Get_ChallengeData());
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
         LoadMulti("Data\\ClearReward", data_Stage.Get_Rewards());
         LoadMulti("Data\\Spawn", spawnData);
+
         data_Stage.Init_StageScript();
         GameManager._instance.Set_PopUpBind(popUpBind);
     }
@@ -103,7 +105,7 @@ public class DataManager:MonoBehaviour
         return data_Monster.Get_MonsterStat(id);
     }
 
-    public Dictionary<Defines.CombatSubPanels, Dictionary<int, List<string>>> Get_Chapters()
+    public Dictionary<Defines.DungeonType, Dictionary<int, List<string>>> Get_Chapters()
     {
         return data_Stage.Get_Chapters();
     }

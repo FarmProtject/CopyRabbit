@@ -169,7 +169,7 @@ public class UI_Manager
 
     #endregion
     #region StagePanel
-   public void Set_SelcectStageType(Defines.CombatSubPanels type)
+   public void Set_SelcectStageType(Defines.DungeonType type)
     {
         stagePanel.Set_CombatSubType(type);
     }

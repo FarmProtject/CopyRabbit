@@ -14,7 +14,7 @@ public class UI_MenuPanel : UI_PopUpObj,IPoolUI
     int buttonSize;
     private static readonly Dictionary<Type, Type> _enumToComponentMap = new()
 {
-    { typeof(Defines.CombatSubPanels), typeof(Cell_CombatSubCell) },
+    { typeof(Defines.DungeonType), typeof(Cell_CombatSubCell) },
     { typeof(Defines.MenuSubPanels), typeof(Cell_MenuSubCell) },
     { typeof(Defines.ShopSubPanels), typeof(Cell_ShopSubCell) },
 };
@@ -68,7 +68,7 @@ public class UI_MenuPanel : UI_PopUpObj,IPoolUI
                 ButtonMake(menus);
                 break;
             case Defines.MenuType.Combat:
-                Defines.CombatSubPanels[] combatMenus = (Defines.CombatSubPanels[])Enum.GetValues(typeof(Defines.CombatSubPanels));
+                Defines.DungeonType[] combatMenus = (Defines.DungeonType[])Enum.GetValues(typeof(Defines.DungeonType));
 
                 foreach(var value in combatMenus)
                 {

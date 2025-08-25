@@ -33,7 +33,7 @@ public class UI_StagePanel : UI_PopUpObj
     [SerializeField] GameObject normalButtons;
     [SerializeField] GameObject challengeButtons;
 
-    [SerializeField]Defines.CombatSubPanels select_Type;
+    [SerializeField]Defines.DungeonType select_Type;
 
     protected override void Awake()
     {
@@ -109,18 +109,18 @@ public class UI_StagePanel : UI_PopUpObj
         
         switch (select_Type)
         {
-            case Defines.CombatSubPanels.Portal:
+            case Defines.DungeonType.Portal:
                 Init_RightButtons();
                 break;
-            case Defines.CombatSubPanels.Treasure:
+            case Defines.DungeonType.Gem:
                 break;
-            case Defines.CombatSubPanels.Skill:
+            case Defines.DungeonType.Skill:
                 break;
-            case Defines.CombatSubPanels.Gold:
+            case Defines.DungeonType.Gold:
                 break;
-            case Defines.CombatSubPanels.Guardian:
+            case Defines.DungeonType.Tower:
                 break;
-            case Defines.CombatSubPanels.Boss:
+            case Defines.DungeonType.Boss:
                 break;
             default:
                 break;
@@ -128,20 +128,24 @@ public class UI_StagePanel : UI_PopUpObj
     }
     public void OnLeftPanelEnable()
     {
-
+        for(int i = 0; i<ui_StageLeftCells.Count; i++)
+        {
+            ui_StageLeftCells[i].gameObject.SetActive(false);
+        }
         switch (select_Type)
         {
-            case Defines.CombatSubPanels.Portal:
+            case Defines.DungeonType.Portal:
+                
                 break;
-            case Defines.CombatSubPanels.Treasure:
+            case Defines.DungeonType.Gem:
                 break;
-            case Defines.CombatSubPanels.Skill:
+            case Defines.DungeonType.Skill:
                 break;
-            case Defines.CombatSubPanels.Gold:
+            case Defines.DungeonType.Gold:
                 break;
-            case Defines.CombatSubPanels.Guardian:
+            case Defines.DungeonType.Tower:
                 break;
-            case Defines.CombatSubPanels.Boss:
+            case Defines.DungeonType.Boss:
                 break;
             default:
                 break;
@@ -151,22 +155,22 @@ public class UI_StagePanel : UI_PopUpObj
     {
         switch (select_Type)
         {
-            case Defines.CombatSubPanels.Portal:
+            case Defines.DungeonType.Portal:
                 normalButtons.SetActive(true);
                 break;
-            case Defines.CombatSubPanels.Treasure:
+            case Defines.DungeonType.Gem:
                 challengeButtons.SetActive(true);
                 break;
-            case Defines.CombatSubPanels.Skill:
+            case Defines.DungeonType.Skill:
                 challengeButtons.SetActive(true);
                 break;
-            case Defines.CombatSubPanels.Gold:
+            case Defines.DungeonType.Gold:
                 challengeButtons.SetActive(true);
                 break;
-            case Defines.CombatSubPanels.Guardian:
+            case Defines.DungeonType.Tower:
                 challengeButtons.SetActive(true);
                 break;
-            case Defines.CombatSubPanels.Boss:
+            case Defines.DungeonType.Boss:
                 challengeButtons.SetActive(true);
                 break;
             default:
@@ -224,7 +228,7 @@ public class UI_StagePanel : UI_PopUpObj
             uI_StageRightCells[i].Init(id);
         }
     }
-
+    
     void Set_RightCells()
     {
         int count = stageKeys.Count - uI_StageRightCells.Count;
@@ -258,13 +262,37 @@ public class UI_StagePanel : UI_PopUpObj
         rightPanelContents.transform.localPosition = new Vector2(0, 0);
 
     }
-    public void Set_CombatSubType(Defines.CombatSubPanels type)
+    public void Set_PortalLeft()
+    {
+        GameObject monstersUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
+        Cell_StageLeft monsterLeft = monstersUI.transform.GetComponent<Cell_StageLeft>();
+        GameObject rewardsUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
+        Cell_StageLeft rewardsLeft = rewardsUI.transform.GetComponent<Cell_StageLeft>();
+    }
+    public void Set_ChallengeLeft()
+    {
+        StageData data = GameManager._instance.Get_StageData_Scriot(selectStage);
+        GameObject rewardSUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
+        GameObject rewardAUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
+        GameObject rewardBUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
+
+        if(data is ChallengeStageData challenge)
+        {
+            Cell_StageLeft rewardS = rewardSUI.transform.GetComponent<Cell_StageLeft>();
+            Cell_StageLeft rewardA = rewardAUI.transform.GetComponent<Cell_StageLeft>();
+            Cell_StageLeft rewardB = rewardBUI.transform.GetComponent<Cell_StageLeft>();
+        }
+
+        
+
+    }
+    public void Set_CombatSubType(Defines.DungeonType type)
     {
         select_Type = type;
         Debug.Log($"select Type : {type}");
     }
 
-    public Defines.CombatSubPanels Get_CombatSubType()
+    public Defines.DungeonType Get_CombatSubType()
     {
         return select_Type;
     }
