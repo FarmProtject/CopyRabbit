@@ -14,14 +14,43 @@ public class Stage_DataManager
    
     Dictionary<string, List<StringKeyDatas>> rewards = new Dictionary<string, List<StringKeyDatas>>();
     
-    Dictionary<string, StageData> script_Stages = new Dictionary<string, StageData>();
+    //Dictionary<string, StageData> script_Stages = new Dictionary<string, StageData>();
     
     Dictionary<Defines.DungeonType, Dictionary<int, List<string>>> chapters = new Dictionary<Defines.DungeonType, Dictionary<int, List<string>>>();
 
+    Dictionary<Defines.DungeonType, Dictionary<string, StageData>> script_Stages = new Dictionary<Defines.DungeonType, Dictionary<string, StageData>>();
 
-    public void BindingChapters()
+    public void BindingChapters(StageData data)
     {
-        
+        int chapterNumber = Int32.Parse(data.chapter);
+        if (chapters.ContainsKey(data.dungeonType))
+        {
+            if (chapters[data.dungeonType].ContainsKey(chapterNumber))
+            {
+                if (chapters[data.dungeonType][chapterNumber].Contains(data.id))
+                {
+                    Debug.Log($"챕터 이미 바인딩되어있음 ID : {data.id}");
+                }
+                else
+                {
+                    chapters[data.dungeonType][chapterNumber].Add(data.id);
+                }
+            }
+            else
+            {
+                chapters[data.dungeonType].Add(chapterNumber, new List<string>());
+                chapters[data.dungeonType][chapterNumber].Add(data.id);
+            }
+
+        }
+        else
+        {
+            chapters.Add(data.dungeonType, new Dictionary<int, List<string>>());
+            chapters[data.dungeonType].Add(chapterNumber, new List<string>());
+            chapters[data.dungeonType][chapterNumber].Add(data.id);
+        }
+
+        /*
         Defines.DungeonType[] combatSub = (Defines.DungeonType[])(Enum.GetValues(typeof(Defines.DungeonType)));
         foreach(var key in combatSub)
         {
@@ -48,6 +77,10 @@ public class Stage_DataManager
                 chapters[Defines.DungeonType.Portal].Add(chapter, newList);
             }
         }
+        foreach(var type in script_Stages.Keys)
+        {
+
+        }*/
     }
 
     public void Set_StageData(string path)
@@ -96,9 +129,9 @@ public class Stage_DataManager
     }
 
     #endregion
-    public StageData Get_Stage_Script(string id)
+    public StageData Get_Stage_Script(Defines.DungeonType type,string id)
     {
-        return script_Stages[id];
+        return script_Stages[type][id];
     }
     
 
@@ -106,7 +139,6 @@ public class Stage_DataManager
     {
         Init_NormalStageData();
         Init_ChallengeStageData();
-        BindingChapters();
     }
 
     public void Init_NormalStageData()
@@ -126,26 +158,30 @@ public class Stage_DataManager
             Utils.TrySetValue(data_NormalStage[key], "dropRewardGroup", ref newData.dropRewardGroup);
             Utils.TrySetValue(data_NormalStage[key], "nextStageId", ref newData.nextStageId);
             Utils.TrySetValue(data_NormalStage[key], "recommendedPower", ref newData.recommendedPower);
-            Utils.TryConvertEnum<Defines.StageClearType>(data_NormalStage[key], "type", ref newData.stageClearType);
+            Utils.TryConvertEnum<Defines.StageClearType>(data_NormalStage[key], "stageType", ref newData.stageClearType);
+            Utils.TryConvertEnum<Defines.DungeonType>(data_NormalStage[key], "dungeonType",ref newData.dungeonType);
 
-            script_Stages.Add(newData.id, newData);
+            Add_Stage_Script(newData);
+            BindingChapters(newData);
         }
     }
+
+
     public void Init_ChallengeStageData()
     {
         foreach (string key in data_Challenge.Keys)
         {
             ChallengeStageData newData = new ChallengeStageData();
 
-            Utils.TrySetValue(data_NormalStage[key], "id", ref newData.id);
-            Utils.TrySetValue(data_NormalStage[key], "chapter", ref newData.chapter);
-            Utils.TrySetValue(data_NormalStage[key], "stage", ref newData.stage);
-            Utils.TrySetValue(data_NormalStage[key], "spawnGroupId", ref newData.spawnGroup);
-            Utils.TrySetValue(data_NormalStage[key], "timeLimit", ref newData.timeLimit);
-            Utils.TrySetValue(data_NormalStage[key], "clearRewardGroup", ref newData.clearRewardGroup);
-            Utils.TrySetValue(data_NormalStage[key], "recommendedPower", ref newData.recommendedPower);
+            Utils.TrySetValue(data_Challenge[key], "id", ref newData.id);
+            Utils.TrySetValue(data_Challenge[key], "chapter", ref newData.chapter);
+            Utils.TrySetValue(data_Challenge[key], "stage", ref newData.stage);
+            Utils.TrySetValue(data_Challenge[key], "spawnGroupId", ref newData.spawnGroup);
+            Utils.TrySetValue(data_Challenge[key], "timeLimit", ref newData.timeLimit);
+            Utils.TrySetValue(data_Challenge[key], "clearRewardGroup", ref newData.clearRewardGroup);
+            Utils.TrySetValue(data_Challenge[key], "recommendedPower", ref newData.recommendedPower);
             
-            Utils.TryConvertEnum<Defines.StageClearType>(data_NormalStage[key], "type", ref newData.stageClearType);
+            Utils.TryConvertEnum<Defines.StageClearType>(data_Challenge[key], "stageType", ref newData.stageClearType);
             Utils.TryConvertEnum<Defines.DungeonType>(data_Challenge[key], "dungeonType", ref newData.dungeonType);
             Utils.TrySetValue(data_Challenge[key], "bGradeParam", ref newData.bGradeParm);
             Utils.TrySetValue(data_Challenge[key], "aGradeParam", ref newData.aGradParm);
@@ -155,27 +191,32 @@ public class Stage_DataManager
             Utils.TrySetValue(data_Challenge[key], "sGradeReward", ref newData.sGradReward);
             Defines.DungeonType type = newData.dungeonType;
 
-            switch (type)
+
+            Add_Stage_Script(newData);
+            BindingChapters(newData);
+        }
+    }
+
+    public void Add_Stage_Script(StageData data)
+    {
+        if (script_Stages.ContainsKey(data.dungeonType))
+        {
+            if (script_Stages[data.dungeonType].ContainsKey(data.id))
             {
-                case Defines.DungeonType.Portal:
-                    break;
-                case Defines.DungeonType.Gem:
-                    
-                    break;
-                case Defines.DungeonType.Skill:
-                    break;
-                case Defines.DungeonType.Gold:
-                    break;
-                case Defines.DungeonType.Tower:
-                    break;
-                case Defines.DungeonType.Boss:
-                    break;
-                default:
-                    break;
+                Debug.Log($"스크립트 할당중 id {data.id}");
+            }
+            else
+            {
+                script_Stages[data.dungeonType].Add(data.id, data);
             }
 
-            script_Stages.Add(newData.id, newData);
         }
+        else
+        {
+            script_Stages.Add(data.dungeonType, new Dictionary<string, StageData>());
+            script_Stages[data.dungeonType].Add(data.id, data);
+        }
+
     }
     public Dictionary<Defines.DungeonType, Dictionary<int, List<string>>> Get_Chapters()
     {

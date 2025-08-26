@@ -96,9 +96,9 @@ public class DataManager:MonoBehaviour
     }
 
     
-    public StageData Get_StageData_Script(string id)
+    public StageData Get_StageData_Script(Defines.DungeonType type ,string id)
     {
-        return data_Stage.Get_Stage_Script(id);
+        return data_Stage.Get_Stage_Script(type,id);
     }
     public MonsterStats Get_MonsterStat(string id)
     {

@@ -19,6 +19,7 @@ public class StageData
 
     public Defines.StageType stageType;
     public Defines.StageClearType stageClearType;
+    public Defines.DungeonType dungeonType;
     public StageData()
     {
 
@@ -33,6 +34,7 @@ public class StageData
         this.clearRewardGroup = other.clearRewardGroup;
         this.timeLimit = other.timeLimit;
         this.rewards = other.rewards;
+        this.dungeonType = other.dungeonType;
     }
 }
 

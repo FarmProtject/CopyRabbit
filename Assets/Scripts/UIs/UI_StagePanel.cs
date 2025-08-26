@@ -271,7 +271,7 @@ public class UI_StagePanel : UI_PopUpObj
     }
     public void Set_ChallengeLeft()
     {
-        StageData data = GameManager._instance.Get_StageData_Scriot(selectStage);
+        StageData data = GameManager._instance.Get_StageData_Scriot(select_Type,selectStage);
         GameObject rewardSUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
         GameObject rewardAUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);
         GameObject rewardBUI = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageLeft, leftPanel);

@@ -1,5 +1,4 @@
 id,dungeonType,chapter,stage,stageType,spawnGroupId,timeLimit,bGradeParam,aGradeParam,sGradeParam,bGradeReward,aGradeReward,sGradeReward,#¡÷ºÆ#
-string,enum,string,string,enum,string,int,int,int,int,string,string,string,
 1G1S,Gold,1,1,normal,spawn_group_1,60,50,100,200,clear_reward_1G1S_B,clear_reward_1G1S_A,clear_reward_1G1S_S,
 1G2S,Gold,1,2,normal,spawn_group_2,60,50,100,200,clear_reward_1G2S_B,clear_reward_1G2S_A,clear_reward_1G2S_S,
 1S1S,Skill,1,1,boss,spawn_group_3,60,50,70,100,clear_reward_1S1S_B,clear_reward_1S1S_A,clear_reward_1S1S_S,

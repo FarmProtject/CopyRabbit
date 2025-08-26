@@ -3,8 +3,8 @@ id,key,target
 2,CombatButton,MenuPanel
 3,ShopButton,MenuPanel
 4,Portal,StagePanel
-5,Treasure,StagePanel
+5,Gem,StagePanel
 6,Skill,StagePanel
 7,Gold,StagePanel
-8,Guardian,StagePanel
+8,Tower,StagePanel
 9,Boss,StagePanel

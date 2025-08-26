@@ -187,9 +187,9 @@ public class GameManager : MonoBehaviour
         return stage_Controller.Get_StageList();
     }
     
-    public StageData Get_StageData_Scriot(string id)
+    public StageData Get_StageData_Scriot(Defines.DungeonType t,string id)
     {
-        return _DataManager.Get_StageData_Script(id);
+        return _DataManager.Get_StageData_Script(t,id);
     }
     public void Set_StageID(string id)
     {

@@ -17,7 +17,7 @@ public class StageController : MonoBehaviour
     {
         //Init_Stage(this.stageId);
         //Init_Stage();
-        select_Stage = GameManager._instance.Get_StageData_Scriot(stageId);
+        select_Stage = GameManager._instance.Get_StageData_Scriot(selectPanelType,stageId);
 
     }
 
@@ -30,7 +30,7 @@ public class StageController : MonoBehaviour
         }
         if(select_Stage == null)
         {
-            select_Stage = GameManager._instance.Get_StageData_Scriot(stageId);
+            select_Stage = GameManager._instance.Get_StageData_Scriot(selectPanelType, stageId);
         }
         Change_StageData(stageId);
         Change_MonsterIdList();
@@ -73,7 +73,7 @@ public class StageController : MonoBehaviour
     public void Change_StageData(string id)
     {
         this.stageId = id;
-        select_Stage = GameManager._instance.Get_StageData_Scriot(id);
+        select_Stage = GameManager._instance.Get_StageData_Scriot(selectPanelType, id);
         chapter = select_Stage.chapter;
         GameManager._instance.Get_StagePanelScript().Set_StageKey(chapter);
     }

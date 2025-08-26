@@ -5,3 +5,13 @@ id,groupId,nextChapter,beforeChapter,combat
 2C1S,2,3,1,25000
 2C2S,2,3,1,30000
 2C3S,2,3,1,35000
+1G1S,1,2,null,10000
+1G2S,1,2,null,10000
+1S1S,1,2,null,10000
+1S2S,1,2,null,10000
+1M1S,1,2,null,10000
+1M2S,1,2,null,10000
+1T1S,1,2,null,10000
+1T2S,1,2,null,10000
+1B1S,1,2,null,10000
+1B2S,1,2,null,10000

@@ -1,7 +1,7 @@
-id,chapter,stage,type,spawnGroupId,killCount,timeLimit,clearRewardGroup,dropRewardGroup,nextStageId,recommendedPower
-1C1S,1,1,normal,spawn_group_1,100,60,clear_reward_1C1S,drop_reward_1C1S,1C2S,10000
-1C2S,1,2,normal,spawn_group_2,100,60,clear_reward_1C2S,drop_reward_1C2S,1C3S,15000
-1C3S,1,3,boss,spawn_group_3,1,90,clear_reward_1C3S,drop_reward_1C3S,2C1S,20000
-2C1S,2,1,normal,spawn_group_4,100,60,clear_reward_2C1S,drop_reward_2C1S,2C2S,25000
-2C2S,2,2,normal,spawn_group_5,100,60,clear_reward_2C2S,drop_reward_2C2S,2C3S,30000
-2C3S,2,3,boss,spawn_group_6,1,90,clear_reward_2C3S,drop_reward_2C3S,3C1S,35000
+id,dungeonType,chapter,stage,stageType,spawnGroupId,killCount,timeLimit,clearRewardGroup,dropRewardGroup,nextStageId,recommendedPower
+1C1S,Portal,1,1,normal,spawn_group_1,100,60,clear_reward_1C1S,drop_reward_1C1S,1C2S,10000
+1C2S,Portal,1,2,normal,spawn_group_2,100,60,clear_reward_1C2S,drop_reward_1C2S,1C3S,15000
+1C3S,Portal,1,3,boss,spawn_group_3,1,90,clear_reward_1C3S,drop_reward_1C3S,2C1S,20000
+2C1S,Portal,2,1,normal,spawn_group_4,100,60,clear_reward_2C1S,drop_reward_2C1S,2C2S,25000
+2C2S,Portal,2,2,normal,spawn_group_5,100,60,clear_reward_2C2S,drop_reward_2C2S,2C3S,30000
+2C3S,Portal,2,3,boss,spawn_group_6,1,90,clear_reward_2C3S,drop_reward_2C3S,3C1S,35000

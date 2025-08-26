@@ -5,12 +5,12 @@ public class PlayerDatas
 {
     public Dictionary<Defines.DungeonType, int> clearChapter = new Dictionary<Defines.DungeonType, int>() 
     { 
-        { Defines.DungeonType.Gold, 0 },
-        {Defines.DungeonType.Skill,0 },
-        {Defines.DungeonType.Tower,0 },
-        {Defines.DungeonType.Portal,0 },
-        {Defines.DungeonType.Boss,0 },
-        {Defines.DungeonType.Gem,0 },
+        { Defines.DungeonType.Gold, 1 },
+        {Defines.DungeonType.Skill,1 },
+        {Defines.DungeonType.Tower,1 },
+        {Defines.DungeonType.Portal,1 },
+        {Defines.DungeonType.Boss,1 },
+        {Defines.DungeonType.Gem,1 },
     };
     public Dictionary<Defines.DungeonType, List<string>> clearStage = new Dictionary<Defines.DungeonType, List<string>>();
 
