@@ -46,6 +46,7 @@ public class DataManager:MonoBehaviour
 
         data_Stage.Init_StageScript();
         GameManager._instance.Set_PopUpBind(popUpBind);
+        data_Stage.ChapterBindingDebug();
     }
     void DebugPopUpBind()
     {

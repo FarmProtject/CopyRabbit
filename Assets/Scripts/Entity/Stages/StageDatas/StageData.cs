@@ -36,6 +36,11 @@ public class StageData
         this.rewards = other.rewards;
         this.dungeonType = other.dungeonType;
     }
+
+    public string GetID()
+    {
+        return id;
+    }
 }
 
 public class Stage_Reward

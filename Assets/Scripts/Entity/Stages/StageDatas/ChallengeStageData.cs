@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 public class ChallengeStageData : StageData
 {
-    public Defines.DungeonType dungeonType;
-
     public string bGradeParm;
     public string aGradParm;
     public string sGradParm;

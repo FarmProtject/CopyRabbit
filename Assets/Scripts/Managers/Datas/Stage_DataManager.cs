@@ -20,9 +20,37 @@ public class Stage_DataManager
 
     Dictionary<Defines.DungeonType, Dictionary<string, StageData>> script_Stages = new Dictionary<Defines.DungeonType, Dictionary<string, StageData>>();
 
+
+    public void ChapterBindingDebug()
+    {
+        foreach(var type in chapters.Keys)
+        {
+            foreach (var chapter in chapters[type].Keys)
+            {
+
+                
+                List<string> chaptersIds = chapters[type][chapter];
+                for(int i =0; i<chaptersIds.Count; i++)
+                {
+                    Debug.Log($" Type : {type} Chapter : {chapter} ID : {chapters[type][chapter][i]}");
+                }
+            }
+        }
+
+        foreach(var type in script_Stages.Keys)
+        {
+            foreach(var chapter in script_Stages[type].Keys)
+            {
+                Debug.Log($"던전 ID : {script_Stages[type][chapter].id}던전 타입 : {script_Stages[type][chapter].dungeonType}");
+            }
+        }
+    }
+
+
     public void BindingChapters(StageData data)
     {
         int chapterNumber = Int32.Parse(data.chapter);
+        Debug.Log($"던전 타입 : {data.dungeonType} 던전 ID : {data.id}");
         if (chapters.ContainsKey(data.dungeonType))
         {
             if (chapters[data.dungeonType].ContainsKey(chapterNumber))
@@ -49,7 +77,7 @@ public class Stage_DataManager
             chapters[data.dungeonType].Add(chapterNumber, new List<string>());
             chapters[data.dungeonType][chapterNumber].Add(data.id);
         }
-
+        
         /*
         Defines.DungeonType[] combatSub = (Defines.DungeonType[])(Enum.GetValues(typeof(Defines.DungeonType)));
         foreach(var key in combatSub)
@@ -183,13 +211,15 @@ public class Stage_DataManager
             
             Utils.TryConvertEnum<Defines.StageClearType>(data_Challenge[key], "stageType", ref newData.stageClearType);
             Utils.TryConvertEnum<Defines.DungeonType>(data_Challenge[key], "dungeonType", ref newData.dungeonType);
+            Debug.Log($"원본 데이터 : {data_Challenge[key]["dungeonType"]}");
+            Debug.Log($"변환 데이터 : {newData.dungeonType}");
             Utils.TrySetValue(data_Challenge[key], "bGradeParam", ref newData.bGradeParm);
             Utils.TrySetValue(data_Challenge[key], "aGradeParam", ref newData.aGradParm);
             Utils.TrySetValue(data_Challenge[key], "sGradeParam", ref newData.sGradParm);
             Utils.TrySetValue(data_Challenge[key], "bGradeReward", ref newData.bGradeReward);
             Utils.TrySetValue(data_Challenge[key], "aGradeReward", ref newData.aGradReward);
             Utils.TrySetValue(data_Challenge[key], "sGradeReward", ref newData.sGradReward);
-            Defines.DungeonType type = newData.dungeonType;
+            
 
 
             Add_Stage_Script(newData);

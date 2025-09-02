@@ -106,13 +106,15 @@ public class UI_StagePanel : UI_PopUpObj
     }
     public void OnRightPanelEnable()
     {
-        
+        Init_RightButtons();
+        /*
         switch (select_Type)
         {
             case Defines.DungeonType.Portal:
                 Init_RightButtons();
                 break;
             case Defines.DungeonType.Gem:
+
                 break;
             case Defines.DungeonType.Skill:
                 break;
@@ -124,7 +126,7 @@ public class UI_StagePanel : UI_PopUpObj
                 break;
             default:
                 break;
-        }
+        }*/
     }
     public void OnLeftPanelEnable()
     {
