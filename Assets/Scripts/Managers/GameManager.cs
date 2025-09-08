@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     PoolManager _PoolManager;
     DataManager _DataManager;
     UI_Pooler _uiPooler;
-
+    UI_StringManager stringKeyManager;
     private void Awake()
     {
         OnAwake();
@@ -142,11 +142,19 @@ public class GameManager : MonoBehaviour
     {
         _ui_Manager.Set_PopUpBind(data);
     }
+    public void Return_All_PoolUI(Defines.UI_PrefabType type)
+    {
+        _uiPooler.ReturnAll(type);
+    }
     #endregion
     #region GetManagers
     public PoolManager Get_PoolMamagaer()
     {
         return _PoolManager;
+    }
+    public UI_StringManager Get_StringKeyManager()
+    {
+        return stringKeyManager;
     }
     #endregion
     #region Upgrage

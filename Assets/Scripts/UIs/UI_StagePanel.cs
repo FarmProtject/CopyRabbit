@@ -233,12 +233,31 @@ public class UI_StagePanel : UI_PopUpObj
     
     void Set_RightCells()
     {
-        int count = stageKeys.Count - uI_StageRightCells.Count;
-        if(rightPanelContents == null)
+        if (rightPanelContents == null)
         {
             rightPanelContents = GameObject.Find("RightCellContents");
         }
-        for(int i = 0; i< uI_StageRightCells.Count; i++)
+        int count = stageKeys.Count;
+        GameManager._instance.Return_All_PoolUI(Defines.UI_PrefabType.Cell_StageRight);
+        uI_StageRightCells.Clear();
+        for(int i = 0; i<count; i++)
+        {
+            GameObject go = GameManager._instance.Get_PoolUI(Defines.UI_PrefabType.Cell_StageRight, rightPanelContents);
+        }
+
+        for(int i = 0; i<rightPanelContents.transform.childCount; i++)
+        {
+            GameObject go = rightPanelContents.transform.GetChild(i).gameObject;
+            if (go.activeSelf)
+            {
+                Cell_StageRightCell script = go.transform.GetComponent<Cell_StageRightCell>();
+                uI_StageRightCells.Add(script);
+            }
+
+        }
+        rightPanelContents.transform.localPosition = new Vector2(0, 0);
+        /*
+        for (int i = 0; i< uI_StageRightCells.Count; i++)
         {
             uI_StageRightCells[i].gameObject.SetActive(true);
         }
@@ -260,8 +279,8 @@ public class UI_StagePanel : UI_PopUpObj
                 uI_StageRightCells[i].gameObject.SetActive(false);
             }
         }
-
-        rightPanelContents.transform.localPosition = new Vector2(0, 0);
+        */
+        
 
     }
     public void Set_PortalLeft()

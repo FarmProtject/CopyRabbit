@@ -87,13 +87,23 @@ public class UI_Pooler : MonoBehaviour
 
     public void ReturnAll(Defines.UI_PrefabType type)
     {
-
+        if (!ui_active.ContainsKey(type))
+        {
+            return;
+        }
+        if (ui_active[type].Count<1)
+        {
+            return;
+        }
         foreach(var pool in ui_active[type])
         {
             ui_pool[type].Enqueue(pool);
             pool.Get().SetActive(false);
-            ui_active[type].Remove(pool);
+            //ui_active[type].Remove(pool);
         }
+        ui_active[type].Clear();
+       
+
     }
 
     public GameObject CreateNew(Defines.UI_PrefabType type)
