@@ -13336,6 +13336,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeadPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 494652560307033732, guid: 5d5866740abc767499193b2812608aad, type: 3}
+      propertyPath: m_Name
+      value: DungeonText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3585785752438149906, guid: 5d5866740abc767499193b2812608aad, type: 3}
+      propertyPath: m_Name
+      value: DungeonTextPanel
+      objectReference: {fileID: 0}
     - target: {fileID: 6402801949645405544, guid: 5d5866740abc767499193b2812608aad, type: 3}
       propertyPath: m_Pivot.x
       value: 1
