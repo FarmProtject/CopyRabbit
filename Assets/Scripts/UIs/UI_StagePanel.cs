@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using TMPro;
 public class UI_StagePanel : UI_PopUpObj
 {
     string cahpterKey;
@@ -35,6 +36,8 @@ public class UI_StagePanel : UI_PopUpObj
 
     [SerializeField]Defines.DungeonType select_Type;
 
+    [SerializeField] StringKey_UI dungeonText;
+
     protected override void Awake()
     {
         Init();
@@ -50,6 +53,7 @@ public class UI_StagePanel : UI_PopUpObj
         OnLeftPanelEnable();
         OnTailPanelEnable();
         Set_ScrollPos();
+        Set_DungeonText_Key();
     }
     private void OnDisable()
     {
@@ -98,6 +102,10 @@ public class UI_StagePanel : UI_PopUpObj
         if(challengeButtons == null)
         {
             challengeButtons = tailPanel.transform.GetChild(1).gameObject;
+        }
+        if(dungeonText == null)
+        {
+            this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetComponent<StringKey_UI>();
         }
     }
     public void Set_SelectChapter()
@@ -356,5 +364,11 @@ public class UI_StagePanel : UI_PopUpObj
         count = count/2;
         Vector2 pos = new Vector2(0, -count*rightCellSizeY);
         rightPanelContents.transform.localPosition = pos;;
+    }
+
+
+    void Set_DungeonText_Key()
+    {
+        dungeonText.Set_AdditionalKey(select_Type.ToString());
     }
 }

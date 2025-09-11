@@ -26,6 +26,7 @@ public class DataManager:MonoBehaviour
     Dictionary<string, List<StringKeyDatas>> spawnData = new Dictionary<string, List<StringKeyDatas>>();
 
     Dictionary<string, Dictionary<string, string>> popUpBind = new Dictionary<string, Dictionary<string, string>>();
+    Dictionary<string, Dictionary<string, string>> stringDatas = new Dictionary<string, Dictionary<string, string>>();
     private void Awake()
     {
         OnAwake();
@@ -39,6 +40,7 @@ public class DataManager:MonoBehaviour
         ReadData("Data\\Monster", monsterData);
         ReadData("Data\\PopUpBind", popUpBind);
         ReadData("Data\\ChallengeStage", data_Stage.Get_ChallengeData());
+        ReadData("Config\\String",stringDatas);
         data_Monster.Set_MonsterData(monsterData);
         LoadMulti("Data\\Chapter", data_Chapter);
         LoadMulti("Data\\ClearReward", data_Stage.Get_Rewards());
@@ -95,7 +97,10 @@ public class DataManager:MonoBehaviour
     {
         return data_Stage.Get_Rewards();
     }
-
+    public Dictionary<string,Dictionary<string,string>> Get_StringDatas()
+    {
+        return stringDatas;
+    }
     
     public StageData Get_StageData_Script(Defines.DungeonType type ,string id)
     {
@@ -150,6 +155,46 @@ public class DataManager:MonoBehaviour
                 }
             }
         }
+    }
+    public void ReadStringKey(string path, Dictionary<string,Dictionary<Defines.Language,string>> target)
+    {
+        List<Dictionary<string, object>> temp = csvReader.Read(path);
+        for(int i = 0; i<temp.Count; i++)
+        {
+            string id = temp[i]["id"].ToString();
+
+            foreach(var key in temp[i].Keys)
+            {
+                if (target.ContainsKey(id))
+                {
+                    Dictionary<Defines.Language, string> newData = new Dictionary<Defines.Language, string>();
+                    if ((Enum.TryParse(key, true, out Defines.Language type)))
+                    {
+                        newData.Add(type, temp[i][key].ToString());
+                    }
+                    else
+                    {
+                        Debug.Log("Type Error!");
+                    }
+                }
+                else
+                {
+                    Dictionary<Defines.Language, string> newData = new Dictionary<Defines.Language, string>();
+                    target.Add(id, newData);
+                    if ((Enum.TryParse(key, true, out Defines.Language type)))
+                    {
+                        newData.Add(type, temp[i][key].ToString());
+                    }
+                    else
+                    {
+                        Debug.Log("Type Error!");
+                    }
+                }
+
+            }
+        }
+
+
     }
 
     void LoadMulti(string path, Dictionary<string, List<StringKeyDatas>> newData)

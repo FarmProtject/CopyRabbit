@@ -108,6 +108,10 @@ public class GameManager : MonoBehaviour
         {
             _PoolManager = _MonsterManager.Get_PoolManager();
         }
+        if(stringKeyManager == null)
+        {
+            stringKeyManager = transform.GetComponent<UI_StringManager>();
+        }
         Debug.Log(_instance);
     }
 
@@ -345,5 +349,12 @@ public class GameManager : MonoBehaviour
     {
         return _DataManager.Get_SpawnDatas();
     }
+    public Dictionary<string, Dictionary<string, string>> Get_StringDatas()
+    {
+        return _DataManager.Get_StringDatas();
+    }
+    #endregion
+    #region StringKeys
+    
     #endregion
 }

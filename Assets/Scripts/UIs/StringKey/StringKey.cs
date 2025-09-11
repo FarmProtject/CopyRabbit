@@ -5,8 +5,9 @@ public class StringKey : MonoBehaviour
 {
     protected UI_StringManager stringKey_Manager;
     protected TextMeshProUGUI myTmp;
-    string myKey;
-    string myText;
+    [SerializeField]protected string myKey;
+    protected string myText;
+    protected string additionalKey;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,10 +19,22 @@ public class StringKey : MonoBehaviour
     {
         
     }
-
+    
     public void Set_MyKey(string key)
     {
         myKey = key;
+    }
+    public void Add_My_Key(string key)
+    {
+        myKey += key;
+    }
+    public void Set_AdditionalKey(string key)
+    {
+        additionalKey = key;
+    }
+    public void AddingKeys()
+    {
+        myKey = myKey+"_"+additionalKey;
     }
 
     public void UpdateText()

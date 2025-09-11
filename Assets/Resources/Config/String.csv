@@ -1,4 +1,4 @@
-stringKey,kr,en
+id,Kr,En
 UI_STAGE_CHAPTER,챕터,Chapter
 UI_STAGE_MONSTER_LIST,등장 몬스터,Monster List
 GENERAL_RECOMMENDED_POWER,권장 전투력,Recommended Power
@@ -20,6 +20,7 @@ DungeonText_Skill,스킬 던전,Skill Dungeon
 DungeonText_Gold,골드 던전,Gold Dungeon
 DungeonText_Tower,수호자의 탑,Tower of Guardian
 DungeonText_Boss,도전 보스,Challenge Boss
+ChapterText,챕터,Chaptera
 GENERAL_S_GRADE_REWARD,S등급 클리어 보상,S Grade Reward
 GENERAL_A_GRADE_REWARD,A등급 클리어 보상,A Grade Reward
 GENERAL_B_GRADE_REWARD3,B등급 클리어 보상,B Grade Reward

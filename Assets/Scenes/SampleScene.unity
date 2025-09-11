@@ -2220,6 +2220,24 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5869cd70849add848bf71cde5d088a0c, type: 3}
+--- !u!1 &323146642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 494652560307033732, guid: 5d5866740abc767499193b2812608aad, type: 3}
+  m_PrefabInstance: {fileID: 8443875700573823730}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &323146644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323146642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc3c704681bf09543b44bfa7f03ae47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myKey: 
 --- !u!4 &324846772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2765888824603402653, guid: 5869cd70849add848bf71cde5d088a0c, type: 3}
@@ -6611,6 +6629,7 @@ MonoBehaviour:
   normalButtons: {fileID: 0}
   challengeButtons: {fileID: 0}
   select_Type: 0
+  dungeonText: {fileID: 323146644}
 --- !u!1 &961553649
 GameObject:
   m_ObjectHideFlags: 0
@@ -13427,7 +13446,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 494652560307033732, guid: 5d5866740abc767499193b2812608aad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323146644}
   m_SourcePrefab: {fileID: 100100000, guid: 5d5866740abc767499193b2812608aad, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
